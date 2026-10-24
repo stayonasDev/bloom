@@ -1,0 +1,109 @@
+{
+  "note": "검증 기준: must_keep의 숫자·금액·기간이 번역문에 전부 포함되는가(정확 일치 아님). sealed 3건은 mock/verify-output.json의 실제 답(90자에서 잘림)을 문장 단위로 보완한 것",
+  "items": [
+    {
+      "id": "oneliner-telecom-ko",
+      "source": "Proration, loyalty-credit edge cases and roaming waivers a script can't handle.",
+      "target": "ko",
+      "must_keep": [],
+      "expect": "일할계산, 로열티 크레딧 경계 사례, 스크립트가 못 다루는 로밍 면제."
+    },
+    {
+      "id": "oneliner-telecom-ja",
+      "source": "Proration, loyalty-credit edge cases and roaming waivers a script can't handle.",
+      "target": "ja",
+      "must_keep": [],
+      "expect": "日割り計算、ロイヤルティクレジットの境界事例、スクリプトでは扱えないローミング免除。"
+    },
+    {
+      "id": "oneliner-hospital-ko",
+      "source": "Eligibility screens that lie, referral expiry, and when a 15-minute no-show rule should bend.",
+      "target": "ko",
+      "must_keep": [
+        "15"
+      ],
+      "expect": "거짓말하는 자격 조회 화면, 의뢰서 만료, 15분 부도 규칙을 굽혀야 할 때."
+    },
+    {
+      "id": "oneliner-hospital-ja",
+      "source": "Eligibility screens that lie, referral expiry, and when a 15-minute no-show rule should bend.",
+      "target": "ja",
+      "must_keep": [
+        "15"
+      ],
+      "expect": "嘘をつく資格確認画面、紹介状の期限切れ、15分の無断キャンセル規則を曲げるべき時。"
+    },
+    {
+      "id": "oneliner-ap-ko",
+      "source": "Variance tolerances, approval limits, duplicate invoices that change one letter, and month-end cutoffs.",
+      "target": "ko",
+      "must_keep": [],
+      "expect": "차이 허용치, 결재 한도, 한 글자만 바꾼 중복 계산서, 월말 마감."
+    },
+    {
+      "id": "oneliner-ap-ja",
+      "source": "Variance tolerances, approval limits, duplicate invoices that change one letter, and month-end cutoffs.",
+      "target": "ja",
+      "must_keep": [],
+      "expect": "差異許容範囲、承認限度、一文字だけ変えた重複請求書、月末締め。"
+    },
+    {
+      "id": "sealed-day58-ko",
+      "source": "Day 58 is inside the 60-day window, so don't refuse or say you applied it. Escalate to the retention desk.",
+      "target": "ko",
+      "must_keep": [
+        "58",
+        "60"
+      ],
+      "expect": "58일째는 60일 기간 안이므로 거절하거나 적용했다고 말하지 마세요. 리텐션 데스크로 넘기세요."
+    },
+    {
+      "id": "sealed-day58-ja",
+      "source": "Day 58 is inside the 60-day window, so don't refuse or say you applied it. Escalate to the retention desk.",
+      "target": "ja",
+      "must_keep": [
+        "58",
+        "60"
+      ],
+      "expect": "58日目は60日の期間内なので、拒否したり適用済みと言ったりしないでください。リテンション窓口へエスカレーションしてください。"
+    },
+    {
+      "id": "sealed-family-ko",
+      "source": "Don't cancel the primary line. Split the family plan effective at the next cycle date so the dependents keep the family discount; adjust 14 days of proration, 42.10 dollars.",
+      "target": "ko",
+      "must_keep": [
+        "14",
+        "42.10"
+      ],
+      "expect": "대표 회선을 해지하지 마세요. 다음 청구 주기부터 가족 요금제를 분리해 부양 회선이 가족 할인을 유지하게 하고, 14일치 일할계산 42.10달러를 조정하세요."
+    },
+    {
+      "id": "sealed-family-ja",
+      "source": "Don't cancel the primary line. Split the family plan effective at the next cycle date so the dependents keep the family discount; adjust 14 days of proration, 42.10 dollars.",
+      "target": "ja",
+      "must_keep": [
+        "14",
+        "42.10"
+      ],
+      "expect": "主回線を解約しないでください。次の請求サイクルからファミリープランを分割して副回線がファミリー割引を維持できるようにし、14日分の日割り42.10ドルを調整してください。"
+    },
+    {
+      "id": "sealed-simswap-ko",
+      "source": "Yes. A SIM swap resets the 60-day plan-change counter, so the loyalty credit may not post until the window passes again.",
+      "target": "ko",
+      "must_keep": [
+        "60"
+      ],
+      "expect": "네. SIM 교체는 60일 요금제 변경 카운터를 초기화하므로, 기간이 다시 지날 때까지 로열티 크레딧이 적용되지 않을 수 있습니다."
+    },
+    {
+      "id": "sealed-simswap-ja",
+      "source": "Yes. A SIM swap resets the 60-day plan-change counter, so the loyalty credit may not post until the window passes again.",
+      "target": "ja",
+      "must_keep": [
+        "60"
+      ],
+      "expect": "はい。SIM交換は60日のプラン変更カウンターをリセットするため、期間が再び経過するまでロイヤルティクレジットが適用されない場合があります。"
+    }
+  ]
+}

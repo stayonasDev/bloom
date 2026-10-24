@@ -1,0 +1,168 @@
+{
+  "slug": "insurance-claims-ko",
+  "preseeded": true,
+  "seller": {
+    "role_title": "보험 청구 접수·서류 심사 담당",
+    "years_experience": 5,
+    "language": "KO",
+    "display_name": "Seller #2106"
+  },
+  "card": {
+    "field": "보험 청구 접수·서류 심사",
+    "field_key": "insurance_claims",
+    "difficulty": 4,
+    "rarity": 4,
+    "one_liner": "어떤 서류가 정말 청구를 막는지, 청구 기한 경계, 심사 회부와 거절의 기준."
+  },
+  "tags": {
+    "field_key": "insurance_claims",
+    "topics": [
+      "missing_document",
+      "claim_window",
+      "partial_approval",
+      "policy_lapse",
+      "pre_existing_condition",
+      "appeal_routing"
+    ],
+    "judgments": [
+      "refusal",
+      "timing",
+      "evidence"
+    ]
+  },
+  "handover_note": {
+    "rules": [
+      {
+        "id": "r1",
+        "text": "Claims must be filed within 3 years of the incident under the standard policy terms.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r2",
+        "text": "Every medical claim needs the diagnosis certificate, the itemised receipt and the account for payment.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r3",
+        "text": "A claim on a policy lapsed for non-payment is declined unless reinstated.",
+        "kind": "manual",
+        "source": "q3"
+      },
+      {
+        "id": "r4",
+        "text": "Pre-existing conditions declared at sign-up are excluded for the first 2 years.",
+        "kind": "manual",
+        "source": "q2"
+      }
+    ],
+    "exceptions": [
+      {
+        "id": "e1",
+        "text": "For outpatient claims under 100,000 won, the itemised receipt alone is accepted without the diagnosis certificate.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "e2",
+        "text": "If the lapse was under 2 months and the premium is paid at claim time, the claim is processed after reinstatement, not declined.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "e3",
+        "text": "A condition first diagnosed after sign-up is not pre-existing even if symptoms were noted earlier; the diagnosis date decides.",
+        "kind": "rare",
+        "source": "f1"
+      },
+      {
+        "id": "e4",
+        "text": "Partial approval above 80% pays immediately; the remainder goes to review with a 7-day target.",
+        "kind": "rare",
+        "source": "q4"
+      }
+    ],
+    "judgment_calls": [
+      {
+        "id": "j1",
+        "text": "When the hospital name on the certificate and the receipt differ, call the hospital before flagging; transfers between affiliated clinics are common.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "j2",
+        "text": "A refile within 14 days with the missing document returns to the same handler, not to appeal.",
+        "kind": "rare",
+        "source": "f2"
+      },
+      {
+        "id": "j3",
+        "text": "A claim filed on day 1,090 of the 3-year window is accepted and flagged for fast review so the window is not lost on an internal delay.",
+        "kind": "rare",
+        "source": "f3"
+      }
+    ],
+    "common_mistakes": [
+      {
+        "id": "m1",
+        "text": "Rejecting a small outpatient claim for a missing certificate that is not required under 100,000 won.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "m2",
+        "text": "Treating symptoms noted before sign-up as a pre-existing condition without a diagnosis date.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "m3",
+        "text": "Declining a 1-month lapse instead of routing to reinstatement.",
+        "kind": "manual",
+        "source": "q3"
+      }
+    ],
+    "never_do": [
+      {
+        "id": "n1",
+        "text": "Never approve a claim on a policy lapsed more than 2 months; refuse and explain the reinstatement path.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "n2",
+        "text": "Never send a first refile to appeal.",
+        "kind": "manual",
+        "source": "f2"
+      },
+      {
+        "id": "n3",
+        "text": "Never pay a partial approval without listing the held items.",
+        "kind": "manual",
+        "source": "q4"
+      }
+    ]
+  },
+  "generalization_log": [
+    {
+      "type": "company",
+      "replaced_with": "the insurer",
+      "count": 2
+    },
+    {
+      "type": "company",
+      "replaced_with": "the hospital",
+      "count": 2
+    },
+    {
+      "type": "system",
+      "replaced_with": "the claims system",
+      "count": 1
+    }
+  ],
+  "metrics": {
+    "followup_ms": 4800,
+    "extract_ms": 10900
+  }
+}

@@ -7,6 +7,9 @@ import { casePriceUsd, packPriceUsd } from "@/lib/pricing";
 import { getInterview, getSeller, insertCard, insertPack, updateInterview } from "@/lib/db";
 import { toPublicCard, type HandoverNote } from "@/lib/server-types";
 
+// Claude ② 추출은 실측 20~53초 (Globe 샘플 53s) — 60이면 아슬아슬. Fluid compute면 120 허용, 아니면 빌드가 거부하므로 그때 60으로.
+export const maxDuration = 120;
+
 const body = z.object({ followup_answers: z.record(z.string(), z.string()) });
 
 /** POST /api/interviews/{id}/seal — 꼬리질문 응답 저장 → Claude ② 추출·일반화·카드 → packs, cards. 인계서 원문은 응답하지 않는다. */

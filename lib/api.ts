@@ -41,6 +41,8 @@ async function call<T>(path: string, init: RequestInit, fallback: () => Promise<
     const body = await res.json().catch(() => ({}));
     if (!res.ok) {
       const e = (body as { error?: { code?: string; message?: string; field?: string } }).error;
+      // Server not configured (no Supabase/Anthropic keys) → demo data, so the screen never breaks. Real 422/429/403/502 still surface.
+      if (res.status === 500 && (e?.code === "INTERNAL" || !e)) { console.warn(`[handover] ${path} → 500 ${e?.code ?? ""}; using demo data`); return fallback(); }
       throw new ApiRejection(e?.code || `HTTP_${res.status}`, e?.message || "Request failed", e?.field);
     }
     return body as T;

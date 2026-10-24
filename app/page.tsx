@@ -38,9 +38,21 @@ export default function Home() {
             Handover<span className="text-fern">.</span>
           </h1>
           <p className="mt-2 max-w-[640px] text-[20px] leading-[1.45] text-graphite">{t("home.lead")}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/sell" className="btn btn-ink">{t("home.cta_write")} <Arrow /></Link>
-            <Link href="/buy" className="btn">{t("home.cta_post")}</Link>
+          <div className="doors mt-10">
+            <Reveal className="door">
+              <span className="who">{t("door.p.who")}</span>
+              <h3>{t("door.p.t")}</h3>
+              <p>{t("door.p.d")}</p>
+              <ul><li>{t("door.p.l1")}</li><li>{t("door.p.l2")}</li></ul>
+              <Link href="/sell" className="btn btn-ink mt-2 self-start">{t("home.cta_write")} <Arrow /></Link>
+            </Reveal>
+            <Reveal delay={140} className="door door-co grain grain-dark">
+              <span className="who">{t("door.c.who")}</span>
+              <h3>{t("door.c.t")}</h3>
+              <p>{t("door.c.d")}</p>
+              <ul><li>{t("door.c.l1")}</li><li>{t("door.c.l2")}</li></ul>
+              <Link href="/buy" className="btn btn-sand mt-2 self-start">{t("home.cta_post")} <Arrow /></Link>
+            </Reveal>
           </div>
           <div className="mt-12 flex justify-start">
             <a href="#matches" className="grid h-12 w-12 place-items-center rounded-full border border-ink text-ink transition-colors hover:bg-ink hover:text-paper" aria-label="Scroll">

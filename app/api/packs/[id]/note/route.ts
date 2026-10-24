@@ -1,6 +1,6 @@
 import { ApiError, handle, json } from "@/lib/errors";
-import { assertUuid, optionalBuyerId, optionalSellerId } from "@/lib/http";
-import { getPack, getPurchase } from "@/lib/db";
+import { assertUuid, optionalBuyerId, optionalSellerId, resolvePack } from "@/lib/http";
+import { getPurchase } from "@/lib/db";
 
 /**
  * GET /api/packs/{id}/note — 봉인 해제 열람.
@@ -11,7 +11,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   return handle(async () => {
     const { id } = await params;
     assertUuid(id, "Pack");
-    const pack = await getPack(id);
+    const pack = await resolvePack(id); // pack id 또는 card id
     if (!pack) throw new ApiError("NOT_FOUND", "Pack not found.");
 
     const sid = optionalSellerId(req);

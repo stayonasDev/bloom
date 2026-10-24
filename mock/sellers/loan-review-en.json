@@ -1,0 +1,24 @@
+{
+  "slug": "loan-review-en",
+  "label": "Consumer loan and card application reviewer (B층 직군)",
+  "axis": "occupation_b_tier",
+  "field_hint": "Consumer credit application review exceptions",
+  "seller": {
+    "role_title": "Consumer loan application reviewer",
+    "years_experience": 7,
+    "language": "EN",
+    "display_name": "Seller #1604"
+  },
+  "seed_answers": {
+    "q1": "The underwriting guide says to decline any application with a debt-to-income ratio above 45%. It never says that the ratio calculator counts a co-signed student loan at full value even when the primary borrower has paid it for 5 years, which pushes about one applicant in fifteen over the line for a loan they can clearly afford. The guide also never says that self-employed income needs two years of returns only if the business is under three years old.",
+    "q2": "New reviewers decline for a single 30-day late payment in the last 12 months because the scorecard shows it in red. The scorecard does not distinguish a medical collection, which our policy says to disregard, from a missed credit card payment. The right move is to open the tradeline and read the creditor name before deciding. The second mistake is approving a card limit based on stated income without checking that the employer on the application matches the employer on the pay stub; mismatched employers are the single most common fraud signal we see, roughly one in forty applications.",
+    "q3": "A branch manager asked me to approve a 25,000 dollar personal loan for a long-time customer whose income documents were a bank statement showing large cash deposits with no pay stubs. I refused, because cash deposits are not verifiable income under the policy and the loan would be unsecured. I offered two paths: a smaller loan at the amount the verifiable retirement income supported, about 9,000 dollars, or the full amount secured against the customer's certificate of deposit. The customer chose the secured option the same week.",
+    "q4": "An application came in from a recent widow whose only income was a survivor's pension that had been approved but not yet paid, so the system showed zero income and auto-declined. The script was to send the decline letter. I called the pension administrator with the customer on the line, obtained the award letter by fax, and used the award letter as verified income under the 'approved but not yet received' exception, which is in the policy but not in the system. The loan was approved at the requested amount. I now check for award letters whenever income shows zero with a recent life event."
+  },
+  "notes": "My review order: 1) recalculate ratio if a co-signed account has 24 months of payments by the other party 2) read the creditor name on every late or collection 3) employer on application must match the pay stub 4) cash deposits are not income 5) zero income with a life event means check for award letters.",
+  "followup_answers": {
+    "f1": "The 24-month threshold is from the senior underwriter, not the guide. With 12 to 24 months I still submit the recalculation but flag it for a second look. Under 12 months I apply the full co-signed amount.",
+    "f2": "Medical collections are disregarded entirely under our policy; utility collections under 500 dollars are disregarded if paid; everything else counts. I keep that list on a card because the scorecard shows all three the same colour.",
+    "f3": "The employer mismatch rule has one common false positive: a staffing agency on the pay stub and the client company on the application. I verify by calling the agency; if the agency confirms the placement, it is not a fraud flag."
+  }
+}

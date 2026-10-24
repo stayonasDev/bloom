@@ -1,5 +1,240 @@
 [
-  { "buyer_type": "ai_ops", "request_text": "Our AI can't resolve roaming disputes after a mid-cycle plan change. Customers escalate and we have no one to route to." },
-  { "buyer_type": "ai_ops", "request_text": "Our support bot handles refunds fine until the order was split across two shipments or partially returned. Those get stuck and we need a human who knows the edge cases." },
-  { "buyer_type": "eval_data", "request_text": "We build evaluation sets for customer-support AI. We need the specific situations where a support model confidently gives the wrong answer — thresholds, exceptions, timing rules a script never states." }
+  {
+    "slug": "ai-ops-telecom-roaming",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #11",
+    "request_text": "Our AI can't resolve roaming disputes after a mid-cycle plan change. Customers escalate and we have no one to route to.",
+    "expect_top_slug": "telecom-billing-en",
+    "expect_tags": {
+      "field_key": "billing_disputes",
+      "topics": [
+        "roaming_waiver",
+        "plan_change",
+        "proration"
+      ],
+      "judgments": [
+        "escalation",
+        "exception"
+      ]
+    }
+  },
+  {
+    "slug": "ai-ops-ecommerce-refunds",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #12",
+    "request_text": "Our support bot approves 'item not received' refunds too easily and can't tell a packing error from courier theft. We need someone who knows when to refuse and what evidence to ask for.",
+    "expect_top_slug": "ecommerce-cs-en",
+    "expect_tags": {
+      "field_key": "ecommerce_returns",
+      "topics": [
+        "item_not_received",
+        "packing_error",
+        "courier_theft",
+        "fraud_signal"
+      ],
+      "judgments": [
+        "evidence",
+        "refusal"
+      ]
+    }
+  },
+  {
+    "slug": "eval-data-csr-failure-points",
+    "buyer_type": "eval_data",
+    "display_name": "Buyer #21",
+    "request_text": "We build evaluation sets for customer-service AI. We need the specific situations where a scripted bot gives the wrong answer: thresholds, exceptions, and refusals a human agent would make differently.",
+    "expect_top_slug": null,
+    "note": "직군 무관. 희소 판단 비율이 높은 카드가 위로 와야 함",
+    "expect_tags": {
+      "field_key": "customer_support",
+      "topics": [
+        "repeat_contact",
+        "goodwill_credit"
+      ],
+      "judgments": [
+        "threshold",
+        "refusal"
+      ]
+    }
+  },
+  {
+    "slug": "ai-ops-hospital-intake",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #13",
+    "request_text": "Our scheduling assistant books specialist visits without checking referral validity, and marks patients as no-shows at exactly 15 minutes. We need the judgment calls a front-desk person makes before releasing a slot or booking without a referral.",
+    "expect_top_slug": "hospital-intake-en",
+    "expect_tags": {
+      "field_key": "hospital_intake",
+      "topics": [
+        "referral_required",
+        "no_show",
+        "eligibility_check"
+      ],
+      "judgments": [
+        "timing",
+        "refusal"
+      ]
+    }
+  },
+  {
+    "slug": "ai-ops-accounting-ap",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #14",
+    "request_text": "Our invoice-processing AI blocks every freight invoice that doesn't match the PO by a few percent, and it has paid a duplicate twice this quarter. We need to know what variance a human AP clerk accepts and how they spot reissued duplicates.",
+    "expect_top_slug": "accounting-ap-en",
+    "expect_tags": {
+      "field_key": "accounts_payable",
+      "topics": [
+        "three_way_match",
+        "tolerance_override",
+        "duplicate_invoice"
+      ],
+      "judgments": [
+        "threshold",
+        "evidence"
+      ]
+    }
+  },
+  {
+    "slug": "ai-ops-telecom-ko",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #15",
+    "request_text": "Our Korean-language telecom support bot can't explain contract penalty refunds when a customer downgrades mid-contract, and it runs the full retention script on customers who already switched carriers. We need a Korean-market agent's judgment.",
+    "expect_top_slug": "telecom-ko",
+    "expect_tags": {
+      "field_key": "billing_disputes",
+      "topics": [
+        "contract_fee",
+        "plan_change",
+        "retention_offer"
+      ],
+      "judgments": [
+        "exception",
+        "threshold"
+      ]
+    }
+  },
+  {
+    "slug": "eval-data-refusal-cases",
+    "buyer_type": "eval_data",
+    "display_name": "Buyer #22",
+    "request_text": "We're building a refusal benchmark for customer-facing AI. We need real cases where an experienced agent said no to a customer request and the exact reason, plus what they offered instead.",
+    "expect_top_slug": null,
+    "note": "직군 무관. q3(거절 사례)가 강한 카드가 위로",
+    "expect_tags": {
+      "field_key": "customer_support",
+      "topics": [
+        "goodwill_credit",
+        "repeat_contact"
+      ],
+      "judgments": [
+        "refusal",
+        "evidence"
+      ]
+    }
+  },
+  {
+    "slug": "no-match-forklift",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #99",
+    "request_text": "Our warehouse robot fleet can't decide when to pull a forklift from service for maintenance versus finishing the shift. We need a maintenance technician's judgment on vibration and load thresholds.",
+    "expect_top_slug": null,
+    "expect_max_score": 0.5,
+    "note": "어느 카드도 맞지 않음. 모든 점수가 0.5 미만이어야 함",
+    "expect_tags": {
+      "field_key": "other",
+      "topics": [],
+      "judgments": [
+        "threshold"
+      ]
+    }
+  },
+  {
+    "slug": "ai-ops-translation-qa",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #16",
+    "request_text": "Our localization AI passes literal machine output and fails natural translations, and it applied the UI glossary term to billing emails. We need a reviewer's judgment on context, register and when a string should go back to the developer.",
+    "expect_top_slug": "translation-review-en",
+    "expect_tags": {
+      "field_key": "other",
+      "topics": [],
+      "judgments": [
+        "evidence",
+        "exception"
+      ]
+    }
+  },
+  {
+    "slug": "ai-ops-contract-intake",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #17",
+    "request_text": "Our contract-review assistant flags a third of vendor contracts as missing a liability cap that is actually in a referenced master agreement, and it calendars end dates instead of notice deadlines. We need a paralegal's intake judgment.",
+    "expect_top_slug": "paralegal-en",
+    "expect_tags": {
+      "field_key": "legal_assistant",
+      "topics": [
+        "deadline_calculation",
+        "client_intake",
+        "filing_format"
+      ],
+      "judgments": [
+        "timing",
+        "evidence"
+      ]
+    }
+  },
+  {
+    "slug": "ai-ops-travel-changes",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #18",
+    "request_text": "Our travel bot quotes change fees without checking schedule-change refund rights or the fare difference, and it cancels round trips when a customer only wants to drop the return. We need an agent who knows the exceptions.",
+    "expect_top_slug": "travel-booking-en",
+    "expect_tags": {
+      "field_key": "travel_booking",
+      "topics": [
+        "change_fee_waiver",
+        "schedule_change",
+        "partial_cancellation",
+        "fare_rule_conflict"
+      ],
+      "judgments": [
+        "exception",
+        "threshold"
+      ]
+    }
+  },
+  {
+    "slug": "ai-ops-loan-review",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #19",
+    "request_text": "Our credit decisioning model auto-declines on debt-to-income over 45% and on any late payment, including medical collections. We need a human reviewer's recalculation rules and the exceptions that are in policy but not in the system.",
+    "expect_top_slug": "loan-review-en",
+    "expect_tags": {
+      "field_key": "other",
+      "topics": [],
+      "judgments": [
+        "threshold",
+        "exception"
+      ]
+    }
+  },
+  {
+    "slug": "ai-ops-moderation",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #20",
+    "request_text": "Our listing classifier removes 'compatible with brand' cases and reviews that merely compare products, generating appeals that are always overturned. We need a moderator's judgment on where the real line is.",
+    "expect_top_slug": "content-moderator-en",
+    "expect_tags": {
+      "field_key": "content_moderation",
+      "topics": [
+        "spam_vs_promo",
+        "appeal_review",
+        "copyright_claim"
+      ],
+      "judgments": [
+        "evidence",
+        "threshold"
+      ]
+    }
+  }
 ]
