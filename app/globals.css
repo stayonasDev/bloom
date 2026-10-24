@@ -109,7 +109,7 @@ textarea.field { resize: vertical; line-height: 1.55; field-sizing: content; min
 .arc { position: relative; height: 380px; }
 .arc > * { position: absolute; left: 50%; bottom: 24px; width: 216px; transform-origin: 50% 2200px; }
 /* hero backdrop: 7 large cards fanned like photos along a rainbow arc, text sits below/over them */
-.arc-bg { position: absolute; left: 50%; top: -30px; width: 1800px; height: 560px; transform: translateX(-50%); pointer-events: none; }
+.arc-bg { position: absolute; left: 50%; top: 24px; width: 1800px; height: 560px; transform: translateX(-50%); pointer-events: none; }
 .arc-bg .arc { height: 100%; }
 .arc-bg .arc > * { bottom: auto; top: 0; width: 340px; transform-origin: 50% 1500px; pointer-events: auto; }
 .arc-bg .card { box-shadow: 0 30px 60px -40px rgba(26,25,23,.35); }
@@ -135,8 +135,7 @@ textarea.field { resize: vertical; line-height: 1.55; field-sizing: content; min
 @media (max-width: 900px) {
   main .grid { grid-template-columns: 1fr !important; }
   .steps { grid-template-columns: 1fr 1fr; }
-  .arc, .arc-bg { display: none; }
-  .pt-\[380px\] { padding-top: 48px !important; }
+  .arc, .arc-bg, .arc-stage { display: none; }
   .bracket, .chip { white-space: normal; }
   .hero-right { display: none; }
   table.ledger .fit, .ledger td .font-mono { font-size: 16px; }

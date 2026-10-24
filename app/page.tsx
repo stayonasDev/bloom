@@ -21,18 +21,9 @@ export default function Home() {
   const { t } = useT();
   return (
     <main className="flex-1">
-      {/* ── hero: big blind cards fanned across the top, like photographs laid over the page ── */}
+      {/* ── hero: title + two doors ── */}
       <div className="grain relative overflow-hidden border-b border-rule">
-        <Parallax className="arc-bg" strength={14}>
-          <div className="arc stagger-slow">
-            {cards.slice(0, 7).map((c, i) => (
-              <div key={c.id} style={{ transform: `translateX(-50%) rotate(${fan[i]}deg)`, zIndex: 10 - Math.abs(fan[i]) }}>
-                <BlindCard card={c} href="/buy" />
-              </div>
-            ))}
-          </div>
-        </Parallax>
-        <Section className="relative z-10 pt-[380px] pb-14">
+        <Section className="relative z-10 pt-16 pb-14">
           <Bracket>{t("home.kicker")} · 2026-10-24</Bracket>
           <h1 className="display mt-6 text-[clamp(88px,13.5vw,196px)]">
             Handover<span className="text-fern">.</span>
@@ -62,31 +53,21 @@ export default function Home() {
         </Section>
       </div>
 
-      {/* ── live matches ── */}
-      <Section className="pt-20">
-        <div id="matches" className="flex items-end justify-between">
-          <Display>{t("home.matches")}</Display>
-          <Bracket>{t("home.fit_kicker")}</Bracket>
-        </div>
-        <table className="ledger mt-10">
-          <thead>
-            <tr><th style={{ width: "36%" }}>{t("th.demand")}</th><th style={{ width: "12%" }}>{t("th.fit")}</th><th style={{ width: "36%" }}>{t("th.note")}</th><th>{t("th.status")}</th></tr>
-          </thead>
-          <tbody>
-            {live.map((r, i) => (
-              <Reveal as="tr" key={r.demand} delay={i * 140}>
-                <td><div className="text-[17px] font-semibold">{r.demand}</div><div className="mt-1 text-[13px] text-ash">{r.who}</div></td>
-                <td><span className="font-mono text-[22px]">{r.fit}</span></td>
-                <td><div className="text-[17px] font-semibold">{r.note}</div><div className="mt-1 text-[13px] text-ash">{r.meta}</div></td>
-                <td><span className={`font-mono text-[13px] ${r.fern ? "text-fern" : "text-graphite"}`}>{r.status}</span></td>
-              </Reveal>
+      {/* ── the blind cards, fanned like photographs, leading into the sealed section ── */}
+      <div className="arc-stage relative mt-4 h-[500px] overflow-hidden">
+        <Parallax className="arc-bg" strength={14}>
+          <div className="arc stagger-slow">
+            {cards.slice(0, 7).map((c, i) => (
+              <div key={c.id} style={{ transform: `translateX(-50%) rotate(${fan[i]}deg)`, zIndex: 10 - Math.abs(fan[i]) }}>
+                <BlindCard card={c} href="/buy" />
+              </div>
             ))}
-          </tbody>
-        </table>
-      </Section>
+          </div>
+        </Parallax>
+      </div>
 
       {/* ── full-bleed: how sealing works ── */}
-      <div className="grain grain-dark mt-24 bg-earth text-sand">
+      <div className="grain grain-dark bg-earth text-sand">
         <Section className="py-24">
           <div className="flex items-end justify-between">
             <Display sand>{t("home.sealed")}</Display>
@@ -115,6 +96,29 @@ export default function Home() {
           </Reveal>
         </Section>
       </div>
+
+      {/* ── live matches ── */}
+      <Section className="pt-24">
+        <div id="matches" className="flex items-end justify-between">
+          <Display>{t("home.matches")}</Display>
+          <Bracket>{t("home.fit_kicker")}</Bracket>
+        </div>
+        <table className="ledger mt-10">
+          <thead>
+            <tr><th style={{ width: "36%" }}>{t("th.demand")}</th><th style={{ width: "12%" }}>{t("th.fit")}</th><th style={{ width: "36%" }}>{t("th.note")}</th><th>{t("th.status")}</th></tr>
+          </thead>
+          <tbody>
+            {live.map((r, i) => (
+              <Reveal as="tr" key={r.demand} delay={i * 140}>
+                <td><div className="text-[17px] font-semibold">{r.demand}</div><div className="mt-1 text-[13px] text-ash">{r.who}</div></td>
+                <td><span className="font-mono text-[22px]">{r.fit}</span></td>
+                <td><div className="text-[17px] font-semibold">{r.note}</div><div className="mt-1 text-[13px] text-ash">{r.meta}</div></td>
+                <td><span className={`font-mono text-[13px] ${r.fern ? "text-fern" : "text-graphite"}`}>{r.status}</span></td>
+              </Reveal>
+            ))}
+          </tbody>
+        </table>
+      </Section>
 
       {/* ── three ways + stats ── */}
       <Section className="py-24">
