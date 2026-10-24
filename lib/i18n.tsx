@@ -77,7 +77,7 @@ const en = {
   "trace.kicker": "Receipt", "trace.h1": "What Claude did with your answers.", "trace.lead": "Each step, what came out, how long it took. Nothing from a company system was read.",
   "trace.l1": "Follow-up questions, written from your four answers", "trace.l2": "Items extracted and sorted into five sections", "trace.l3": "Names generalized", "trace.l4": "Matched against open demands", "trace.l5": "Questions answered from the sealed note",
   "trace.split": "{r} not in any manual · {m} manual knowledge", "trace.rank": "rank {k} · {s}", "trace.total": "interview submitted → card listed", "trace.worker": "Worker: Claude ({m}) · 4 calls. You can review every replacement before the card goes live. Replacements are final once a buyer unlocks.",
-  "sell.no_logs": "Don't paste logs or customer records. We only need your judgment.", "buy.limit": "Unlock the pack to keep asking.", "buy.browse": "All sealed notes", "card.listed": "listed", "buy.soon": "Coming soon · demo", "buy.or_search": "Or search the sealed notes below by keyword or category.", "buy.browse_word": "Browse", "buy.results": "{n} of {total} notes", "buy.search_ph": "Search by keyword — roaming, refunds, intake, invoices…", "buy.clear": "Clear", "buy.category": "Category", "buy.filter_all": "All", "buy.no_results": "No notes match. Try another word, or describe your cases above.", "cat.telecom": "Telecom", "cat.ecommerce": "E-commerce", "cat.health": "Healthcare", "cat.finance": "Finance", "cat.language": "Language & legal", "trace.read": "Read the note", "trace.board": "Match board", "trace.avg": "avg",
+  "sell.no_logs": "Don't paste logs or customer records. We only need your judgment.", "buy.limit": "Unlock the pack to keep asking.", "buy.browse": "All sealed notes", "card.listed": "listed", "buy.soon": "Coming soon · demo", "trace.read": "Read the note", "trace.board": "Match board", "trace.avg": "avg",
 };
 export type Dict = typeof en;
 export type Key = keyof Dict;
@@ -259,7 +259,7 @@ const ko: Dict = {
   "buy.browse": "등록된 노트 전체",
   "card.listed": "등록",
   "buy.soon": "준비 중 · 데모",
-  "buy.or_search": "아래에서 키워드나 분야로 등록된 노트를 바로 찾아볼 수도 있습니다.", "buy.browse_word": "둘러보기", "buy.results": "전체 {total}개 중 {n}개", "buy.search_ph": "키워드로 찾기 — 로밍, 환불, 접수, 영수증…", "buy.clear": "지우기", "buy.category": "분야", "buy.filter_all": "전체", "buy.no_results": "맞는 노트가 없습니다. 다른 단어로 찾거나, 위에 문의를 적어 주세요.", "cat.telecom": "통신", "cat.ecommerce": "온라인 쇼핑", "cat.health": "의료", "cat.finance": "회계·금융", "cat.language": "번역·법률", "trace.read": "노트 보기",
+  "trace.read": "노트 보기",
   "trace.board": "매칭 현황",
   "trace.avg": "평균",
 };
@@ -320,7 +320,7 @@ const ja: Dict = {
   "trace.kicker": "レシート", "trace.h1": "Claude があなたの回答でしたこと。", "trace.lead": "各ステップで何が出て、どれだけかかったか。会社のシステムからは何も読んでいません。",
   "trace.l1": "4つの回答から生まれた追加質問", "trace.l2": "抽出して5つのセクションに整理した項目", "trace.l3": "一般化した名前", "trace.l4": "募集中の需要とマッチ", "trace.l5": "封印ノートから答えた質問",
   "trace.split": "マニュアルにないもの {r} · マニュアル知識 {m}", "trace.rank": "順位 {k} · {s}", "trace.total": "面談送信 → カード掲載", "trace.worker": "作業者: Claude ({m}) · 4回呼び出し。カード公開前にすべての置換を確認できます。買い手が開くと置換は確定します。",
-  "sell.no_logs": "ログや顧客記録は貼らないでください。必要なのはあなたの判断だけです。", "buy.limit": "続けて質問するにはノートを開いてください。", "buy.browse": "すべての封印ノート", "card.listed": "掲載", "buy.soon": "準備中 · デモ", "buy.or_search": "下でキーワードや分野から封印ノートを直接探すこともできます。", "buy.browse_word": "一覧", "buy.results": "全 {total} 件中 {n} 件", "buy.search_ph": "キーワードで探す — ローミング、返金、受付、請求書…", "buy.clear": "クリア", "buy.category": "分野", "buy.filter_all": "すべて", "buy.no_results": "一致するノートがありません。別の語で探すか、上にケースを書いてください。", "cat.telecom": "通信", "cat.ecommerce": "EC・通販", "cat.health": "医療", "cat.finance": "会計・金融", "cat.language": "翻訳・法務", "trace.read": "ノートを読む", "trace.board": "マッチボード", "trace.avg": "平均",
+  "sell.no_logs": "ログや顧客記録は貼らないでください。必要なのはあなたの判断だけです。", "buy.limit": "続けて質問するにはノートを開いてください。", "buy.browse": "すべての封印ノート", "card.listed": "掲載", "buy.soon": "準備中 · デモ", "trace.read": "ノートを読む", "trace.board": "マッチボード", "trace.avg": "平均",
 };
 
 const tl: Dict = {
@@ -379,7 +379,7 @@ const tl: Dict = {
   "trace.kicker": "Resibo", "trace.h1": "Ang ginawa ni Claude sa mga sagot mo.", "trace.lead": "Bawat hakbang, ano ang lumabas, gaano katagal. Walang binasa mula sa sistema ng kumpanya.",
   "trace.l1": "Follow-up na tanong, hango sa apat mong sagot", "trace.l2": "Mga item na hinango at inayos sa limang seksyon", "trace.l3": "Mga pangalang pinangkalahatan", "trace.l4": "Itinugma sa mga bukas na demand", "trace.l5": "Mga tanong na sinagot mula sa sealed note",
   "trace.split": "{r} wala sa anumang manual · {m} kaalaman sa manual", "trace.rank": "ranggo {k} · {s}", "trace.total": "interview isinumite → card nakalista", "trace.worker": "Manggagawa: Claude ({m}) · 4 na tawag. Puwede mong suriin ang bawat pagpapalit bago mailista ang card. Pinal na ang mga pagpapalit kapag may buyer nang nagbukas.",
-  "sell.no_logs": "Huwag mag-paste ng log o customer record. Judgment mo lang ang kailangan namin.", "buy.limit": "Buksan ang note para magtanong pa.", "buy.browse": "Lahat ng sealed na note", "card.listed": "nakalista", "buy.soon": "Malapit na · demo", "buy.or_search": "O hanapin ang mga sealed na note sa ibaba gamit ang keyword o kategorya.", "buy.browse_word": "Tingnan lahat", "buy.results": "{n} sa {total} note", "buy.search_ph": "Hanapin sa keyword — roaming, refund, intake, invoice…", "buy.clear": "Burahin", "buy.category": "Kategorya", "buy.filter_all": "Lahat", "buy.no_results": "Walang tumugmang note. Subukan ang ibang salita, o ilarawan ang mga case mo sa itaas.", "cat.telecom": "Telecom", "cat.ecommerce": "E-commerce", "cat.health": "Healthcare", "cat.finance": "Pananalapi", "cat.language": "Wika at legal", "trace.read": "Basahin ang note", "trace.board": "Match board", "trace.avg": "avg",
+  "sell.no_logs": "Huwag mag-paste ng log o customer record. Judgment mo lang ang kailangan namin.", "buy.limit": "Buksan ang note para magtanong pa.", "buy.browse": "Lahat ng sealed na note", "card.listed": "nakalista", "buy.soon": "Malapit na · demo", "trace.read": "Basahin ang note", "trace.board": "Match board", "trace.avg": "avg",
 };
 
 const es: Dict = {
@@ -438,7 +438,7 @@ const es: Dict = {
   "trace.kicker": "Recibo", "trace.h1": "Lo que Claude hizo con tus respuestas.", "trace.lead": "Cada paso, qué salió, cuánto tardó. No se leyó nada de un sistema de la empresa.",
   "trace.l1": "Preguntas adicionales, a partir de tus cuatro respuestas", "trace.l2": "Elementos extraídos y ordenados en cinco secciones", "trace.l3": "Nombres generalizados", "trace.l4": "Comparada con demandas abiertas", "trace.l5": "Preguntas respondidas desde la nota sellada",
   "trace.split": "{r} fuera de cualquier manual · {m} conocimiento de manual", "trace.rank": "puesto {k} · {s}", "trace.total": "entrevista enviada → tarjeta publicada", "trace.worker": "Trabajador: Claude ({m}) · 4 llamadas. Puedes revisar cada reemplazo antes de que la tarjeta se publique. Los reemplazos son definitivos cuando un comprador desbloquea.",
-  "sell.no_logs": "No pegues registros ni datos de clientes. Solo necesitamos tu criterio.", "buy.limit": "Desbloquea la nota para seguir preguntando.", "buy.browse": "Todas las notas selladas", "card.listed": "publicada", "buy.soon": "Próximamente · demo", "buy.or_search": "O busca las notas selladas abajo por palabra clave o categoría.", "buy.browse_word": "Explorar", "buy.results": "{n} de {total} notas", "buy.search_ph": "Buscar por palabra clave — roaming, reembolsos, admisión, facturas…", "buy.clear": "Limpiar", "buy.category": "Categoría", "buy.filter_all": "Todas", "buy.no_results": "Ninguna nota coincide. Prueba otra palabra o describe tus casos arriba.", "cat.telecom": "Telecom", "cat.ecommerce": "Comercio electrónico", "cat.health": "Salud", "cat.finance": "Finanzas", "cat.language": "Idiomas y legal", "trace.read": "Leer la nota", "trace.board": "Tablero", "trace.avg": "prom.",
+  "sell.no_logs": "No pegues registros ni datos de clientes. Solo necesitamos tu criterio.", "buy.limit": "Desbloquea la nota para seguir preguntando.", "buy.browse": "Todas las notas selladas", "card.listed": "publicada", "buy.soon": "Próximamente · demo", "trace.read": "Leer la nota", "trace.board": "Tablero", "trace.avg": "prom.",
 };
 
 const de: Dict = {
@@ -497,7 +497,7 @@ const de: Dict = {
   "trace.kicker": "Beleg", "trace.h1": "Was Claude mit deinen Antworten getan hat.", "trace.lead": "Jeder Schritt, was herauskam, wie lange es dauerte. Aus keinem Firmensystem wurde etwas gelesen.",
   "trace.l1": "Nachfragen aus deinen vier Antworten", "trace.l2": "Einträge extrahiert und in fünf Abschnitte sortiert", "trace.l3": "Namen verallgemeinert", "trace.l4": "Mit offenen Anfragen abgeglichen", "trace.l5": "Fragen aus der versiegelten Notiz beantwortet",
   "trace.split": "{r} in keinem Handbuch · {m} Handbuchwissen", "trace.rank": "Rang {k} · {s}", "trace.total": "Interview gesendet → Karte gelistet", "trace.worker": "Arbeiter: Claude ({m}) · 4 Aufrufe. Du kannst jede Ersetzung prüfen, bevor die Karte live geht. Ersetzungen sind endgültig, sobald ein Käufer freischaltet.",
-  "sell.no_logs": "Füge keine Protokolle oder Kundendaten ein. Wir brauchen nur dein Urteil.", "buy.limit": "Schalte die Notiz frei, um weiterzufragen.", "buy.browse": "Alle versiegelten Notizen", "card.listed": "gelistet", "buy.soon": "Bald verfügbar · Demo", "buy.or_search": "Oder durchsuche die versiegelten Notizen unten nach Stichwort oder Kategorie.", "buy.browse_word": "Stöbern", "buy.results": "{n} von {total} Notizen", "buy.search_ph": "Nach Stichwort suchen — Roaming, Erstattung, Aufnahme, Rechnungen…", "buy.clear": "Leeren", "buy.category": "Kategorie", "buy.filter_all": "Alle", "buy.no_results": "Keine passende Notiz. Versuch ein anderes Wort oder beschreib deine Fälle oben.", "cat.telecom": "Telekom", "cat.ecommerce": "E-Commerce", "cat.health": "Gesundheit", "cat.finance": "Finanzen", "cat.language": "Sprache & Recht", "trace.read": "Notiz lesen", "trace.board": "Match-Board", "trace.avg": "Ø",
+  "sell.no_logs": "Füge keine Protokolle oder Kundendaten ein. Wir brauchen nur dein Urteil.", "buy.limit": "Schalte die Notiz frei, um weiterzufragen.", "buy.browse": "Alle versiegelten Notizen", "card.listed": "gelistet", "buy.soon": "Bald verfügbar · Demo", "trace.read": "Notiz lesen", "trace.board": "Match-Board", "trace.avg": "Ø",
 };
 
 export const DICTS: Record<Lang, Dict> = { en, ko, ja, tl, es, de };
