@@ -55,12 +55,12 @@ export function Lock({ open = false, className = "" }: { open?: boolean; classNa
 export function BlindCard({ card, compact = false, selected = false, href }: { card: Card; compact?: boolean; selected?: boolean; href?: string }) {
   const { t } = useT();
   const body = (
-    <div className={`card ${selected ? "card-sel" : ""} ${compact ? "p-4" : "p-6"} flex h-full flex-col gap-3`}>
+    <div className={`card ${selected ? "card-sel" : ""} ${compact ? "p-4" : "p-6"} flex h-full flex-col gap-3 text-ink`}>
       <div className="flex items-center justify-between gap-2">
         <Bracket>{card.language} · {card.years_experience} {t("card.yrs")}</Bracket>
         <span className="chip chip-fern"><Lock /> {compact ? card.item_count : `${t("card.sealed")} · ${card.item_count}`}</span>
       </div>
-      <div className={`font-display leading-[1.05] tracking-tight ${compact ? "text-[22px]" : "text-[30px]"}`}>{card.field}</div>
+      <div className={`font-display leading-[1.05] tracking-tight text-ink ${compact ? "text-[22px]" : "text-[30px]"}`}>{card.field}</div>
       {!compact && <p className="text-[14px] text-graphite">{card.one_liner}</p>}
       <div className="mt-auto flex items-end justify-between gap-3 pt-2 font-mono text-[12px] text-graphite">
         <span>{t("card.difficulty")} {card.difficulty}/5 · {t("card.rarity")} {card.rarity}/5{!compact && <><br />{t("card.listed")} {fmtDate(card.listed_at)}</>}</span>

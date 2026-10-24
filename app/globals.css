@@ -204,3 +204,10 @@ tr.reveal { display: table-row; }
 .btn-fern-outline { border-color: var(--fern); color: var(--fern); }
 .btn-fern-outline:hover { background: var(--fern); border-color: var(--fern); color: #fff; }
 @media (max-width: 900px) { .doors { grid-template-columns: 1fr; } }
+
+/* slider in the effect panel */
+.range { -webkit-appearance: none; appearance: none; height: 2px; background: #6B5747; border-radius: 2px; outline: none; }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--sand); border: 2px solid var(--earth); cursor: pointer; transition: transform .22s ease-out; }
+.range::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--sand); border: 2px solid var(--earth); cursor: pointer; }
+.contents { display: contents; }
