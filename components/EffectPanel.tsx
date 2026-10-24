@@ -1,13 +1,14 @@
 "use client";
 
 // "How much changes": today vs. Handover for the same person, plus a slider that shows
-// monthly income from routed cases. Formula follows docs/API.md: USD 15 per case (rarity 4), author keeps 70%.
+// monthly income from routed cases. Per-case price comes from lib/pricing (8 + rarity × 3; rarity 4 → USD 20), author keeps 70%.
 import { useState } from "react";
 import { useT } from "@/lib/i18n";
+import { casePriceUsd } from "@/lib/pricing";
 import { CountUp, Reveal } from "@/components/motion";
 import { Arrow, Bracket } from "@/components/ui";
 
-const PER_CASE = 15;
+const PER_CASE = casePriceUsd(4);
 const SHARE = 0.7;
 
 export function EffectPanel() {
