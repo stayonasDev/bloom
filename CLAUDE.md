@@ -44,3 +44,10 @@
 - 계약 문서(`docs/PRD.md`·`API.md`·`DB.md`·`supabase/migrations`)나 다른 역할의 영역을 바꿔야 하면 코드보다 먼저 `docs/인계사항.md`에 "제안"으로 올린다. 쓰는 법은 그 파일 맨 위.
 - 작업 세션은 시작할 때와 합치기 전(13:30)에 `git pull` 후 `docs/인계사항.md`를 읽는다. 상태가 "합의"이고 영향에 내 역할이 있는 항목만 반영하고, "제안"은 참고만 한다. 반영하면 그 항목의 응답에 `역할: 반영, 바꾼 파일`을 적는다.
 - "인계사항"은 팀 전달 문서다. 제품 용어 "인계서(Handover Note)"와 다르다.
+
+## 프론트 (2026-10-24 12:55 확정, 수정)
+- 구조: `src/` 없이 루트 `app/ · components/ · lib/`. API 라우트는 `app/api/*/route.ts`에, 목 데이터는 루트 `mock/`에.
+- 스택: Next 16.4.3 · React 19.3.0 · Tailwind 4 · TypeScript 5. `package-lock.json` 기준, 설치는 `npm ci`. 실행 `npx next dev -p 3100`.
+- API 호출은 `lib/api.ts` 한 곳. `docs/API.md` 그대로. 라우트가 404면 `lib/mock.ts`로 대체(데모용), 422·403·429는 그대로 표시.
+- 입력칸 기본값 `lib/sample.ts`(참고 목업 문장). UI 문구는 `lib/i18n.tsx`(기본 영어, 6개 언어). 프론트 파일 수정은 수정에게 알리고.
+- 백엔드에 요청: `GET /api/cards`·`matches[].card`에 `pack_id` 추가(구매 → `/packs/{pack_id}/note` 이동에 필요).
