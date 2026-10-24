@@ -1,0 +1,381 @@
+{
+  "base": "https://handover-seven-red.vercel.app",
+  "seeded_at": "2026-10-24T05:26:15.476Z",
+  "cards": {
+    "accounting-ap-en": {
+      "seller_id": "2e72ea03-338c-40a5-91aa-a2080480af8c",
+      "interview_id": "241496e7-4a7f-4400-9e73-2d8b91d0fc93",
+      "pack_id": "1f2e1e0f-572b-4df1-9a9f-bb4ff8e76fca",
+      "card_id": "ca596c3b-32d0-4e9d-9a92-9259222b1a78",
+      "field": "Accounts payable invoice controls",
+      "rarity": 4,
+      "difficulty": 3,
+      "price_pack_usd": 112,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 16,
+        "rare_count": 13,
+        "manual_count": 3,
+        "generalized_count": 1
+      },
+      "followup_ms": 4094,
+      "extract_ms": 36952,
+      "total_ms": 51525,
+      "followups": [
+        "[rare] You said you accept a freight variance up to 3% or 50 dollars, whichever is larger, and send anything above that to the buyer with the surcharge table. How did you arrive at those numbers, and have you ever accepted a variance above them or rejected one below them because of the carrier, the lane or the pattern you saw?",
+        "[rare] Your checklist says to run the duplicate check on amount plus vendor instead of invoice number. When that check flags a match, what do you look at to decide whether it is a true duplicate or a legitimate repeat charge, such as recurring fees? What do you do with the payment while you are deciding?",
+        "[rare] For the 14,000 dollar invoice you split 60-30-10 using the PO lines, you said 'month-end cutoff beats returning to vendor'. Where is the line? Is there a size of understatement, a type of invoice, or a missing PO-line match where you would still return it, and how much of an accrual would you book on your own authority before you want someone to sign off first?"
+      ]
+    },
+    "bank-callcenter-en-senior": {
+      "seller_id": "a495e9d0-7a1f-478a-ac00-53dd9877a657",
+      "interview_id": "c9047fa9-3371-4f27-8157-07fa845e4d9e",
+      "pack_id": "bacbdb5d-fd07-4132-8804-8338a0de65a3",
+      "card_id": "4dce10dc-817d-434d-b4a8-279c3837166c",
+      "field": "Bank card fraud and dispute handling",
+      "rarity": 4,
+      "difficulty": 4,
+      "price_pack_usd": 133,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 19,
+        "rare_count": 18,
+        "manual_count": 1,
+        "generalized_count": 0
+      },
+      "followup_ms": 3082,
+      "extract_ms": 23495,
+      "total_ms": 35033,
+      "followups": [
+        "[rare] You said you ask the customer to wait on blocking if a pending authorization is above 300 dollars, 'unless the fraud is active.' How do you tell in the moment that fraud is active, and what specific signals make you block immediately even though the customer will see a double hold?",
+        "[rare] You noted the provisional credit is reversed in about 15% of merchant disputes. Which kinds of disputes do you see reversed most often, and how do you decide in the moment whether to mention the credit at all or warn the customer it might be reversed?",
+        "[rare] With the casino cash advance, you refused after seeing the PIN verification and the travel notice match. Where is your line when only one of those signals is present, for example a signature transaction in a location that doesn't match the travel notice? What do you do then, and how would you coach a new agent to handle that same call?"
+      ]
+    },
+    "content-moderator-en": {
+      "seller_id": "b1eab501-3b00-4d47-a456-39168b13fe83",
+      "interview_id": "bbbfb8b5-1531-443e-a5f7-11334fdabca7",
+      "pack_id": "cf2b12cb-1f28-4e58-95fe-a6bb0119b770",
+      "card_id": "6d9c85ac-20c1-4cc6-87e7-e64cb3cf1ee4",
+      "field": "Marketplace listing and review moderation",
+      "rarity": 4,
+      "difficulty": 3,
+      "price_pack_usd": 126,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 18,
+        "rare_count": 16,
+        "manual_count": 2,
+        "generalized_count": 0
+      },
+      "followup_ms": 4033,
+      "extract_ms": 23397,
+      "total_ms": 34850,
+      "followups": [
+        "[rare] You said a seller with over 500 listings and three removals in a week should be paused rather than warned, because by the fourth removal it is usually a bulk counterfeit uploader. What did you look at on the account, besides the removal count, to decide it was a bulk uploader and not a legitimate large seller having a bad week, and how did you handle the cases where you paused someone who turned out to be legitimate?",
+        "[rare] In the brand legal team case you removed 22 of the 40 listings, using a logo mismatch or a price below 30% of retail as your tests. How did you arrive at the 30% line, and what did you do with listings that were borderline, such as priced at 35% with a clean logo, or a genuine logo with suspicious photos?",
+        "[rare] You said that on a 'compatible with' versus 'for' phone case listing the difference is one word the filter cannot see, and your checklist says a logo in the image is not fine. When the title says 'compatible with' but the first image shows the brand's logo prominently, how do you decide whether to remove it, and what is the least visible logo use that would still make you take it down?"
+      ]
+    },
+    "ecommerce-cs-en": {
+      "seller_id": "8f77fdb2-cca8-4d4a-928d-8ca0b338d67a",
+      "interview_id": "8fbe9292-9324-4c8a-b3c7-75e20429952e",
+      "pack_id": "121dd548-0497-4c4d-8ba3-a132b136be86",
+      "card_id": "ef44278d-1db3-42fd-9659-9b7423c7f707",
+      "field": "E-commerce refunds and returns disputes",
+      "rarity": 4,
+      "difficulty": 3,
+      "price_pack_usd": 105,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 15,
+        "rare_count": 12,
+        "manual_count": 3,
+        "generalized_count": 1
+      },
+      "followup_ms": 3210,
+      "extract_ms": 29347,
+      "total_ms": 40787,
+      "followups": [
+        "[rare] You said the whole decision tree changes above 150 dollars. What specifically changes above that line (extra proof, supervisor sign-off, reship instead of refund?), and have you ever bent that threshold for a case just under or over it, and why?",
+        "[rare] For 'item not received' cases, you send the tracking proof and wait 24 hours. What made you settle on 24 hours rather than 12 or 48, and what do you do when the customer comes back still insisting after checking with the guard, especially when tracking says 'signed by neighbour'?",
+        "[rare] You use weight from the courier label (180g vs expected 260g) to separate packing error from theft. How big does the gap have to be before you trust it, and what do you do when the weight is close to expected but the seal is broken, or the seal is intact and the weight is right?"
+      ]
+    },
+    "ecommerce-cs-taglish": {
+      "seller_id": "82f25c45-9f8d-4bf1-9cb2-cc93546c9307",
+      "interview_id": "e323afb2-3e59-46e9-93ca-87336d256ee4",
+      "pack_id": "20a9a5ff-7d6c-4a75-add5-26428c452471",
+      "card_id": "498bb353-6f43-4300-9eaf-93888be5457b",
+      "field": "E-commerce refund and return disputes",
+      "rarity": 4,
+      "difficulty": 3,
+      "price_pack_usd": 112,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 16,
+        "rare_count": 13,
+        "manual_count": 3,
+        "generalized_count": 0
+      },
+      "followup_ms": 14607,
+      "extract_ms": 33050,
+      "total_ms": 55399,
+      "followups": [
+        "[rare] You approve refunds under 500 pesos without photos. Have you ever refused or asked for photos on a claim under that line, for example a repeat claimant, a certain category, or a pattern that looked off? What made you break your own rule, and how many claims from the same customer would make you stop auto-approving?",
+        "[detail] On the power bank case, you used 410 grams against an expected 680 grams to call it a packing error. How do you find the expected weight, and how far off can the label weight be before you stop trusting it (for example, different packaging or a bundled item)? Have you seen a case where the seal was intact but you still did not file it as a packing discrepancy?",
+        "[rare] With the phone case 'iba ang shade' request, you gave a 10% goodwill voucher after refusing the full refund. How did you decide on 10% rather than nothing or something larger? What would have made you approve the refund, or skip the voucher, given that the customer was already on day 11 from delivery?"
+      ]
+    },
+    "hospital-intake-en": {
+      "seller_id": "f995932a-e011-42b6-95c9-db21a2dd2135",
+      "interview_id": "939818be-7c63-48fe-a7e5-7a53831b5657",
+      "pack_id": "f8353889-f65f-4c27-b512-fc3b8a39750d",
+      "card_id": "473a2596-9816-4432-8064-235d1bd4ab3b",
+      "field": "Hospital front desk intake",
+      "rarity": 4,
+      "difficulty": 3,
+      "price_pack_usd": 119,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 17,
+        "rare_count": 15,
+        "manual_count": 2,
+        "generalized_count": 0
+      },
+      "followup_ms": 3263,
+      "extract_ms": 25753,
+      "total_ms": 37286,
+      "followups": [
+        "[rare] You said you call the payer for anyone whose last visit was more than 60 days ago. Have you ever skipped that call for a patient under 60 days, or made it anyway because something looked off (plan type, employer change, time of year)? What was the trigger, and what did you find?",
+        "[rare] For the no-show rule, you check the phone log and lab queue before releasing a slot at 15 minutes. If the patient has called or is in the lab, how long past the 15 minutes will you hold the slot before releasing it, and what makes you cut it off (next patient waiting, doctor's schedule, a second call)?",
+        "[rare] With the chest pain walk-in, you used the triage room and logged it as a triage assessment so no charge was created. What made you decide that was the right move rather than calling a rapid response or the ER yourself, and how do you decide when a patient is too symptomatic to wait even the 10 minutes for the charge nurse?"
+      ]
+    },
+    "loan-review-en": {
+      "seller_id": "29baa4f7-46bc-4201-8289-d99b11ac586a",
+      "interview_id": "498bb163-c569-4315-9d6a-66ef42ba7c66",
+      "pack_id": "9568faf7-3c4c-4e41-aabc-c331ef205e94",
+      "card_id": "f490bb83-bec8-4c66-9446-c42b7dc71d5c",
+      "field": "Consumer loan application underwriting",
+      "rarity": 4,
+      "difficulty": 3,
+      "price_pack_usd": 105,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 15,
+        "rare_count": 11,
+        "manual_count": 4,
+        "generalized_count": 0
+      },
+      "followup_ms": 3889,
+      "extract_ms": 31547,
+      "total_ms": 42348,
+      "followups": [
+        "[rare] You recalculate the ratio when a co-signed account has 24 months of payments by the other party, but you also said the calculator pushes about one in fifteen applicants over 45% for a loan they can afford. When you recalculate, what do you actually do with the co-signed debt (drop it entirely, count a partial amount), and how do you handle a case where the other party paid 20 months, or paid late a few times, so the 24-month rule doesn't fit cleanly?",
+        "[rare] You said mismatched employers are the most common fraud signal, about one in forty applications. When you see a mismatch, what makes you treat it as an innocent explanation (a parent company, a staffing agency, a recent job change) versus a real fraud flag, and at what point do you stop and escalate rather than ask the applicant to explain?",
+        "[rare] In the widow's survivor pension case, you used the 'approved but not yet received' exception, which is in the policy but not in the system. What did you check on the award letter before you trusted it (start date, amount, payment frequency, how soon the first payment was due), and was there a point where you would have declined anyway, such as a first payment months away or a pension amount too small to support the loan?"
+      ]
+    },
+    "paralegal-en": {
+      "seller_id": "fb0956ab-f354-4507-abf2-c64d42e2e05b",
+      "interview_id": "ddef34a1-e012-47ba-bcb8-d24fb2769e99",
+      "pack_id": "95fb51e1-6838-4cdd-bdea-d6f0bf23b03b",
+      "card_id": "3c09a799-fd2c-4677-a67f-93baa418ed3c",
+      "field": "Commercial contract review and intake",
+      "rarity": 4,
+      "difficulty": 3,
+      "price_pack_usd": 119,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 17,
+        "rare_count": 16,
+        "manual_count": 1,
+        "generalized_count": 0
+      },
+      "followup_ms": 3148,
+      "extract_ms": 22259,
+      "total_ms": 31103,
+      "followups": [
+        "[rare] You said a strict reading flags about 30% of vendor contracts as missing a limitation of liability clause when it's actually in a master agreement or order form. When you do find the clause in a referenced document, what makes you decide it's enough to clear the flag, and what would make you still escalate to the attorney (for example, the master agreement being outdated, unsigned, or not clearly incorporated)?",
+        "[rare] You said an auto-renewal with a notice window under 30 days is more urgent than a missing signature. When you have several of these on your desk at once, how do you decide what to handle first, and how far ahead of the notice deadline do you calendar your reminders to leave enough time for the attorney and the business to decide?",
+        "[rare] In the signature-page mix-up, you compared the two versions and confirmed the cap was the only difference before drafting the amendment. How did you actually verify that nothing else had changed, and what kind of difference (another clause, a schedule, a different party name) would have made you go back to requesting a fresh signature despite the week's delay?"
+      ]
+    },
+    "recruiting-screener-en": {
+      "seller_id": "9b6374ec-c639-4178-a2bf-a4b828891c67",
+      "interview_id": "8bd1dda6-e7e9-4d43-be7f-43975bd59ed2",
+      "pack_id": "0b23ddc5-fe1c-4611-b456-9b384311044a",
+      "card_id": "27103cb6-d8af-4953-a3c8-c8836030b007",
+      "field": "Recruiting screening and HR coordination",
+      "rarity": 4,
+      "difficulty": 3,
+      "price_pack_usd": 133,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 19,
+        "rare_count": 15,
+        "manual_count": 4,
+        "generalized_count": 0
+      },
+      "followup_ms": 3455,
+      "extract_ms": 22982,
+      "total_ms": 33858,
+      "followups": [
+        "[rare] You said you pass candidates with gaps over 12 months to the phone screen and ask about the gap in the first two minutes. What do you listen for in those two minutes that makes you advance them or drop them, and is there a type of gap explanation or a length of gap where you still reject even for warehouse and support roles?",
+        "[rare] You mentioned that the rubric never says a referral from an employee with under 6 months tenure should count the same as a cold applicant. Where did the 6-month line come from, and what do you actually do differently with those referrals when they land in your queue, for example in how you weigh them or how fast you move them?",
+        "[rare] You check whether a candidate did the specific task in the posting rather than counting years, even when they are six months under the minimum. How far under the minimum will you go before you stop passing them, and how do you verify in a screen that they really did the task and are not just describing it well?"
+      ]
+    },
+    "telecom-billing-en-junior": {
+      "seller_id": "0a33e83a-b6c2-4436-87e6-8d8b3c12a8a7",
+      "interview_id": "2fbdcba1-7d4d-4221-8afb-f0e8faaddf77",
+      "pack_id": "9f60bd11-d76c-4859-bdb8-7f7fba468d81",
+      "card_id": "53dd31b1-64ee-4509-a747-dbcd99111831",
+      "field": "Telecom billing customer support",
+      "rarity": 2,
+      "difficulty": 2,
+      "price_pack_usd": 105,
+      "price_case_usd": 14,
+      "metrics": {
+        "item_count": 15,
+        "rare_count": 7,
+        "manual_count": 8,
+        "generalized_count": 0
+      },
+      "followup_ms": 3606,
+      "extract_ms": 16273,
+      "total_ms": 26959,
+      "followups": [
+        "[rare] You said you read the customer's last three interactions to see if a previous agent promised something. Tell me about a time you found a promise in those notes that you weren't sure you could honor. What did you do, and how did you decide whether to keep it or walk it back?",
+        "[rare] In the late fee case, the customer had two late fees in twelve months so you refused the waiver. If he had been just barely over the rule, for example the second fee was only a few days outside the window, or he had been a long-time customer with a perfect record otherwise, would you have escalated or looked for another way? What would make you push back on the rule?",
+        "[rare] You mentioned you were unsure if you could say who added the second line, so you asked your team lead. What did your lead tell you, and what do you now do when the person asking about a charge is not the person who made the change? Does it matter whether they are the account holder or an authorized user?"
+      ]
+    },
+    "telecom-billing-en-rough": {
+      "seller_id": "49ac4781-9af7-496a-b5da-f03ea60b904d",
+      "interview_id": "fce2abd6-49b2-407d-8fe3-8e00f8068fa8",
+      "pack_id": "a23f669a-5740-4d89-a921-85c2ad6023a2",
+      "card_id": "46dfe538-860e-4a82-bfce-9e1e32c2d78c",
+      "field": "Telecom billing and credit disputes",
+      "rarity": 4,
+      "difficulty": 3,
+      "price_pack_usd": 77,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 11,
+        "rare_count": 8,
+        "manual_count": 3,
+        "generalized_count": 0
+      },
+      "followup_ms": 3333,
+      "extract_ms": 15125,
+      "total_ms": 25531,
+      "followups": [
+        "[rare] You said the loyalty credit sometimes fails if the customer changed plan recently. How recent is 'recently' in your experience, and what do you actually check first to know whether the credit will go through or fail?",
+        "[rare] On the roaming case, you refused to remove the charges because he turned roaming on himself but gave a small credit instead. What made you decide a credit was okay here, and how did you pick the amount or percentage? What would have changed your answer to a full removal?",
+        "[rare] For the family plan where the main person moved overseas, you split it at the next cycle so the others kept the discount. What did you check to be sure the split wouldn't make them lose the discount, and what would you have done if the timing didn't work out, such as the main account holder being unreachable or the cycle date being far off?"
+      ]
+    },
+    "telecom-billing-en": {
+      "seller_id": "c53de495-2119-4e40-8758-dc1837264415",
+      "interview_id": "cad4cb80-cd96-4371-a753-d4164fc39eab",
+      "pack_id": "f0c4a89c-3671-46b8-b495-c496b148e6e3",
+      "card_id": "33b35f50-14e8-4e69-8e11-9aa1df69e3cb",
+      "field": "Telecom billing disputes and credits",
+      "rarity": 4,
+      "difficulty": 4,
+      "price_pack_usd": 133,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 19,
+        "rare_count": 14,
+        "manual_count": 5,
+        "generalized_count": 3
+      },
+      "followup_ms": 2969,
+      "extract_ms": 32230,
+      "total_ms": 42429,
+      "followups": [
+        "[rare] You said a SIM swap resets the 60-day counter and you only learned it after three callbacks in one week. When a customer is inside that window because of a SIM swap rather than a plan change, how do you handle the conversation, and is there a point where you stop trying to save them with the loyalty credit and escalate or let them cancel?",
+        "[rare] You set a reminder to confirm that the family plan split actually posted because the system sometimes drops the dependents' discount on the first bill. How long after the split do you check, what exactly do you look at, and what do you do if the discount is missing?",
+        "[rare] Your goodwill cap is 20% of the roaming charge or 25 dollars, whichever is lower. Have you ever had a case where you wanted to give more, or where you chose to give less than the cap or escalate to a supervisor? What made you decide that, and how large was the roaming charge in the case?"
+      ]
+    },
+    "telecom-ko": {
+      "seller_id": "dc7c31a6-df5b-4d84-945a-2cefb8f5ec2d",
+      "interview_id": "1daf10cc-9758-45dd-9d08-0d67ca392c5d",
+      "pack_id": "9278ea49-55dd-4c7a-b0da-81263cc251a1",
+      "card_id": "66862747-974e-4388-850c-5faecba7c63e",
+      "field": "Telecom billing and contract disputes",
+      "rarity": 4,
+      "difficulty": 3,
+      "price_pack_usd": 147,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 21,
+        "rare_count": 18,
+        "manual_count": 3,
+        "generalized_count": 1
+      },
+      "followup_ms": 5478,
+      "extract_ms": 26199,
+      "total_ms": 39963,
+      "followups": [
+        "[rare] '내리는 경우에만 전산에서 반환금 예상액을 조회해서 말한다'고 하셨는데, 조회된 금액을 고객에게 안내했을 때 고객이 그래도 내리겠다고 하거나 망설이는 경우가 있을 것 같습니다. 그때 약정 만료까지 남은 기간이 어느 정도면 '조금 기다렸다가 변경하세요'라고 권하고, 어느 정도면 그냥 진행하시나요? 판단 기준이 되는 개월 수나 금액이 있으면 알려주세요.",
+        "[rare] 로밍 건에서 문자 발송일이 출국 다음 날이어서 사후 안내로 보고 감면 심사팀에 올리셨다고 했는데, 출국일과 문자 발송일이 같은 날이거나 몇 시간 차이로 애매한 경우에는 어떻게 판단하시나요? 감면 심사팀에 올릴지 말지 가르는 기준(시간 차이, 금액, 고객의 반응 등)이 있다면 구체적으로 말씀해 주세요.",
+        "[rare] 요양병원에 계신 어머니 명의 회선 건에서 본인 인증이 안 되는 상황에서 일시정지와 자동 정지 절차, 90일 기간을 안내하셨습니다. 이런 상황에서 고객이 '그럼 요금은 계속 나가는 거냐'며 강하게 항의하거나 대리점 방문이 불가능하다고 할 때, 원칙은 지키면서도 실제로 쓰셨던 우회 방법이 있나요? 그 방법을 쓰는 조건은 무엇인가요?"
+      ]
+    },
+    "translation-review-en": {
+      "seller_id": "78f92c73-5648-49f1-ba30-377509a422fa",
+      "interview_id": "532d9057-117c-408f-bbc5-ca92de732cd2",
+      "pack_id": "af2c0a2a-b29b-49bf-85a4-90d184eb46fa",
+      "card_id": "32e1855f-2ff0-4722-9fe2-a93953c440e6",
+      "field": "EN-KO and EN-JA translation QA",
+      "rarity": 4,
+      "difficulty": 4,
+      "price_pack_usd": 140,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 20,
+        "rare_count": 16,
+        "manual_count": 4,
+        "generalized_count": 0
+      },
+      "followup_ms": 3463,
+      "extract_ms": 24209,
+      "total_ms": 34950,
+      "followups": [
+        "[rare] You said strings under 20 characters with a placeholder go back to the developer because Korean word order breaks the placeholder position. What do you do when the developer can't change the string structure before release, and is there a case where you let such a string through anyway? What would make you accept it?",
+        "[rare] You split the 400-string release and signed off only the 40 legal and payment strings in two hours. How did you decide which strings counted as legal or payment, and what would you have done if that set had been 150 strings instead of 40? At what size would you have refused the deadline entirely?",
+        "[detail] You mentioned the 'cancel' mismatch caused a 12% spike in support tickets in one quarter. Over what period was that measured, and how did you trace the spike back to that term rather than something else? How do you now spot a similar UI-versus-email term conflict before it ships?"
+      ]
+    },
+    "travel-booking-en": {
+      "seller_id": "6bcb33fa-43a8-4ce8-9c30-aaa19678310f",
+      "interview_id": "d81ee0f2-0f4d-4204-84a1-83bb545a3584",
+      "pack_id": "0924ef81-0708-4b49-a76d-20d4633f6a47",
+      "card_id": "7324ace6-970b-4268-b42e-69f222841303",
+      "field": "Airline ticket changes and disruptions",
+      "rarity": 4,
+      "difficulty": 4,
+      "price_pack_usd": 98,
+      "price_case_usd": 20,
+      "metrics": {
+        "item_count": 14,
+        "rare_count": 13,
+        "manual_count": 1,
+        "generalized_count": 0
+      },
+      "followup_ms": 3269,
+      "extract_ms": 29660,
+      "total_ms": 40128,
+      "followups": [
+        "[rare] You said you check the partner flights first for any cancellation after 9 pm and call the partner desk to get the seat protected at no cost. When the partner desk pushed back or said no, what did you say or do, and at what point did you decide to stop pushing and fall back to the airline's own options?",
+        "[rare] You said about one booking in eight has a qualifying schedule change the customer never noticed. When you find one, how do you decide whether to proactively tell the customer about the full refund or to just proceed with the change they asked for, and have you ever found a case that was close to the 2-hour line where you had to make a judgment call?",
+        "[detail] In the missed-flight case you filed under the same-day standby rule for a 75 dollar fee. What conditions have to be true for that rule to work (for example, how long after the gate closed, how many seats left, or which fare types), and have you seen cases where it wasn't available and you had to do something else?"
+      ]
+    }
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "slug": "travel-booking-ko",
+  "preseeded": true,
+  "seller": {
+    "role_title": "여행 예약 변경·환불 상담원",
+    "years_experience": 3,
+    "language": "KO",
+    "display_name": "Seller #2107"
+  },
+  "card": {
+    "field": "여행 예약 변경·환불",
+    "field_key": "travel_booking",
+    "difficulty": 3,
+    "rarity": 3,
+    "one_liner": "항공권 변경 수수료 예외, 날씨·질병 사유 처리, 부분 취소에서 왕복을 지키는 법."
+  },
+  "tags": {
+    "field_key": "travel_booking",
+    "topics": [
+      "change_fee_waiver",
+      "weather_exception",
+      "partial_cancellation",
+      "no_show_refund",
+      "schedule_change",
+      "name_correction"
+    ],
+    "judgments": [
+      "exception",
+      "evidence",
+      "refusal"
+    ]
+  },
+  "handover_note": {
+    "rules": [
+      {
+        "id": "r1",
+        "text": "Change fees follow the fare rules of the ticket; the agency cannot waive the airline's fee.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r2",
+        "text": "A name correction of up to 3 characters is free within 24 hours of booking.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "r3",
+        "text": "A round trip is changed, never cancelled, when only the return is dropped.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "r4",
+        "text": "No-show tickets are refunded for taxes only, unless the fare rule says otherwise.",
+        "kind": "manual",
+        "source": "q3"
+      }
+    ],
+    "exceptions": [
+      {
+        "id": "e1",
+        "text": "Weather waivers apply only when the airline publishes one; a typhoon warning alone is not enough, and the waiver window is usually 72 hours.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "e2",
+        "text": "Illness waivers require a medical certificate dated before departure; a certificate dated after departure is refused by every carrier.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "e3",
+        "text": "A schedule change over 2 hours gives a free change or full refund even on a non-refundable fare.",
+        "kind": "rare",
+        "source": "f1"
+      },
+      {
+        "id": "e4",
+        "text": "Group bookings of 10 or more can change one name free up to 7 days before departure.",
+        "kind": "rare",
+        "source": "f2"
+      }
+    ],
+    "judgment_calls": [
+      {
+        "id": "j1",
+        "text": "If the airline has not published a weather waiver but the forecast is a warning, hold the change request for 24 hours before charging; waivers are often published late.",
+        "kind": "rare",
+        "source": "q4"
+      },
+      {
+        "id": "j2",
+        "text": "When a customer asks to cancel only the return, price the one-way change first; it is usually cheaper than forfeiting the outbound.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "j3",
+        "text": "A no-show caused by an airline-side check-in failure, with a screenshot, is refunded in full by most carriers within 30 days.",
+        "kind": "rare",
+        "source": "f3"
+      }
+    ],
+    "common_mistakes": [
+      {
+        "id": "m1",
+        "text": "Promising a weather waiver before the airline publishes it.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "m2",
+        "text": "Cancelling the whole round trip to drop a return.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "m3",
+        "text": "Accepting a medical certificate dated after departure.",
+        "kind": "rare",
+        "source": "q3"
+      }
+    ],
+    "never_do": [
+      {
+        "id": "n1",
+        "text": "Never process an illness waiver with a certificate dated after departure; refuse and explain the date rule.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "n2",
+        "text": "Never cancel a round trip to drop a return.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "n3",
+        "text": "Never charge a change fee before checking for a published waiver or a schedule change.",
+        "kind": "manual",
+        "source": "q1"
+      }
+    ]
+  },
+  "generalization_log": [
+    {
+      "type": "company",
+      "replaced_with": "the airline",
+      "count": 3
+    },
+    {
+      "type": "system",
+      "replaced_with": "the booking system",
+      "count": 1
+    }
+  ],
+  "metrics": {
+    "followup_ms": 3900,
+    "extract_ms": 8600
+  }
+}

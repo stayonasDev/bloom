@@ -1,0 +1,44 @@
+{
+  "slug": "ecommerce-cs-en",
+  "label": "E-commerce customer support, returns and refunds",
+  "field_hint": "E-commerce returns and refunds",
+  "seller": {
+    "role_title": "E-commerce customer support specialist",
+    "years_experience": 4,
+    "language": "EN",
+    "display_name": "Seller #0512"
+  },
+  "seed_answers": {
+    "q1": "The manual says the return window is 7 days, but it never explains that for electronics the marketplace policy on Lazada overrides ours and gives 15 days, so refusing a day-10 laptop return just creates a chargeback we lose anyway. It also never says that a partial refund under 30% of the item price can be approved by the agent without photos, which saves about 10 minutes per case. I learned to ask for the order value first, because the whole decision tree changes above 150 dollars.",
+    "q2": "New hires approve 'item not received' refunds the moment the customer says so. They do not open the courier tracking, which in 40% of my cases shows 'delivered, signed by neighbour' or 'left at guard house'. The right move is to send the tracking proof and ask the customer to check with the guard first, then wait 24 hours. A second mistake is issuing a refund to the original card when the order was paid with vouchers, which gives the customer real money for free credit.",
+    "q3": "I refused a full refund for a dress the customer said was 'wrong colour'. The photos she sent matched the listing exactly under daylight, and the complaint came on day 13 of a 7-day window. I explained that colour perception is not a defect under our policy, offered a 15% voucher as goodwill, and closed the case. She escalated and the supervisor upheld it. I document the listing photo and customer photo side by side every time so the escalation takes two minutes instead of twenty.",
+    "q4": "A customer ordered two phone cases, received one case and one empty box with the seal intact. The script only had 'missing item' which triggers a reship, but the seal being intact meant warehouse packing error, not courier theft. I filed it as a packing discrepancy instead, which refunds within 2 days instead of 10, and attached the weight from the courier label, 180 grams, which was below the expected 260 grams for two cases. That weight check is now how I decide between packing error and theft."
+  },
+  "notes": "Refund decision order: 1) order value above or below 150 dollars 2) tracking status before believing not received 3) payment method, vouchers never refund to card 4) seal intact means packing error 5) partial under 30% I can approve alone.",
+  "followup_answers": {
+    "f1": "Above 150 dollars I always require photos and a courier weight, because that is the threshold where our fraud team reviews the case and a refund without evidence gets clawed back from the agent's quality score. Below 150 I approve partials up to 30% on the spot.",
+    "f2": "The weight rule fails for very light items like earrings, where the difference between one and two is under 20 grams and the courier scale rounds. For those I fall back to the seal check and the customer's history, more than two missing-item claims in 90 days means I route it to fraud review.",
+    "f3": "If the customer is outside the window but the item was delivered late by the courier, I count the window from the actual delivery scan, not the order date. That is not in the manual but supervisors always uphold it."
+  },
+  "self_reported": {
+    "cases_per_month": 900,
+    "escalation_rate_pct": 6,
+    "years_on_queue": 4,
+    "note": "estimate, from my own weekly tallies"
+  },
+  "expect_tags": {
+    "field_key": "ecommerce_returns",
+    "topics": [
+      "item_not_received",
+      "packing_error",
+      "return_window",
+      "partial_refund",
+      "voucher_payment"
+    ],
+    "judgments": [
+      "evidence",
+      "refusal",
+      "threshold"
+    ]
+  }
+}

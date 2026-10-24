@@ -1,0 +1,169 @@
+{
+  "slug": "insurance-claims-en",
+  "preseeded": true,
+  "seller": {
+    "role_title": "Insurance claims intake specialist",
+    "years_experience": 5,
+    "language": "EN",
+    "display_name": "Seller #2103"
+  },
+  "card": {
+    "field": "Insurance claims intake and document checks",
+    "field_key": "insurance_claims",
+    "difficulty": 4,
+    "rarity": 4,
+    "one_liner": "Which missing document actually blocks a claim, the 30-day window edge cases, and when to route to appeal."
+  },
+  "tags": {
+    "field_key": "insurance_claims",
+    "topics": [
+      "missing_document",
+      "claim_window",
+      "partial_approval",
+      "appeal_routing",
+      "policy_lapse",
+      "duplicate_claim"
+    ],
+    "judgments": [
+      "refusal",
+      "timing",
+      "evidence",
+      "escalation"
+    ]
+  },
+  "handover_note": {
+    "rules": [
+      {
+        "id": "r1",
+        "text": "A claim must be filed within 30 days of the incident date.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r2",
+        "text": "Every claim needs the incident report, the itemised bill and proof of payment.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r3",
+        "text": "A claim on a lapsed policy is declined unless the lapse was under 15 days and the premium was paid in the grace period.",
+        "kind": "manual",
+        "source": "q3"
+      },
+      {
+        "id": "r4",
+        "text": "Duplicate claims are checked by policy number, incident date and amount.",
+        "kind": "manual",
+        "source": "q2"
+      }
+    ],
+    "exceptions": [
+      {
+        "id": "e1",
+        "text": "The 30-day window counts from the date the claimant could reasonably know, so a hospital discharge date can replace the admission date.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "e2",
+        "text": "If only proof of payment is missing and the bill is under 500 dollars, register the claim as pending and give 14 days; do not reject.",
+        "kind": "rare",
+        "source": "f1"
+      },
+      {
+        "id": "e3",
+        "text": "A partial approval above 70% of the claimed amount is paid immediately and the remainder goes to review; below 70% the whole claim goes to review.",
+        "kind": "rare",
+        "source": "q4"
+      },
+      {
+        "id": "e4",
+        "text": "A lapse of 15 to 30 days with a documented bank failure of autopay is routed to underwriting, not declined.",
+        "kind": "rare",
+        "source": "f2"
+      }
+    ],
+    "judgment_calls": [
+      {
+        "id": "j1",
+        "text": "Two claims with the same incident date but different providers are usually one event, not a duplicate; check the provider before flagging.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "j2",
+        "text": "A claimant who refiles within 7 days of a decline with the missing document goes to the original handler, not to appeal.",
+        "kind": "rare",
+        "source": "f3"
+      },
+      {
+        "id": "j3",
+        "text": "If the itemised bill has a code outside the policy schedule, approve the covered lines and route only the uncovered line to review.",
+        "kind": "rare",
+        "source": "q4"
+      }
+    ],
+    "common_mistakes": [
+      {
+        "id": "m1",
+        "text": "Rejecting for a missing document that is not actually required for claims under 500 dollars.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "m2",
+        "text": "Flagging same-day claims from two providers as duplicates.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "m3",
+        "text": "Counting the window from the admission date when the discharge was 10 days later.",
+        "kind": "rare",
+        "source": "q1"
+      }
+    ],
+    "never_do": [
+      {
+        "id": "n1",
+        "text": "Never approve a claim on a policy lapsed more than 30 days; refuse and explain the reinstatement path.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "n2",
+        "text": "Never route a first refile to appeal; appeal is for a second decline.",
+        "kind": "manual",
+        "source": "f3"
+      },
+      {
+        "id": "n3",
+        "text": "Never pay a partial approval without recording which lines were held.",
+        "kind": "manual",
+        "source": "q4"
+      }
+    ]
+  },
+  "generalization_log": [
+    {
+      "type": "company",
+      "replaced_with": "the insurer",
+      "count": 2
+    },
+    {
+      "type": "system",
+      "replaced_with": "the claims system",
+      "count": 2
+    },
+    {
+      "type": "customer",
+      "replaced_with": "the claimant",
+      "count": 1
+    }
+  ],
+  "metrics": {
+    "followup_ms": 4600,
+    "extract_ms": 9200
+  }
+}

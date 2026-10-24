@@ -1,0 +1,24 @@
+{
+  "slug": "paralegal-en",
+  "label": "Paralegal, contract review support (B층 직군)",
+  "axis": "occupation_b_tier",
+  "field_hint": "Contract review support and legal intake exceptions",
+  "seller": {
+    "role_title": "Paralegal, commercial contracts",
+    "years_experience": 9,
+    "language": "EN",
+    "display_name": "Seller #1402"
+  },
+  "seed_answers": {
+    "q1": "The intake checklist says to flag any contract without a limitation of liability clause. It never says that the clause is often hiding in a referenced master agreement or an order form, so a strict reading flags 30% of our vendor contracts as missing it when it is simply elsewhere. The checklist also never says that an auto-renewal clause with a notice window under 30 days is more urgent than a missing signature, because the notice date is a real deadline and the signature is not.",
+    "q2": "New paralegals redline every deviation from our template, including harmless ones like a different governing law in the same country, which turns a two-page redline into twenty and the counterparty stops reading it. The right move is to redline only clauses on the attorney's priority list, usually liability, indemnity, termination and data, and to summarise the rest in a one-line note. The second mistake is calendaring the contract end date instead of the notice deadline, which is how we missed an auto-renewal on a 90,000 dollar annual subscription two years ago.",
+    "q3": "A sales director asked me to mark a customer contract as 'approved' in the system so the deal could close before quarter end, saying the attorney had verbally agreed. I refused, because the approval field is the record the audit team relies on and I had no written confirmation. I emailed the attorney with the specific clauses still open, two indemnity items, and asked for a one-line reply; it came within an hour and I approved with the email attached. The deal closed the same day. I keep every verbal-approval request in the matter file with the written confirmation next to it.",
+    "q4": "A counterparty sent a signed contract where the signature page was from an older draft, with a different liability cap than the version we had agreed. The script said to request a fresh signature, which would have taken a week during their holiday period. I compared the two versions, confirmed the only difference was the cap, and prepared a one-paragraph amendment confirming the agreed cap that both sides could sign electronically the same day. The attorney approved the approach and it was done in four hours. I now always compare the signature page draft number to the body."
+  },
+  "notes": "My intake order: 1) search referenced documents before flagging a missing clause 2) notice deadlines beat signatures 3) redline only the priority list, summarise the rest 4) no approval in the system without written confirmation 5) compare signature page draft number to the body.",
+  "followup_answers": {
+    "f1": "The 30-day notice threshold is mine. Under 30 days I calendar it as urgent with two reminders because our internal review takes about three weeks. Between 30 and 90 days it is a normal calendar entry. I have not had a problem with anything over 90.",
+    "f2": "The priority list changes by attorney, but liability, indemnity, termination and data are on every list I have worked with. For a customer contract I add payment terms; for a vendor contract I add service levels.",
+    "f3": "The one time I would redline a harmless deviation is when the counterparty is a repeat vendor and the deviation will propagate to the next five contracts. Then I fix it once in the template conversation rather than in each redline."
+  }
+}

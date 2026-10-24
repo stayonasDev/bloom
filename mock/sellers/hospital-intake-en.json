@@ -1,0 +1,43 @@
+{
+  "slug": "hospital-intake-en",
+  "label": "Hospital front desk and patient intake",
+  "field_hint": "Patient intake and scheduling exceptions",
+  "seller": {
+    "role_title": "Hospital front desk and intake coordinator",
+    "years_experience": 5,
+    "language": "EN",
+    "display_name": "Seller #1104"
+  },
+  "seed_answers": {
+    "q1": "The manual says to verify insurance at check-in. It never says that the eligibility response in Epic can show 'active' for a plan that was terminated last month, because the payer file updates on a 30-day lag. I learned to call the payer line for any patient whose last visit was more than 60 days ago, which takes 4 minutes and avoids a denied claim that costs the clinic about 180 dollars in rework. The manual also never says that a referral for a specialist expires after 90 days or 3 visits, whichever comes first, and the front desk is the only place that catches it.",
+    "q2": "New hires mark a patient as a no-show at exactly 15 minutes late and release the slot. The policy says 15 minutes, but if the patient already called from the parking lot or is doing a lab draw first, releasing the slot means the doctor sits idle and the patient gets charged a 50 dollar no-show fee they will dispute. I check the phone log and the lab queue before releasing. The second mistake is scheduling a new patient in a 15-minute follow-up slot, which pushes the whole afternoon by 20 minutes.",
+    "q3": "A patient asked me to book a same-week appointment with the cardiologist without a referral, saying his primary care doctor 'told him to come'. His plan requires a referral on file before the visit, and without it the claim is denied and the patient gets a 400 dollar bill. I refused to book it as a specialist visit, explained why, and instead booked a nurse triage call the same day and sent the referral request to his primary office with 'urgent' flagged. The referral came in two days and he was seen within the week.",
+    "q4": "A walk-in patient arrived with chest discomfort but insisted on waiting for his scheduled 3 pm appointment because he did not want an emergency room bill. The script for front desk is 'direct to ER for chest pain'. I did not argue the bill; I asked the charge nurse to do a quick assessment in the triage room, which is free, and she escalated him to ER within 10 minutes. I logged it as a triage assessment, not a visit, so no charge was created. Since then I use the triage room for any walk-in who refuses ER over cost."
+  },
+  "notes": "Check-in order: 1) last visit over 60 days means call payer, do not trust eligibility screen 2) referral expiry 90 days or 3 visits 3) check phone log and lab queue before no-show 4) new patients only in 30-minute slots 5) chest pain plus bill refusal means triage room, not argument.",
+  "followup_answers": {
+    "f1": "I call the payer line only for commercial plans. For the government plan the online portal is real-time, so the 60-day rule does not apply and calling just wastes 4 minutes. About 40% of our patients are on the government plan.",
+    "f2": "The referral rule has an exception for plans that allow self-referral to specific specialties, usually dermatology and OB. I keep a one-page list of which plans allow which, because the eligibility screen does not show it. That list is maybe 12 lines.",
+    "f3": "For the no-show decision my real threshold is 15 minutes plus a check of two things, the phone log and the lab queue. If both are empty at 15 minutes, I release the slot. If either shows the patient, I hold it up to 25 minutes, after that the doctor decides."
+  },
+  "self_reported": {
+    "cases_per_month": 600,
+    "escalation_rate_pct": 9,
+    "years_on_queue": 5,
+    "note": "estimate, from my own weekly tallies"
+  },
+  "expect_tags": {
+    "field_key": "hospital_intake",
+    "topics": [
+      "eligibility_check",
+      "referral_required",
+      "no_show",
+      "walk_in_triage"
+    ],
+    "judgments": [
+      "refusal",
+      "timing",
+      "escalation"
+    ]
+  }
+}

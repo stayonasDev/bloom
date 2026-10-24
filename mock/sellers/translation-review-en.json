@@ -1,0 +1,24 @@
+{
+  "slug": "translation-review-en",
+  "label": "Translation QA reviewer, EN↔KO/JA (A층 직군)",
+  "axis": "occupation_a_tier",
+  "field_hint": "Localization review and translation QA",
+  "seller": {
+    "role_title": "Translation QA reviewer (EN-KO, EN-JA)",
+    "years_experience": 8,
+    "language": "EN",
+    "display_name": "Seller #1301"
+  },
+  "seed_answers": {
+    "q1": "The style guide says to follow the glossary. It never says that the glossary term for 'cancel' in the Korean app UI is wrong for the billing emails, because in a button it means abort and in an email it means terminate the contract, and using the UI term in the email caused a 12% spike in support tickets one quarter. The guide also never says that a string under 20 characters with a placeholder should be sent back to the developer, because Korean word order breaks the placeholder position.",
+    "q2": "New reviewers score a translation as a fail because it does not match the reference word for word. Machine output that is literal gets a pass and a human translation that reordered the sentence for natural Korean gets a fail, which is backwards. The right move is to check meaning, tone register and terminology, then readability, in that order. The second mistake is correcting the translator's choice of honorific level across a whole file without checking who the sender is; a customer-facing push notification and an internal admin message need different levels.",
+    "q3": "A product manager asked me to approve a 400-string release in two hours, saying the machine translation was 'good enough' and the vendor review could happen after launch. I refused to sign off the full set, because 40 of the strings were legal and payment text where a wrong honorific or a mistranslated 'may' versus 'must' creates a compliance issue. I split it: I reviewed the 40 legal and payment strings in the two hours and signed off only those, and the rest shipped with a 'machine translated' flag and a review ticket. The PM accepted and the release went out on time.",
+    "q4": "A Japanese marketing tagline came back from three translators with three different versions and the script said to pick the one closest to the source. None of them worked because the English pun did not exist in Japanese. I wrote a one-page brief for the client explaining that a literal version would read as a grammar error, proposed a transcreation with the same emotional claim and no pun, and attached a back-translation so they could judge. They approved it in a day. Since then I ask for a back-translation on any tagline before the client sees it."
+  },
+  "notes": "My review order: 1) where does the string appear, button or email or legal 2) meaning, register, terminology, then readability 3) placeholders in strings under 20 characters go back to dev 4) legal and payment strings never ship unreviewed 5) taglines get a back-translation.",
+  "followup_answers": {
+    "f1": "The 20-character rule came from counting breakages over about six releases; below that length the Korean sentence usually has no safe position for the placeholder. Above 20 I can usually restructure. For Japanese the threshold is closer to 15.",
+    "f2": "The 40 legal and payment strings were identified by their string ID prefix, which the dev team uses for anything shown on a payment or terms screen. If the prefix is missing I search for currency symbols and the words 'agree' or 'consent'.",
+    "f3": "The exception to meaning-first review is a UI string with a hard character limit. There I accept a meaning loss if the full meaning does not fit, but I log it as a known gap so the help center text covers it."
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "slug": "legal-translation-ja",
+  "preseeded": true,
+  "seller": {
+    "role_title": "法務翻訳レビュアー",
+    "years_experience": 9,
+    "language": "EN",
+    "display_name": "Seller #2108"
+  },
+  "card": {
+    "field": "Translation review, legal",
+    "field_key": "legal_assistant",
+    "difficulty": 5,
+    "rarity": 4,
+    "one_liner": "機械翻訳が流暢で誤っている箇所、期限計算、秘匿情報の扱い。"
+  },
+  "tags": {
+    "field_key": "legal_assistant",
+    "topics": [
+      "deadline_calculation",
+      "filing_format",
+      "privilege_marking",
+      "client_intake",
+      "conflict_check"
+    ],
+    "judgments": [
+      "refusal",
+      "evidence",
+      "timing",
+      "threshold"
+    ]
+  },
+  "handover_note": {
+    "rules": [
+      {
+        "id": "r1",
+        "text": "Legal text is reviewed meaning first, then register, then terminology, then readability.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r2",
+        "text": "Deadlines in a contract are computed in the governing law's calendar, not the reader's.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "r3",
+        "text": "Privileged documents carry the privilege marking on every page of the translation.",
+        "kind": "manual",
+        "source": "q3"
+      },
+      {
+        "id": "r4",
+        "text": "A conflict check is completed before any client document is opened.",
+        "kind": "manual",
+        "source": "notes"
+      }
+    ],
+    "exceptions": [
+      {
+        "id": "e1",
+        "text": "'May' versus 'shall' in a 40-string payment clause set is never machine-approved; those strings go to human review even under a 2-hour deadline.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "e2",
+        "text": "When the source uses business days and the target jurisdiction has a different holiday calendar, the translation keeps the source count and adds a translator's note.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "e3",
+        "text": "A fluent machine translation that drops a negation is the most common critical error; check every sentence containing 'not', 'unless' or 'except'.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "e4",
+        "text": "A deadline that falls on a target-country holiday is noted, not moved; moving it is a legal decision.",
+        "kind": "rare",
+        "source": "f1"
+      }
+    ],
+    "judgment_calls": [
+      {
+        "id": "j1",
+        "text": "Under a 2-hour deadline, review the legal and payment strings fully and ship the rest with a 'machine translated' flag and a review ticket.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "j2",
+        "text": "A pun or tagline in legal marketing gets a transcreation plus a back-translation for the client before approval.",
+        "kind": "rare",
+        "source": "q4"
+      },
+      {
+        "id": "j3",
+        "text": "If a string under 20 characters contains a placeholder, send it back to the developer; word order breaks the placeholder position.",
+        "kind": "rare",
+        "source": "f2"
+      }
+    ],
+    "common_mistakes": [
+      {
+        "id": "m1",
+        "text": "Passing literal machine output and failing a natural human translation.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "m2",
+        "text": "Applying the UI glossary term to a contract email, where the same word means terminate.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "m3",
+        "text": "Correcting honorific level across a whole file without checking the sender.",
+        "kind": "manual",
+        "source": "q2"
+      }
+    ],
+    "never_do": [
+      {
+        "id": "n1",
+        "text": "Never sign off a full release because the machine output is 'good enough'; refuse and split out the legal and payment strings.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "n2",
+        "text": "Never move a deadline date in translation.",
+        "kind": "manual",
+        "source": "f1"
+      },
+      {
+        "id": "n3",
+        "text": "Never remove a privilege marking to fit a layout.",
+        "kind": "manual",
+        "source": "q3"
+      }
+    ]
+  },
+  "generalization_log": [
+    {
+      "type": "company",
+      "replaced_with": "the client",
+      "count": 2
+    },
+    {
+      "type": "system",
+      "replaced_with": "the translation memory",
+      "count": 1
+    },
+    {
+      "type": "person",
+      "replaced_with": "the product manager",
+      "count": 1
+    }
+  ],
+  "metrics": {
+    "followup_ms": 5200,
+    "extract_ms": 11600
+  },
+  "card_language": "JA"
+}

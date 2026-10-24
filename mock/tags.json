@@ -1,0 +1,126 @@
+{
+  "field_key": [
+    "customer_support",
+    "billing_disputes",
+    "ecommerce_returns",
+    "hospital_intake",
+    "insurance_claims",
+    "accounts_payable",
+    "travel_booking",
+    "hr_screening",
+    "legal_assistant",
+    "content_moderation",
+    "other"
+  ],
+  "topics": {
+    "billing_disputes": [
+      "proration",
+      "roaming_waiver",
+      "loyalty_credit",
+      "plan_change",
+      "family_plan",
+      "retention_offer",
+      "contract_fee",
+      "late_fee",
+      "autopay_failure",
+      "early_termination",
+      "data_overage",
+      "sim_swap"
+    ],
+    "ecommerce_returns": [
+      "item_not_received",
+      "packing_error",
+      "courier_theft",
+      "return_window",
+      "partial_refund",
+      "voucher_payment",
+      "wrong_item",
+      "fraud_signal",
+      "marketplace_policy",
+      "damaged_in_transit"
+    ],
+    "hospital_intake": [
+      "insurance_mismatch",
+      "referral_required",
+      "no_show",
+      "walk_in_triage",
+      "copay_dispute",
+      "eligibility_check",
+      "prior_authorization",
+      "emergency_routing"
+    ],
+    "insurance_claims": [
+      "missing_document",
+      "claim_window",
+      "pre_existing_condition",
+      "partial_approval",
+      "fraud_signal",
+      "appeal_routing",
+      "policy_lapse",
+      "duplicate_claim"
+    ],
+    "accounts_payable": [
+      "three_way_match",
+      "duplicate_invoice",
+      "tolerance_override",
+      "approval_limit",
+      "month_end_cutoff",
+      "vendor_dispute",
+      "early_payment_discount",
+      "tax_code_error"
+    ],
+    "travel_booking": [
+      "change_fee_waiver",
+      "no_show_refund",
+      "schedule_change",
+      "name_correction",
+      "partial_cancellation",
+      "weather_exception",
+      "fare_rule_conflict",
+      "group_booking"
+    ],
+    "customer_support": [
+      "account_lockout",
+      "password_reset",
+      "service_outage",
+      "goodwill_credit",
+      "repeat_contact",
+      "abusive_caller",
+      "language_barrier",
+      "callback_promise"
+    ],
+    "hr_screening": [
+      "resume_gap",
+      "salary_mismatch",
+      "reference_check",
+      "visa_status",
+      "overqualified",
+      "no_show_interview"
+    ],
+    "legal_assistant": [
+      "deadline_calculation",
+      "filing_format",
+      "conflict_check",
+      "privilege_marking",
+      "fee_estimate",
+      "client_intake"
+    ],
+    "content_moderation": [
+      "borderline_satire",
+      "self_harm_signal",
+      "spam_vs_promo",
+      "copyright_claim",
+      "harassment_context",
+      "appeal_review"
+    ]
+  },
+  "judgments": [
+    "refusal",
+    "exception",
+    "threshold",
+    "escalation",
+    "evidence",
+    "timing",
+    "de_escalation"
+  ]
+}

@@ -1,19 +1,21 @@
-// Sample inputs for the demo. Taken from the reference mockup (handover-handoff.zip, mockup-final-C/01, 03).
+// Sample inputs for the demo. Same content as mock/sellers/telecom-billing-en.json (keep the two in sync).
+// Company/system names (Globe, Siebel, Manila) are intentional: they show up in the generalization log on screen 3.
 // One click fills the form so the demo never depends on typing.
 
 export const SELLER_SAMPLE = {
-  role: "Telecom billing support (US carriers)",
+  role: "Telecom billing CSR",
   years: "5",
-  notes: "",
+  notes: "My own checklist before promising any credit: 1) plan-change date within 60 days? 2) roaming toggle history, who switched it on 3) cycle date, never change it for proration 4) is this a family plan with dependents 5) max goodwill without supervisor is 20% or 25 dollars.",
   answers: {
-    q1: "A roaming charge that lands within 3 days of a plan change is almost always a cycle overlap, not real roaming. The manual treats it as a dispute; it's a billing error. Prorate, don't argue.",
-    q2: "They offer a goodwill credit first. Once you say \"goodwill\" the customer hears \"you admit it's wrong\" and asks for the whole bill. Say what was correct before you say what you'll fix.",
-    q3: "Refund of 6 months of international add-on after the customer \"didn't notice\". Refused beyond 1 cycle: the add-on shows on every bill and the app sends a monthly notice. Offered to cancel it and refund the current cycle only.",
-    q4: "Two lines on one account, one line changed plan mid-cycle. The script prorates the whole account. I prorate only the changed line and re-run the shared data pool for the remaining days — otherwise the other line gets an overage it never had.",
+    q1: "The manual says 'offer the loyalty credit when the customer threatens to cancel', but it never says the credit only posts if there was no plan change in the last 60 days. The billing system at Globe silently rejects it on day 61 and the customer calls back angrier. So before I promise anything I check the plan-change date, and if they are inside the 60-day window I tell them the exact day it becomes available instead of saying 'I applied it'. The manual also never says that a SIM swap resets that 60-day counter, which I learned after three callbacks in one week.",
+    q2: "New hires reset the billing cycle date when a customer asks about proration. It sounds helpful, but the system then bills the old cycle and the new one in the same month, so the customer sees roughly double, for example 2,400 pesos instead of 1,200. The right move is to explain the prorated amount for the remaining days and never touch the cycle date. The second mistake is promising a roaming waiver before pulling the toggle history. If the customer switched roaming on themselves, the waiver gets reversed by audit within 5 days.",
+    q3: "I refused a retroactive roaming waiver for a customer who had turned data roaming on himself a week before travelling. The waiver exists only for lines where roaming was enabled by the system migration in 2024. I showed him the toggle timestamp, explained why I could not waive it, and offered the maximum goodwill credit I can give without a supervisor, which is 20% of the roaming charge or 25 dollars, whichever is lower. He took it. I documented the toggle history in the case notes so the next agent would not reopen it.",
+    q4: "A customer on a family plan moved abroad mid-cycle while the three dependents stayed in Manila. The script had no branch for the primary line leaving the country. If I cancelled the primary line the dependents would lose the family discount immediately and get billed at single-line rates. I split the plan effective at the next cycle date, kept the dependents on the family discount, and manually adjusted 14 days of prorated charges, which came to 42.10 dollars. I also set a reminder to confirm the split actually posted, because Siebel sometimes drops the dependents' discount on the first bill.",
   },
   followups: {
-    f1: "If the customer changed plan from the app, the account shows a timestamp and the old plan ends that day — no overlap exists, so a roaming charge after it is real. Also real if the roaming location is outside the new plan's zone.",
-    f2: "\"The charge was correct for your old plan. The switch date is what we're fixing.\" Then the amount. Never the amount first.",
+    f1: "At day 58 or 59 I escalate to the retention desk instead of refusing, because the system backdates the plan change on day 61 and a plain refusal gets reversed anyway. My threshold is 3 days before the 60-day mark. If the customer is at day 30, I give the exact date and offer a one-time 100 peso courtesy credit so they do not call back angry.",
+    f2: "For the family plan split I used the remaining days in the cycle, 14 out of 30, times the primary line's daily rate, 3.01 dollars, which gave 42.10 dollars. I only do a manual split if the dependents are at least two lines, because for one dependent the family discount is smaller than the proration headache and I just move them to a single plan.",
+    f3: "The exception to my 60-day rule is a customer who changed plans because of our own outage credit. Those changes are flagged as system-initiated, and the loyalty credit posts anyway. I check the change reason code before refusing, roughly one in ten cases is this.",
   },
 };
 
@@ -21,6 +23,6 @@ export const SELLER_SAMPLE = {
 export const SELLER_SAMPLE_LOG = "[10:42:17] AGENT: Thank you for calling, how can I help?\n[10:42:25] CUSTOMER: I was charged $48 roaming after I changed my plan…\n[10:42:41] AGENT: Let me check the plan-change date.";
 
 export const BUYER_SAMPLE = {
-  demand: "Our support AI fails on roaming-charge disputes after a mid-cycle plan change. Customers escalate and demand full refunds; we have no human pool to route them to.",
-  question: "Customer changed plan mid-cycle, then got a $48 roaming charge from the old plan. Do we refund? How much?",
+  demand: "Our AI can't resolve roaming disputes after a mid-cycle plan change. Customers escalate and we have no one to route to.",
+  question: "What do you do when a customer changed plans 58 days ago and asks for the loyalty credit?",
 };

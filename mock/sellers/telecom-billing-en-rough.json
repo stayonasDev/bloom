@@ -1,0 +1,27 @@
+{
+  "slug": "telecom-billing-en-rough",
+  "label": "Telecom billing CSR, 거친 답변 (품질 축: 짧고 숫자 없음)",
+  "axis": "quality_rough",
+  "allow_short": true,
+  "expect": {
+    "item_count_max": 12
+  },
+  "seller": {
+    "role_title": "Telecom CSR",
+    "years_experience": 4,
+    "language": "EN",
+    "display_name": "Seller #0702"
+  },
+  "seed_answers": {
+    "q1": "the manual doesnt tell you that the loyalty credit fails sometimes if they changed plan recently. you just have to know and check first",
+    "q2": "they reset the cycle when someone asks about proration and then the bill goes crazy. also they promise stuff before checking",
+    "q3": "guy wanted roaming charges removed but he turned it on himself. said no, gave him a small credit instead and wrote it down",
+    "q4": "family plan where the main person moved overseas, script had nothing. i split it at next cycle so the others kept the discount"
+  },
+  "notes": null,
+  "followup_answers": {
+    "f1": "i think its like two months, i check the plan change date and if its close i send it to retention instead of saying no",
+    "f2": "i just took the days left and multiplied by the daily rate, dont remember the exact number",
+    "f3": "not sure, probably if the change was our fault then the credit still works"
+  }
+}

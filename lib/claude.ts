@@ -204,7 +204,7 @@ export async function extractNote(input: ExtractInput) {
 Role: ${input.role_title}, ${input.years_experience} years.
 
 Structure the note into five lists: rules, exceptions, judgment_calls, common_mistakes, never_do.
-Each item is one concrete, actionable sentence that keeps every number, threshold, day count, amount and condition the worker gave — those are the value. No generic advice, no padding. Aim for 15–30 items in total, only what the interview supports.
+Each item is one concrete, actionable sentence of at most 30 words that keeps every number, threshold, day count, amount and condition the worker gave — those are the value. No generic advice, no padding, no restating the same point in two sections. Aim for 15–25 items in total, only what the interview supports.
 item.kind = "rare" if it is judgment beyond the manual (an exception, a threshold they learned, a refusal, timing, a workaround); "manual" if a handbook would state it.
 item.source = the answer it came from: "q1".."q4", "f1".."f3", or "notes".
 item.id: leave as "x"; the server assigns ids.

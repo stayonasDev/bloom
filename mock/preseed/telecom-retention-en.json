@@ -1,0 +1,168 @@
+{
+  "slug": "telecom-retention-en",
+  "preseeded": true,
+  "seller": {
+    "role_title": "Telecom retention and cancellations specialist",
+    "years_experience": 8,
+    "language": "EN",
+    "display_name": "Seller #2105"
+  },
+  "card": {
+    "field": "Telecom retention and cancellations",
+    "field_key": "billing_disputes",
+    "difficulty": 4,
+    "rarity": 4,
+    "one_liner": "Save offers without over-promising, early termination fees that are actually waivable, and when to stop the script."
+  },
+  "tags": {
+    "field_key": "billing_disputes",
+    "topics": [
+      "retention_offer",
+      "early_termination",
+      "contract_fee",
+      "autopay_failure",
+      "late_fee"
+    ],
+    "judgments": [
+      "de_escalation",
+      "threshold",
+      "refusal",
+      "timing"
+    ]
+  },
+  "handover_note": {
+    "rules": [
+      {
+        "id": "r1",
+        "text": "Retention offers above 40% off require supervisor sign-off.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r2",
+        "text": "An early termination fee is prorated by remaining months of the contract.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r3",
+        "text": "One late fee waiver per 12 months on an account in good standing.",
+        "kind": "manual",
+        "source": "q3"
+      },
+      {
+        "id": "r4",
+        "text": "Confirm whether the customer has already activated with another carrier before any save offer.",
+        "kind": "manual",
+        "source": "q2"
+      }
+    ],
+    "exceptions": [
+      {
+        "id": "e1",
+        "text": "The early termination fee is waived when the customer moves to an address with no coverage; a utility bill at the new address is enough proof.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "e2",
+        "text": "A customer within 30 days of contract end pays no termination fee even though the system still quotes one; override and note it.",
+        "kind": "rare",
+        "source": "f1"
+      },
+      {
+        "id": "e3",
+        "text": "An autopay failure caused by a card reissue, with the bank letter, resets the late-fee counter for that cycle.",
+        "kind": "rare",
+        "source": "q4"
+      },
+      {
+        "id": "e4",
+        "text": "If the customer already ported out, skip the save script and quote only the final prorated bill; the script costs 3 minutes and produces a complaint.",
+        "kind": "rare",
+        "source": "q2"
+      }
+    ],
+    "judgment_calls": [
+      {
+        "id": "j1",
+        "text": "Offer the 40% retention tier only when the customer names a competitor's price; otherwise start at 15% and hold.",
+        "kind": "rare",
+        "source": "f2"
+      },
+      {
+        "id": "j2",
+        "text": "A customer calling for the third time in 30 days about the same fee gets the waiver on the spot; the call cost exceeds the fee.",
+        "kind": "rare",
+        "source": "f3"
+      },
+      {
+        "id": "j3",
+        "text": "A fee dispute over 100 dollars with any prior credit on the account goes to the billing desk, not retention.",
+        "kind": "rare",
+        "source": "q4"
+      }
+    ],
+    "common_mistakes": [
+      {
+        "id": "m1",
+        "text": "Reading the full save script to a customer who has already switched, generating an escalation.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "m2",
+        "text": "Quoting the system's termination fee at day 25 of a 30-day end-of-contract window.",
+        "kind": "rare",
+        "source": "f1"
+      },
+      {
+        "id": "m3",
+        "text": "Promising a 40% offer before supervisor sign-off; audit reverses it and the customer calls back.",
+        "kind": "manual",
+        "source": "q1"
+      }
+    ],
+    "never_do": [
+      {
+        "id": "n1",
+        "text": "Never waive a second late fee in 12 months without a documented bank failure; refuse and offer autopay setup instead.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "n2",
+        "text": "Never run the save script on a customer who has confirmed a port-out.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "n3",
+        "text": "Never quote an early termination fee without checking the contract end date first.",
+        "kind": "manual",
+        "source": "q1"
+      }
+    ]
+  },
+  "generalization_log": [
+    {
+      "type": "company",
+      "replaced_with": "the carrier",
+      "count": 3
+    },
+    {
+      "type": "system",
+      "replaced_with": "the billing system",
+      "count": 2
+    },
+    {
+      "type": "company",
+      "replaced_with": "a competing carrier",
+      "count": 1
+    }
+  ],
+  "metrics": {
+    "followup_ms": 4100,
+    "extract_ms": 9600
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "recruiting-screener-en",
+  "label": "Recruiting screener / HR coordinator (B층 직군)",
+  "axis": "occupation_b_tier",
+  "field_hint": "Recruiting screening exceptions",
+  "seller": {
+    "role_title": "Recruiting screener and HR coordinator",
+    "years_experience": 6,
+    "language": "EN",
+    "display_name": "Seller #1210"
+  },
+  "seed_answers": {
+    "q1": "The screening rubric says to reject candidates with employment gaps over 12 months unless explained. It never says that for our warehouse and support roles the gap rule costs us the best hires, because the gap is usually caregiving or a visa wait, and those candidates show 30% lower 90-day attrition in our own data. I pass them to the phone screen with a note instead of rejecting, and ask about the gap in the first two minutes. The rubric also never says a referral from an employee with under 6 months tenure should count the same as a cold applicant.",
+    "q2": "New screeners reject anyone below the posting's minimum years, even by six months. Hiring managers wrote those minimums as wishes, not requirements, and the last three support team leads we promoted were all under the minimum when screened. The right move is to check whether the candidate did the specific task in the posting, not the years. The second mistake is booking the hiring manager interview before the candidate confirmed salary range and start date, which wastes about one in five manager hours.",
+    "q3": "A hiring manager asked me to pass his former colleague straight to the final interview, skipping the phone screen and the skills test. I refused, because skipping the test for one candidate means the test results of the other four finalists cannot be compared, and we had a complaint about exactly that two years ago. I offered to schedule the phone screen and test the same day so the candidate would not be delayed more than 48 hours. He agreed. I note every skip request in the requisition file so the pattern is visible.",
+    "q4": "A candidate for a night-shift support role disclosed in the screen that she could not work two specific nights a month for a religious observance. The script had no branch and the default was to mark her as unavailable for the shift. Instead I checked the shift roster, found that those nights were already over-staffed by two people, and passed her with a note describing the exact constraint. The manager hired her and she has been there 14 months. Since then I ask about fixed constraints as a scheduling question, not an availability yes or no."
+  },
+  "notes": "My screening notes: 1) gaps are a phone-screen question, not a rejection 2) specific task done beats years 3) confirm salary and start date before any manager hour 4) no skip of the skills test for anyone 5) fixed constraints go to the roster, not to a yes or no.",
+  "followup_answers": {
+    "f1": "The 30% attrition figure is from our internal quarterly report comparing hires with and without a gap over 12 months, about 400 hires over two years. I do not have it broken down by role, so for engineering roles I still apply the rubric strictly.",
+    "f2": "My threshold for 'under the minimum' is one year. A candidate two years under the stated minimum goes to the manager only if they did the exact task in the posting in the last 12 months; otherwise I reject and say why.",
+    "f3": "The exception to the no-skip rule is an internal transfer who already took the same skills test within the last 6 months. Then I attach the old result and skip the retest."
+  }
+}
