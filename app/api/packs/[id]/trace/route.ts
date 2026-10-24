@@ -1,6 +1,6 @@
 import { ApiError, handle, json } from "@/lib/errors";
-import { assertUuid } from "@/lib/http";
-import { getCardByPack, getClaudeRun, getPack, listClaudeRuns, listMatchesForCard, listSealedQaForCard } from "@/lib/db";
+import { assertUuid, resolvePack } from "@/lib/http";
+import { getCardByPack, getClaudeRun, listClaudeRuns, listMatchesForCard, listSealedQaForCard } from "@/lib/db";
 import { MODEL } from "@/lib/claude";
 
 /** GET /api/packs/{id}/trace — "What Claude did" 실측 묶음. 전부 claude_runs·packs·matches·sealed_qa에서 집계. 원문 없음. */
@@ -8,7 +8,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   return handle(async () => {
     const { id } = await params;
     assertUuid(id, "Pack");
-    const pack = await getPack(id);
+    const pack = await resolvePack(id); // pack id 또는 card id
     if (!pack) throw new ApiError("NOT_FOUND", "Pack not found.");
 
     const [followupRun, extractRun, card] = await Promise.all([

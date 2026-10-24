@@ -2,7 +2,7 @@
 import { z } from "zod";
 import { ApiError } from "./errors";
 import type { RunMeta } from "./claude";
-import { insertClaudeRun } from "./db";
+import { getCard, getPack, insertClaudeRun } from "./db";
 
 export async function parseBody<T>(req: Request, schema: z.ZodType<T>): Promise<T> {
   let raw: unknown;
@@ -41,6 +41,17 @@ export const optionalBuyerId = (req: Request) => headerId(req, "x-buyer-id", fal
 export function assertUuid(id: string, what: string): string {
   if (!uuid.safeParse(id).success) throw new ApiError("NOT_FOUND", `${what} not found.`);
   return id;
+}
+
+/**
+ * /api/packs/{id}/* 의 {id}는 pack id가 기본이지만 card id도 받는다.
+ * 프론트(app/buy/page.tsx packIdOf)가 실제 카드에는 card.id를 그대로 보내기 때문 — 404가 나면 프론트가 목 데이터로 폴백해 버린다.
+ */
+export async function resolvePack(id: string) {
+  const pack = await getPack(id);
+  if (pack) return pack;
+  const card = await getCard(id);
+  return card ? getPack(card.pack_id) : null;
 }
 
 /** Claude 실측을 claude_runs에 기록 (불변 조건 4) */

@@ -5,6 +5,9 @@ import { matchCards } from "@/lib/claude";
 import { getBuyer, insertBuyerRequest, insertMatches, listCards } from "@/lib/db";
 import { toPublicCard } from "@/lib/server-types";
 
+// Claude ③ 호출 — Vercel 기본 10초를 넘길 수 있다
+export const maxDuration = 30;
+
 const body = z.object({ request_text: z.string().min(10).max(2000) });
 
 /** POST /api/requests — 수요문 저장 → Claude ③ 매칭 → 상위 3 카드 + 이유. Claude에는 카드 공개 필드 + 항목 수만 보낸다. */

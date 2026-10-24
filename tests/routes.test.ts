@@ -44,11 +44,20 @@ describe("POST /api/sellers", () => {
     expect(res.status).toBe(201);
     expect(await res.json()).toEqual({ id: SELLER_ID, role_title: "Telecom billing CSR", years_experience: 5, language: "EN", display_name: "Seller #0427" });
   });
-  it("400 VALIDATION_ERROR on bad language / years", async () => {
-    const res = await postSellers(req("POST", { role_title: "x1", years_experience: 99, language: "JP" }));
+  it("400 VALIDATION_ERROR on bad years", async () => {
+    const res = await postSellers(req("POST", { role_title: "x1", years_experience: 99, language: "EN" }));
     expect(res.status).toBe(400);
     expect((await res.json()).error.code).toBe("VALIDATION_ERROR");
     expect(db.insertSeller).not.toHaveBeenCalled();
+  });
+  it("normalizes language: front sends UI-language prefix (JA/ES/…) → EN, ko/KO → KO", async () => {
+    m(db.insertSeller).mockResolvedValue(seller);
+    await postSellers(req("POST", { role_title: "Telecom billing CSR", years_experience: 5, language: "JA" }));
+    expect(db.insertSeller).toHaveBeenLastCalledWith(expect.objectContaining({ language: "EN" }));
+    await postSellers(req("POST", { role_title: "Telecom billing CSR", years_experience: 5, language: "ko" }));
+    expect(db.insertSeller).toHaveBeenLastCalledWith(expect.objectContaining({ language: "KO" }));
+    await postSellers(req("POST", { role_title: "Telecom billing CSR", years_experience: 5, language: "Korean" }));
+    expect(db.insertSeller).toHaveBeenLastCalledWith(expect.objectContaining({ language: "KO" }));
   });
 });
 
@@ -225,6 +234,20 @@ describe("POST /api/buyers", () => {
   it("400 on unknown buyer_type", async () => {
     expect((await postBuyers(req("POST", { buyer_type: "vc" }))).status).toBe(400);
   });
+  it("200 + existing buyer when x-buyer-id already exists (front calls createBuyer on every search)", async () => {
+    m(db.getBuyer).mockResolvedValue(buyer);
+    const res = await postBuyers(req("POST", { buyer_type: "ai_ops" }, { "x-buyer-id": BUYER_ID }));
+    expect(res.status).toBe(200);
+    expect((await res.json()).id).toBe(BUYER_ID);
+    expect(db.insertBuyer).not.toHaveBeenCalled();
+  });
+  it("201 new buyer when x-buyer-id is a client-generated UUID not in DB", async () => {
+    m(db.getBuyer).mockResolvedValue(null);
+    m(db.insertBuyer).mockResolvedValue(buyer);
+    const res = await postBuyers(req("POST", { buyer_type: "ai_ops" }, { "x-buyer-id": OTHER_ID }));
+    expect(res.status).toBe(201);
+    expect(db.insertBuyer).toHaveBeenCalled();
+  });
 });
 
 describe("GET /api/cards", () => {
@@ -343,10 +366,51 @@ describe("POST /api/cards/{id}/ask — Sealed Q&A", () => {
     expect((await postAsk(req("POST", { question: "What about day 58?" }, headers), ctx(CARD_ID))).status).toBe(404);
     expect(claude.sealedQa).not.toHaveBeenCalled();
   });
+  it("429 'Unlock the pack to keep asking.' on the 4th free question; unlocked buyer is not limited", async () => {
+    m(db.getBuyer).mockResolvedValue(buyer);
+    m(db.getCard).mockResolvedValue(card);
+    m(db.getPack).mockResolvedValue(pack);
+    m(db.getPurchase).mockResolvedValue(null);
+    m(db.countSealedQa).mockResolvedValue(3);
+    const res = await postAsk(req("POST", { question: "What about day 58?" }, headers), ctx(CARD_ID));
+    expect(res.status).toBe(429);
+    expect(await res.json()).toEqual({ error: { code: "VALIDATION_ERROR", message: "Unlock the pack to keep asking." } });
+    expect(claude.sealedQa).not.toHaveBeenCalled();
+
+    // 2회까지는 통과
+    m(db.countSealedQa).mockResolvedValue(2);
+    m(claude.sealedQa).mockResolvedValue({ answer: "a", evidence_item_ids: ["e1"], covered: true, run: runMeta("sealed_qa", 1000) });
+    m(db.insertSealedQa).mockImplementation(async (row) => ({ ...row, id: QA_ID, created_at: "" }));
+    expect((await postAsk(req("POST", { question: "What about day 58?" }, headers), ctx(CARD_ID))).status).toBe(201);
+
+    // 구매자는 무제한
+    m(db.getPurchase).mockResolvedValue(purchase);
+    m(db.countSealedQa).mockResolvedValue(10);
+    expect((await postAsk(req("POST", { question: "What about day 58?" }, headers), ctx(CARD_ID))).status).toBe(201);
+  });
 });
 
 describe("POST /api/packs/{id}/purchase — mock payment", () => {
   const headers = { "x-buyer-id": BUYER_ID };
+  it("accepts a CARD id in place of the pack id (front packIdOf passes card.id through)", async () => {
+    m(db.getBuyer).mockResolvedValue(buyer);
+    m(db.getPack).mockImplementation(async (id) => (id === PACK_ID ? pack : null));
+    m(db.getCard).mockImplementation(async (id) => (id === CARD_ID ? card : null));
+    m(db.getPurchase).mockResolvedValue(null);
+    m(db.insertPurchase).mockImplementation(async (row) => ({ ...row, id: purchase.id, created_at: "" }));
+    const res = await postPurchase(req("POST", { kind: "pack" }, headers), ctx(CARD_ID));
+    expect(res.status).toBe(201);
+    expect((await res.json()).pack_id).toBe(PACK_ID); // 응답은 진짜 pack_id → 프론트가 /packs/{pack_id}/note로 이동
+    // note·trace도 card id로 접근 가능
+    m(db.getPurchase).mockResolvedValue(purchase);
+    expect((await getNote(req("GET", undefined, headers), ctx(CARD_ID))).status).toBe(200);
+    m(db.getCardByPack).mockResolvedValue(card);
+    m(db.getClaudeRun).mockResolvedValue(null);
+    m(db.listMatchesForCard).mockResolvedValue([]);
+    m(db.listClaudeRuns).mockResolvedValue([]);
+    m(db.listSealedQaForCard).mockResolvedValue([]);
+    expect((await getTrace(req("GET"), ctx(CARD_ID))).status).toBe(200);
+  });
   it("201 creates mock_paid purchase with amount = packs.price_pack_usd", async () => {
     m(db.getBuyer).mockResolvedValue(buyer);
     m(db.getPack).mockResolvedValue({ ...pack, price_pack_usd: 149 });

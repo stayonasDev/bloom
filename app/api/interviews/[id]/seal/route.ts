@@ -7,6 +7,9 @@ import { casePriceUsd, packPriceUsd } from "@/lib/pricing";
 import { getInterview, getSeller, insertCard, insertPack, updateInterview } from "@/lib/db";
 import { toPublicCard, type HandoverNote } from "@/lib/server-types";
 
+// Claude ② 추출은 실측 20초+ (smoke 20.9s) — Vercel 기본 10초면 끊긴다
+export const maxDuration = 60;
+
 const body = z.object({ followup_answers: z.record(z.string(), z.string()) });
 
 /** POST /api/interviews/{id}/seal — 꼬리질문 응답 저장 → Claude ② 추출·일반화·카드 → packs, cards. 인계서 원문은 응답하지 않는다. */

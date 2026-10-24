@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { ApiError, handle, json } from "@/lib/errors";
-import { assertUuid, buyerId, parseBody } from "@/lib/http";
-import { getBuyer, getPack, getPurchase, insertPurchase } from "@/lib/db";
+import { assertUuid, buyerId, parseBody, resolvePack } from "@/lib/http";
+import { getBuyer, getPurchase, insertPurchase } from "@/lib/db";
 
 const body = z.object({ kind: z.enum(["pack", "case", "hire"]).default("pack") });
 
@@ -16,7 +16,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
 
     const buyer = await getBuyer(bid);
     if (!buyer) throw new ApiError("NOT_FOUND", "Buyer not found.", "x-buyer-id");
-    const pack = await getPack(id);
+    const pack = await resolvePack(id); // pack id 또는 card id
     if (!pack) throw new ApiError("NOT_FOUND", "Pack not found.");
 
     const existing = await getPurchase(bid, pack.id, "pack");
