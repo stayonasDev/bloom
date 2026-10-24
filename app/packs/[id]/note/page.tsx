@@ -17,12 +17,12 @@ const SECTIONS: { key: keyof NoteResponse["handover_note"]; k: Key }[] = [
 ];
 
 export default function NotePage() {
-  const { t } = useT();
+  const { t, lang } = useT();
   const { id } = useParams<{ id: string }>();
   const [note, setNote] = useState<NoteResponse | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
-  useEffect(() => { api.getNote(id).then(setNote).catch((e) => setErr(e.message)); }, [id]);
+  useEffect(() => { api.getNote(id, lang).then(setNote).catch((e) => setErr(e.message)); }, [id, lang]);
 
   if (err) return <Section className="py-24"><Bracket>{t("note.locked")}</Bracket><p className="mt-4 text-[20px]">{err}</p><Link href="/buy" className="btn mt-8">{t("note.back")}</Link></Section>;
   if (!note) return <Section className="py-24"><div className="progress"><i style={{ animationDuration: "2s" }} /></div><div className="mt-2 font-mono text-[13px] text-graphite">{t("note.opening")}</div></Section>;

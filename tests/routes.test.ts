@@ -6,7 +6,7 @@ vi.mock("@/lib/db");
 vi.mock("next/server", () => ({ connection: vi.fn(async () => {}) }));
 vi.mock("@/lib/claude", async () => {
   const actual = await vi.importActual<typeof import("@/lib/claude")>("@/lib/claude");
-  return { ...actual, generateFollowups: vi.fn(), extractNote: vi.fn(), matchCards: vi.fn(), sealedQa: vi.fn() };
+  return { ...actual, generateFollowups: vi.fn(), extractNote: vi.fn(), matchCards: vi.fn(), sealedQa: vi.fn(), translateCards: vi.fn(), translateNote: vi.fn() };
 });
 
 import * as db from "@/lib/db";
@@ -197,6 +197,26 @@ describe("GET /api/packs/{id}/note — the only endpoint that returns handover_n
       metrics: { item_count: 5, rare_count: 4, manual_count: 1, generalized_count: 5 },
     });
   });
+  it("?language=KO translates item text (structure/ids/kind/source unchanged); cached on 2nd read; same language → original", async () => {
+    m(db.getPack).mockResolvedValue(pack);
+    m(db.getSeller).mockResolvedValue(seller); // EN seller
+    m(db.getPackTranslation).mockResolvedValue(null);
+    const translated = { ...note, exceptions: [{ ...note.exceptions[0], text: "58~60일차에는 거절 대신 에스컬레이션." }] };
+    m(claude.translateNote).mockResolvedValue({ handover_note: translated, run: { kind: "translate", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 5 } });
+    const u = new Request("http://t/api/packs/x/note?language=ko", { headers: { "x-seller-id": SELLER_ID } });
+    const body = await (await getNote(u, ctx(PACK_ID))).json();
+    expect(body.handover_note.exceptions[0]).toMatchObject({ id: "e1", kind: "rare", source: "f1", text: "58~60일차에는 거절 대신 에스컬레이션." });
+    expect(body.handover_note.rules[0].text).toBe(note.rules[0].text);
+    expect(db.upsertPackTranslation).toHaveBeenCalledWith(PACK_ID, "KO", translated);
+    // 캐시 적중
+    m(db.getPackTranslation).mockResolvedValue({ handover_note: translated });
+    m(claude.translateNote).mockClear();
+    await getNote(u, ctx(PACK_ID));
+    expect(claude.translateNote).not.toHaveBeenCalled();
+    // 판매자 언어와 같으면 원문
+    const en = new Request("http://t/api/packs/x/note?language=en", { headers: { "x-seller-id": SELLER_ID } });
+    expect((await (await getNote(en, ctx(PACK_ID))).json()).handover_note).toEqual(note);
+  });
   it("200 for a buyer with a pack purchase", async () => {
     m(db.getPack).mockResolvedValue(pack);
     m(db.getPurchase).mockResolvedValue(purchase);
@@ -256,18 +276,31 @@ describe("GET /api/cards", () => {
     const body = await res.json();
     assertSealed(body);
     expect(body).toEqual({ cards: [{ id: CARD_ID, field: card.field, language: "EN", years_experience: 5, difficulty: 4, rarity: 4, one_liner: card.one_liner, price_pack_usd: 49, price_case_usd: 20, listed_at: card.listed_at, pack_id: PACK_ID, item_count: 22 }] });
-    expect(db.listCards).toHaveBeenCalledWith(100, null);
+    expect(db.listCards).toHaveBeenCalledWith(100);
     await getCards(new Request("http://t/api/cards"));
-    expect(db.listCards).toHaveBeenLastCalledWith(20, null);
+    expect(db.listCards).toHaveBeenLastCalledWith(20);
   });
-  it("language param filters to that language only (UI 언어와 섞이지 않게), normalized to ISO code", async () => {
-    m(db.listCards).mockResolvedValue([]);
-    await getCards(new Request("http://t/api/cards?language=ko"));
-    expect(db.listCards).toHaveBeenLastCalledWith(20, "KO");
-    await getCards(new Request("http://t/api/cards?language=%ED%95%9C%EA%B5%AD"));
-    expect(db.listCards).toHaveBeenLastCalledWith(20, "KO");
-    await getCards(new Request("http://t/api/cards?language=ja&limit=5"));
-    expect(db.listCards).toHaveBeenLastCalledWith(5, "JA");
+  it("language param TRANSLATES all cards (not filter): cache hit → no Claude; miss → Claude ⑥ then cached; same-language card untouched", async () => {
+    const ko = { ...card, id: OTHER_ID, language: "KO", field: "여행 예약 변경", one_liner: "항공권 변경 수수료 예외.", item_count: 10, rare_count: 5 };
+    m(db.listCards).mockResolvedValue([{ ...card, item_count: 22, rare_count: 13 }, ko]);
+    // 캐시 적중
+    m(db.getCardTranslations).mockResolvedValue([{ card_id: CARD_ID, language: "KO", field: "통신 요금 분쟁", one_liner: "스크립트가 못 다루는 예외." }]);
+    let body = await (await getCards(new Request("http://t/api/cards?language=ko"))).json();
+    expect(body.cards).toHaveLength(2);
+    expect(body.cards[0]).toMatchObject({ id: CARD_ID, field: "통신 요금 분쟁", one_liner: "스크립트가 못 다루는 예외.", language: "EN" });
+    expect(body.cards[1]).toMatchObject({ id: OTHER_ID, field: "여행 예약 변경" });
+    expect(claude.translateCards).not.toHaveBeenCalled();
+    // 캐시 미스 → 번역 → 저장
+    m(db.getCardTranslations).mockResolvedValue([]);
+    m(claude.translateCards).mockResolvedValue({ cards: [{ id: CARD_ID, field: "Telekom-Abrechnungsstreit", one_liner: "Ausnahmen." }], run: { kind: "translate", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 5 } });
+    body = await (await getCards(new Request("http://t/api/cards?language=de"))).json();
+    expect(body.cards[0].field).toBe("Telekom-Abrechnungsstreit");
+    expect(m(claude.translateCards).mock.calls[0][1]).toBe("DE");
+    expect(db.upsertCardTranslations).toHaveBeenCalledWith([{ card_id: CARD_ID, language: "DE", field: "Telekom-Abrechnungsstreit", one_liner: "Ausnahmen." }]);
+    // 번역 실패 → 원문 유지, 목록은 살아 있다
+    m(claude.translateCards).mockRejectedValue(new Error("boom"));
+    body = await (await getCards(new Request("http://t/api/cards?language=ja"))).json();
+    expect(body.cards[0].field).toBe(card.field);
   });
 });
 
@@ -330,14 +363,19 @@ describe("POST /api/requests", () => {
     const res = await postRequests(req("POST", { request_text: "Something long enough to pass." }, headers));
     expect(await res.json()).toEqual({ request_id: REQUEST_ID, matches: [], run: { kind: "match", duration_ms: 0, candidate_count: 0 } });
     expect(claude.matchCards).not.toHaveBeenCalled();
-    expect(db.listCards).toHaveBeenLastCalledWith(100, null);
+    expect(db.listCards).toHaveBeenLastCalledWith(100);
   });
-  it("language in body limits candidates to that language (normalized)", async () => {
+  it("language in body: candidates stay ALL cards (Claude sees originals), matched cards are translated in the response", async () => {
     m(db.getBuyer).mockResolvedValue(buyer);
     m(db.insertBuyerRequest).mockResolvedValue({ id: REQUEST_ID, buyer_id: BUYER_ID, request_text: "x", created_at: "" });
-    m(db.listCards).mockResolvedValue([]);
-    await postRequests(req("POST", { request_text: "로밍 분쟁을 AI가 못 풀어요. 사람이 필요해요.", language: "ko" }, headers));
-    expect(db.listCards).toHaveBeenLastCalledWith(100, "KO");
+    m(db.listCards).mockResolvedValue([{ ...card, item_count: 22, rare_count: 13 }]);
+    m(claude.matchCards).mockResolvedValue({ matches: [{ card_id: CARD_ID, rank: 1, score: 0.9, reason: "로밍 분쟁을 다룸" }], run: runMeta("match", 1000) });
+    m(db.insertMatches).mockResolvedValue([]);
+    m(db.getCardTranslations).mockResolvedValue([{ card_id: CARD_ID, language: "KO", field: "통신 요금 분쟁", one_liner: "예외." }]);
+    const body = await (await postRequests(req("POST", { request_text: "로밍 분쟁을 AI가 못 풀어요. 사람이 필요해요.", language: "ko" }, headers))).json();
+    expect(m(claude.matchCards).mock.calls[0][0].candidates[0].field).toBe(card.field); // 원문으로 매칭
+    expect(body.matches[0].card.field).toBe("통신 요금 분쟁");                        // 응답은 번역
+    expect(db.listCards).toHaveBeenLastCalledWith(100);
   });
   it("400 without buyer header; 404 unknown buyer", async () => {
     expect((await postRequests(req("POST", { request_text: "Something long enough." }))).status).toBe(400);
