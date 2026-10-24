@@ -211,3 +211,8 @@ tr.reveal { display: table-row; }
 .range::-webkit-slider-thumb:hover { transform: scale(1.15); }
 .range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--sand); border: 2px solid var(--earth); cursor: pointer; }
 .contents { display: contents; }
+
+/* ledger on the earth background */
+.ledger-dark th { color: var(--sand); border-bottom-color: var(--sand); }
+.ledger-dark td { border-bottom-color: #4A3628; }
+.ledger-dark tbody tr:hover { background: rgba(255,255,255,.04); }

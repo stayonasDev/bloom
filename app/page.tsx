@@ -55,18 +55,18 @@ export default function Home() {
       </div>
 
       {/* ── full-bleed: how sealing works ── */}
-      <div className="grain grain-dark overflow-hidden bg-earth text-sand">
+      <div className="grain overflow-hidden border-t border-rule">
         <Section className="py-24">
           <div className="flex items-end justify-between">
-            <Display sand>{t("home.sealed")}</Display>
-            <Bracket tone="sand">{t("home.how")}</Bracket>
+            <Display>{t("home.sealed")}</Display>
+            <Bracket>{t("home.how")}</Bracket>
           </div>
           <div className="mt-16 grid grid-cols-3 gap-12">
             {(["1", "2", "3"] as const).map((n, i) => (
-              <Reveal key={n} delay={i * 180} className="border-t border-earth-2 pt-6">
-                <Bracket tone="sand">0{n}</Bracket>
+              <Reveal key={n} delay={i * 180} className="border-t border-ink pt-6">
+                <Bracket tone="fern">0{n}</Bracket>
                 <div className="mt-4 font-display text-[40px] leading-none">{t(`how.${n}.t`)}</div>
-                <p className="mt-4 text-[16px] leading-[1.6] text-sand/80">{t(`how.${n}.d`)}</p>
+                <p className="mt-4 text-[16px] leading-[1.6] text-graphite">{t(`how.${n}.d`)}</p>
               </Reveal>
             ))}
           </div>
@@ -86,27 +86,29 @@ export default function Home() {
       </div>
 
       {/* ── live matches ── */}
-      <Section className="pt-24">
+      <div className="grain grain-dark bg-earth text-sand">
+      <Section className="py-24">
         <div id="matches" className="flex items-end justify-between">
-          <Display>{t("home.matches")}</Display>
-          <Bracket>{t("home.fit_kicker")}</Bracket>
+          <Display sand>{t("home.matches")}</Display>
+          <Bracket tone="sand">{t("home.fit_kicker")}</Bracket>
         </div>
-        <table className="ledger mt-10">
+        <table className="ledger ledger-dark mt-10">
           <thead>
             <tr><th style={{ width: "36%" }}>{t("th.demand")}</th><th style={{ width: "12%" }}>{t("th.fit")}</th><th style={{ width: "36%" }}>{t("th.note")}</th><th>{t("th.status")}</th></tr>
           </thead>
           <tbody>
             {live.map((r, i) => (
               <Reveal as="tr" key={r.demand} delay={i * 140}>
-                <td><div className="text-[17px] font-semibold">{r.demand}</div><div className="mt-1 text-[13px] text-ash">{r.who}</div></td>
-                <td><span className="font-mono text-[22px]">{r.fit}</span></td>
-                <td><div className="text-[17px] font-semibold">{r.note}</div><div className="mt-1 text-[13px] text-ash">{r.meta}</div></td>
-                <td><span className={`font-mono text-[13px] ${r.fern ? "text-fern" : "text-graphite"}`}>{r.status}</span></td>
+                <td><div className="text-[17px] font-semibold text-white">{r.demand}</div><div className="mt-1 text-[13px] text-sand/60">{r.who}</div></td>
+                <td><span className="font-mono text-[22px] text-white">{r.fit}</span></td>
+                <td><div className="text-[17px] font-semibold text-white">{r.note}</div><div className="mt-1 text-[13px] text-sand/60">{r.meta}</div></td>
+                <td><span className={`font-mono text-[13px] ${r.fern ? "text-[#9FE1C8]" : "text-sand/80"}`}>{r.status}</span></td>
               </Reveal>
             ))}
           </tbody>
         </table>
       </Section>
+      </div>
 
       {/* ── three ways + how the price works · effect ── */}
       <Section className="py-24">
