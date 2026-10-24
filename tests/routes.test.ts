@@ -228,12 +228,12 @@ describe("POST /api/buyers", () => {
 });
 
 describe("GET /api/cards", () => {
-  it("returns public cards + item_count, no note, no pack_id, no rare_count; clamps limit", async () => {
+  it("returns public cards + pack_id + item_count, no note, no rare_count; clamps limit", async () => {
     m(db.listCards).mockResolvedValue([{ ...card, item_count: 22, rare_count: 13 }]);
     const res = await getCards(new Request("http://t/api/cards?limit=500"));
     const body = await res.json();
     assertSealed(body);
-    expect(body).toEqual({ cards: [{ id: CARD_ID, field: card.field, language: "EN", years_experience: 5, difficulty: 4, rarity: 4, one_liner: card.one_liner, price_pack_usd: 49, price_case_usd: 20, listed_at: card.listed_at, item_count: 22 }] });
+    expect(body).toEqual({ cards: [{ id: CARD_ID, field: card.field, language: "EN", years_experience: 5, difficulty: 4, rarity: 4, one_liner: card.one_liner, price_pack_usd: 49, price_case_usd: 20, listed_at: card.listed_at, pack_id: PACK_ID, item_count: 22 }] });
     expect(db.listCards).toHaveBeenCalledWith(100);
     await getCards(new Request("http://t/api/cards"));
     expect(db.listCards).toHaveBeenLastCalledWith(20);

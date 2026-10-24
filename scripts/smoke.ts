@@ -88,7 +88,7 @@ async function main() {
   const list = await call("GET", "/api/cards?limit=20");
   ok(list.status === 200 && list.json.cards.some((c: { id: string }) => c.id === cardId), "card listed");
   noNote(list.json, "cards");
-  ok(list.json.cards.every((c: Record<string, unknown>) => c.pack_id === undefined && typeof c.item_count === "number"), "no pack_id, has item_count");
+  ok(list.json.cards.every((c: Record<string, unknown>) => c.pack_id === packId && typeof c.item_count === "number" || c.id !== cardId), "has pack_id + item_count");
   const detail = await call("GET", `/api/cards/${cardId}`, undefined, B);
   ok(detail.status === 200 && detail.json.unlocked === false && detail.json.sealed_qa_count === 0 && detail.json.rare_count === met.rare_count, "detail: unlocked=false, sealed_qa_count=0, rare_count");
   noNote(detail.json, "card detail");

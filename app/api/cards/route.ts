@@ -1,7 +1,7 @@
 import { connection } from "next/server";
 import { handle, json } from "@/lib/errors";
 import { listCards } from "@/lib/db";
-import { toPublicCard } from "@/lib/types";
+import { toPublicCard } from "@/lib/server-types";
 
 /** GET /api/cards?limit=20 — 공개 카드 목록. 인계서 없음. */
 export async function GET(req: Request) {
@@ -13,6 +13,6 @@ export async function GET(req: Request) {
     const limit = Number.isFinite(raw) ? Math.min(Math.max(Math.trunc(raw), 1), 100) : 20;
     const rows = await listCards(limit);
     // rare_count는 상세(GET /api/cards/{id})에만 노출
-    return json({ cards: rows.map((c) => ({ ...toPublicCard(c), item_count: c.item_count })) });
+    return json({ cards: rows.map((c) => ({ ...toPublicCard(c), pack_id: c.pack_id, item_count: c.item_count })) });
   });
 }

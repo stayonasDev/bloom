@@ -1,69 +1,143 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { Arrow, BlindCard, Bracket, Display, Section, Stat } from "@/components/ui";
+import { cards } from "@/lib/mock";
+import { useT } from "@/lib/i18n";
+import { CountUp, Parallax, Reveal } from "@/components/motion";
+
+// demo rows for the live board (data, not UI copy — stays as the backend would return it)
+const live = [
+  { demand: "Roaming disputes after a plan change", who: "Support software vendor · US · EN · 11:56", fit: "0.91", note: "Telecom billing disputes", meta: "Manila · 5 yrs · 22 items · 9 not in any manual", status: "3 questions asked" },
+  { demand: "Refund abuse vs. honest returns", who: "Online retailer · DE · EN, DE · 11:41", fit: "0.84", note: "Returns and chargeback judgment", meta: "Cebu · 4 yrs · 19 items", status: "unlocked · USD 129", fern: true },
+  { demand: "Test cases: where support systems fail", who: "Evaluation data company · US · EN · 11:20", fit: "0.78", note: "Telecom retention and cancellations", meta: "Seoul · 7 yrs · 25 items · written in KO", status: "case routing on", fern: true },
+  { demand: "Clinic intake: insurance mismatch", who: "Clinic software vendor · JP · JA · 11:03", fit: "0.72", note: "Front-desk triage and billing codes", meta: "Davao · 6 yrs · 17 items · JA copy", status: "2 questions asked" },
+];
+
+// cards fanned on an arc, like photographs laid out on a table
+const fan = [-15, -10, -5, 0, 5, 10, 15];
 
 export default function Home() {
+  const { t } = useT();
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main className="flex-1">
+      {/* ── hero ── */}
+      <div className="grain overflow-hidden border-b border-rule">
+        <Section className="pt-16">
+          <Bracket>{t("home.kicker")} · 2026-10-24</Bracket>
+          <h1 className="display mt-6 text-[clamp(88px,13.5vw,196px)]">
+            Handover<span className="text-fern">.</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+          <p className="mt-2 max-w-[640px] text-[20px] leading-[1.45] text-graphite">{t("home.lead")}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/sell" className="btn btn-ink">{t("home.cta_write")} <Arrow /></Link>
+            <Link href="/buy" className="btn">{t("home.cta_post")}</Link>
+          </div>
+        </Section>
+
+        <Parallax className="mx-auto -mt-8 max-w-[1240px]">
+          <div className="arc stagger">
+            {cards.slice(0, 7).map((c, i) => (
+              <div key={c.id} style={{ transform: `translateX(-50%) rotate(${fan[i]}deg)`, zIndex: 10 - Math.abs(fan[i]) }}>
+                <BlindCard card={c} compact href="/buy" />
+              </div>
+            ))}
+          </div>
+        </Parallax>
+        <div className="flex justify-center pb-10 pt-4">
+          <a href="#matches" className="grid h-12 w-12 place-items-center rounded-full border border-ink text-ink transition-colors hover:bg-ink hover:text-paper" aria-label="Scroll">
+            <Arrow className="rotate-90" />
           </a>
         </div>
-      </main>
-    </div>
+      </div>
+
+      {/* ── live matches ── */}
+      <Section className="pt-20">
+        <div id="matches" className="flex items-end justify-between">
+          <Display>{t("home.matches")}</Display>
+          <Bracket>{t("home.fit_kicker")}</Bracket>
+        </div>
+        <table className="ledger mt-10">
+          <thead>
+            <tr><th style={{ width: "36%" }}>{t("th.demand")}</th><th style={{ width: "12%" }}>{t("th.fit")}</th><th style={{ width: "36%" }}>{t("th.note")}</th><th>{t("th.status")}</th></tr>
+          </thead>
+          <tbody>
+            {live.map((r, i) => (
+              <Reveal as="tr" key={r.demand} delay={i * 70}>
+                <td><div className="text-[17px] font-semibold">{r.demand}</div><div className="mt-1 text-[13px] text-ash">{r.who}</div></td>
+                <td><span className="font-mono text-[22px]">{r.fit}</span></td>
+                <td><div className="text-[17px] font-semibold">{r.note}</div><div className="mt-1 text-[13px] text-ash">{r.meta}</div></td>
+                <td><span className={`font-mono text-[13px] ${r.fern ? "text-fern" : "text-graphite"}`}>{r.status}</span></td>
+              </Reveal>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+
+      {/* ── full-bleed: how sealing works ── */}
+      <div className="grain grain-dark mt-24 bg-earth text-sand">
+        <Section className="py-24">
+          <div className="flex items-end justify-between">
+            <Display sand>{t("home.sealed")}</Display>
+            <Bracket tone="sand">{t("home.how")}</Bracket>
+          </div>
+          <div className="mt-16 grid grid-cols-3 gap-12">
+            {(["1", "2", "3"] as const).map((n, i) => (
+              <Reveal key={n} delay={i * 90} className="border-t border-earth-2 pt-6">
+                <Bracket tone="sand">0{n}</Bracket>
+                <div className="mt-4 font-display text-[40px] leading-none">{t(`how.${n}.t`)}</div>
+                <p className="mt-4 text-[16px] leading-[1.6] text-sand/80">{t(`how.${n}.d`)}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-20 flex items-center justify-center">
+            <div className="card w-[560px] p-8 text-ink">
+              <div className="flex items-center justify-between"><Bracket>Handover Note · HN-2026-10-24-0417</Bracket><span className="chip chip-fern">{t("card.sealed")} · 22</span></div>
+              <div className="font-display mt-6 text-[44px] leading-none">Telecom billing disputes</div>
+              <div className="mt-6 grid grid-cols-2 gap-x-8 gap-y-2 font-mono text-[13px] text-graphite">
+                <span>EN · Filipino</span><span>5 {t("card.yrs")}</span>
+                <span>{t("card.difficulty")} 4 / 5</span><span>{t("card.rarity")} 4 / 5 · 9 / 22</span>
+                <span>USD 149 · USD 15 {t("card.per_case")}</span><span>2026-10-24 11:42</span>
+              </div>
+              <Link href="/buy" className="btn btn-sm mt-8">{t("home.ask_btn")} <Arrow /></Link>
+            </div>
+          </Reveal>
+        </Section>
+      </div>
+
+      {/* ── three ways + stats ── */}
+      <Section className="py-24">
+        <div className="grid grid-cols-[1fr_1.2fr] gap-16">
+          <div>
+            <Bracket>{t("earn.kicker")}</Bracket>
+            <ol className="mt-6 border-t border-ink">
+              {(["1", "2", "3"] as const).map((n) => (
+                <li key={n} className="grid grid-cols-[64px_1fr_auto] items-center gap-5 border-b border-rule py-5">
+                  <Bracket>0{n}</Bracket>
+                  <div><div className="text-[20px] font-semibold tracking-tight">{t(`earn.${n}.t`)}</div><div className="text-[14px] text-graphite">{t(`earn.${n}.d`)}</div></div>
+                  <span className="font-mono text-[13px] text-graphite">{t(`earn.${n}.r`)}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div>
+            <Bracket>{t("num.kicker")}</Bracket>
+            <div className="mt-6 grid grid-cols-2 gap-x-10 gap-y-12 border-t border-ink pt-8">
+              <Reveal><Stat v={<CountUp value={1284} format={(n) => Math.round(n).toLocaleString("en-US")} />} k={t("num.sealed")} /></Reveal>
+              <Reveal delay={70}><Stat v={<CountUp value={312} />} k={t("num.open")} /></Reveal>
+              <Reveal delay={140}><Stat v={<CountUp value={58} format={(n) => `${Math.round(n)}s`} />} k={t("num.median")} /></Reveal>
+              <Reveal delay={210}><Stat v={<CountUp value={12} />} k={t("num.langs")} /></Reveal>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <footer className="border-t border-rule">
+        <Section className="flex items-center justify-between py-8 text-[13px] text-ash">
+          <span className="font-display text-[20px] text-ink">Handover</span>
+          <span>{t("footer.langs")}</span>
+        </Section>
+      </footer>
+    </main>
   );
 }

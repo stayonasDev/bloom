@@ -3,7 +3,7 @@ import { ApiError, handle, json } from "@/lib/errors";
 import { buyerId, parseBody, recordRun } from "@/lib/http";
 import { matchCards } from "@/lib/claude";
 import { getBuyer, insertBuyerRequest, insertMatches, listCards } from "@/lib/db";
-import { toPublicCard } from "@/lib/types";
+import { toPublicCard } from "@/lib/server-types";
 
 const body = z.object({ request_text: z.string().min(10).max(2000) });
 
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       request_id: request.id,
       matches: matches.map((m) => {
         const c = byId.get(m.card_id)!;
-        return { rank: m.rank, score: m.score, reason: m.reason, card: { ...toPublicCard(c), item_count: c.item_count } };
+        return { rank: m.rank, score: m.score, reason: m.reason, card: { ...toPublicCard(c), pack_id: c.pack_id, item_count: c.item_count } };
       }),
       run: { kind: "match", duration_ms: run.duration_ms, candidate_count: cards.length },
     }, 201);

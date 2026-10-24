@@ -1,7 +1,7 @@
 import { ApiError, handle, json } from "@/lib/errors";
 import { assertUuid, optionalBuyerId } from "@/lib/http";
 import { countSealedQa, getCard, getPack, getPurchase } from "@/lib/db";
-import { toPublicCard } from "@/lib/types";
+import { toPublicCard } from "@/lib/server-types";
 
 /** GET /api/cards/{id} — 카드 상세 + 이 구매자의 구매 여부. 인계서 없음. */
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {

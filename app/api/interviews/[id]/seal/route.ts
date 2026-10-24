@@ -5,7 +5,7 @@ import { maskPii } from "@/lib/guard";
 import { extractNote } from "@/lib/claude";
 import { casePriceUsd, packPriceUsd } from "@/lib/pricing";
 import { getInterview, getSeller, insertCard, insertPack, updateInterview } from "@/lib/db";
-import { toPublicCard, type HandoverNote } from "@/lib/types";
+import { toPublicCard, type HandoverNote } from "@/lib/server-types";
 
 const body = z.object({ followup_answers: z.record(z.string(), z.string()) });
 

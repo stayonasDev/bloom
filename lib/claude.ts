@@ -3,7 +3,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
 import { ApiError } from "./errors";
-import type { HandoverNote, Language, NoteItem, RunKind } from "./types";
+import type { HandoverNote, Language, NoteItem, RunKind } from "./server-types";
 
 export const MODEL = process.env.ANTHROPIC_MODEL ?? "claude-sonnet-5-5";
 

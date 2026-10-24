@@ -1,5 +1,5 @@
 // 단위 테스트 공용 행 (DB.md 컬럼 그대로)
-import type { Buyer, Card, ClaudeRun, HandoverNote, Interview, Pack, Purchase, Seller } from "@/lib/types";
+import type { Buyer, Card, ClaudeRun, HandoverNote, Interview, Pack, Purchase, Seller } from "@/lib/server-types";
 
 export const SELLER_ID = "11111111-1111-4111-8111-111111111111";
 export const BUYER_ID = "22222222-2222-4222-8222-222222222222";

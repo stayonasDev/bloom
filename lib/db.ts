@@ -3,7 +3,7 @@
 import { supabase } from "./supabase";
 import type {
   Buyer, BuyerRequest, Card, ClaudeRun, Interview, Match, Pack, Purchase, PurchaseKind, RunKind, SealedQa, Seller,
-} from "./types";
+} from "./server-types";
 
 type Result<T> = { data: T | null; error: { message: string } | null };
 
