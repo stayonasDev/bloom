@@ -6,7 +6,6 @@ import { Arrow, BlindCard, Bracket, Display, Lock, Section } from "@/components/
 import { api, ApiRejection, fmtS } from "@/lib/api";
 import { SEED_QUESTIONS, type InterviewResponse, type SealResponse } from "@/lib/types";
 import { LANGS, useT, type Key } from "@/lib/i18n";
-import { SELLER_SAMPLE } from "@/lib/sample";
 
 type Step = "write" | "followups" | "sealing" | "sealed";
 
@@ -15,13 +14,14 @@ const ERR_KEY: Record<string, Key> = { TOO_SHORT: "err.too_short", LOG_PASTE_SUS
 export default function Sell() {
   const { t, lang } = useT();
   const [step, setStep] = useState<Step>("write");
-  const [role, setRole] = useState(SELLER_SAMPLE.role);
-  const [years, setYears] = useState(SELLER_SAMPLE.years);
+  // 입력칸은 비워서 시작한다 — 사용자가 직접 쓴다 (목 데이터 기본값 제거)
+  const [role, setRole] = useState("");
+  const [years, setYears] = useState("");
   const [writeIn, setWriteIn] = useState("");
   const [notes, setNotes] = useState("");
-  const [answers, setAnswers] = useState<Record<string, string>>({ ...SELLER_SAMPLE.answers });
+  const [answers, setAnswers] = useState<Record<string, string>>({ q1: "", q2: "", q3: "", q4: "" });
   const [interview, setInterview] = useState<InterviewResponse | null>(null);
-  const [followAnswers, setFollowAnswers] = useState<Record<string, string>>({ ...SELLER_SAMPLE.followups });
+  const [followAnswers, setFollowAnswers] = useState<Record<string, string>>({});
   const [sealed, setSealed] = useState<SealResponse | null>(null);
   const [error, setError] = useState<ApiRejection | null>(null);
   const [busy, setBusy] = useState(false);
