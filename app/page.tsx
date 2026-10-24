@@ -15,15 +15,24 @@ const live = [
 ];
 
 // cards fanned on an arc, like photographs laid out on a table
-const fan = [-15, -10, -5, 0, 5, 10, 15];
+const fan = [-24, -16, -8, 0, 8, 16, 24];
 
 export default function Home() {
   const { t } = useT();
   return (
     <main className="flex-1">
-      {/* ── hero ── */}
-      <div className="grain overflow-hidden border-b border-rule">
-        <Section className="pt-16">
+      {/* ── hero: big blind cards fanned across the top, like photographs laid over the page ── */}
+      <div className="grain relative overflow-hidden border-b border-rule">
+        <Parallax className="arc-bg" strength={14}>
+          <div className="arc stagger-slow">
+            {cards.slice(0, 7).map((c, i) => (
+              <div key={c.id} style={{ transform: `translateX(-50%) rotate(${fan[i]}deg)`, zIndex: 10 - Math.abs(fan[i]) }}>
+                <BlindCard card={c} href="/buy" />
+              </div>
+            ))}
+          </div>
+        </Parallax>
+        <Section className="relative z-10 pt-[380px] pb-14">
           <Bracket>{t("home.kicker")} · 2026-10-24</Bracket>
           <h1 className="display mt-6 text-[clamp(88px,13.5vw,196px)]">
             Handover<span className="text-fern">.</span>
@@ -33,22 +42,12 @@ export default function Home() {
             <Link href="/sell" className="btn btn-ink">{t("home.cta_write")} <Arrow /></Link>
             <Link href="/buy" className="btn">{t("home.cta_post")}</Link>
           </div>
-        </Section>
-
-        <Parallax className="mx-auto -mt-8 max-w-[1240px]">
-          <div className="arc stagger">
-            {cards.slice(0, 7).map((c, i) => (
-              <div key={c.id} style={{ transform: `translateX(-50%) rotate(${fan[i]}deg)`, zIndex: 10 - Math.abs(fan[i]) }}>
-                <BlindCard card={c} compact href="/buy" />
-              </div>
-            ))}
+          <div className="mt-12 flex justify-start">
+            <a href="#matches" className="grid h-12 w-12 place-items-center rounded-full border border-ink text-ink transition-colors hover:bg-ink hover:text-paper" aria-label="Scroll">
+              <Arrow className="rotate-90" />
+            </a>
           </div>
-        </Parallax>
-        <div className="flex justify-center pb-10 pt-4">
-          <a href="#matches" className="grid h-12 w-12 place-items-center rounded-full border border-ink text-ink transition-colors hover:bg-ink hover:text-paper" aria-label="Scroll">
-            <Arrow className="rotate-90" />
-          </a>
-        </div>
+        </Section>
       </div>
 
       {/* ── live matches ── */}
@@ -63,7 +62,7 @@ export default function Home() {
           </thead>
           <tbody>
             {live.map((r, i) => (
-              <Reveal as="tr" key={r.demand} delay={i * 70}>
+              <Reveal as="tr" key={r.demand} delay={i * 140}>
                 <td><div className="text-[17px] font-semibold">{r.demand}</div><div className="mt-1 text-[13px] text-ash">{r.who}</div></td>
                 <td><span className="font-mono text-[22px]">{r.fit}</span></td>
                 <td><div className="text-[17px] font-semibold">{r.note}</div><div className="mt-1 text-[13px] text-ash">{r.meta}</div></td>
@@ -83,7 +82,7 @@ export default function Home() {
           </div>
           <div className="mt-16 grid grid-cols-3 gap-12">
             {(["1", "2", "3"] as const).map((n, i) => (
-              <Reveal key={n} delay={i * 90} className="border-t border-earth-2 pt-6">
+              <Reveal key={n} delay={i * 180} className="border-t border-earth-2 pt-6">
                 <Bracket tone="sand">0{n}</Bracket>
                 <div className="mt-4 font-display text-[40px] leading-none">{t(`how.${n}.t`)}</div>
                 <p className="mt-4 text-[16px] leading-[1.6] text-sand/80">{t(`how.${n}.d`)}</p>
@@ -124,9 +123,9 @@ export default function Home() {
             <Bracket>{t("num.kicker")}</Bracket>
             <div className="mt-6 grid grid-cols-2 gap-x-10 gap-y-12 border-t border-ink pt-8">
               <Reveal><Stat v={<CountUp value={1284} format={(n) => Math.round(n).toLocaleString("en-US")} />} k={t("num.sealed")} /></Reveal>
-              <Reveal delay={70}><Stat v={<CountUp value={312} />} k={t("num.open")} /></Reveal>
-              <Reveal delay={140}><Stat v={<CountUp value={58} format={(n) => `${Math.round(n)}s`} />} k={t("num.median")} /></Reveal>
-              <Reveal delay={210}><Stat v={<CountUp value={12} />} k={t("num.langs")} /></Reveal>
+              <Reveal delay={280}><Stat v={<CountUp value={312} />} k={t("num.open")} /></Reveal>
+              <Reveal delay={280}><Stat v={<CountUp value={58} format={(n) => `${Math.round(n)}s`} />} k={t("num.median")} /></Reveal>
+              <Reveal delay={420}><Stat v={<CountUp value={12} />} k={t("num.langs")} /></Reveal>
             </div>
           </div>
         </div>
