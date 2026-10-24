@@ -1,0 +1,8 @@
+[
+  { "card_slug": "telecom-billing-en", "question": "What do you do at day 58 of the loyalty credit window?", "expect_covered": true },
+  { "card_slug": "telecom-billing-en", "question": "A customer turned data roaming on himself and wants the roaming charges waived. Do you waive them?", "expect_covered": true },
+  { "card_slug": "telecom-billing-en", "question": "A customer on a family plan wants only one line moved to an international plan mid-cycle. How do you handle it?", "expect_covered": true },
+  { "card_slug": "telecom-billing-en", "question": "How do I process a warranty replacement for a broken handset?", "expect_covered": false },
+  { "card_slug": "telecom-billing-en", "question": "What is the refund policy for a cancelled streaming subscription bundle?", "expect_covered": false },
+  { "card_slug": "telecom-billing-en", "question": "Should I ever adjust the billing cycle date to fix a dispute?", "expect_covered": true }
+]

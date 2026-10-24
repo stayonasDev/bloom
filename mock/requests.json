@@ -1,0 +1,5 @@
+[
+  { "buyer_type": "ai_ops", "request_text": "Our AI can't resolve roaming disputes after a mid-cycle plan change. Customers escalate and we have no one to route to." },
+  { "buyer_type": "ai_ops", "request_text": "Our support bot handles refunds fine until the order was split across two shipments or partially returned. Those get stuck and we need a human who knows the edge cases." },
+  { "buyer_type": "eval_data", "request_text": "We build evaluation sets for customer-support AI. We need the specific situations where a support model confidently gives the wrong answer — thresholds, exceptions, timing rules a script never states." }
+]
