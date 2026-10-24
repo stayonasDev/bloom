@@ -9,7 +9,7 @@ import { useT } from "@/lib/i18n";
 import { BUYER_SAMPLE } from "@/lib/sample";
 
 export default function Buy() {
-  const { t } = useT();
+  const { t, lang } = useT();
   const router = useRouter();
   const [text, setText] = useState(BUYER_SAMPLE.demand);
   const [busy, setBusy] = useState(false);
@@ -25,13 +25,14 @@ export default function Buy() {
   useEffect(() => { if (res) resRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); }, [res]);
   function soon() { setToast(t("buy.soon")); window.setTimeout(() => setToast(null), 2200); }
   const [all, setAll] = useState<Card[]>([]);
-  useEffect(() => { api.listCards().then((r) => setAll(r.cards)).catch(() => {}); }, []);
+  // UI 언어가 바뀌면 그 언어 카드만 다시 불러온다 (언어 섞임 방지)
+  useEffect(() => { api.listCards(lang).then((r) => setAll(r.cards)).catch(() => {}); }, [lang]);
 
   async function find() {
     setBusy(true); setRes(null); setSel(null); setQa([]);
     try {
       await api.createBuyer({ buyer_type: "ai_ops" });
-      const r = await api.createRequest(text);
+      const r = await api.createRequest(text, lang);
       setRes(r); setSel(r.matches[0] || null);
     } finally { setBusy(false); }
   }
