@@ -50,14 +50,13 @@ describe("POST /api/sellers", () => {
     expect((await res.json()).error.code).toBe("VALIDATION_ERROR");
     expect(db.insertSeller).not.toHaveBeenCalled();
   });
-  it("normalizes language: front sends UI-language prefix (JA/ES/…) → EN, ko/KO → KO", async () => {
+  it("normalizes language to ISO 2 letters: front sends UI-language name prefix (EN·한국·日本·FI·ES·DE)", async () => {
     m(db.insertSeller).mockResolvedValue(seller);
-    await postSellers(req("POST", { role_title: "Telecom billing CSR", years_experience: 5, language: "JA" }));
-    expect(db.insertSeller).toHaveBeenLastCalledWith(expect.objectContaining({ language: "EN" }));
-    await postSellers(req("POST", { role_title: "Telecom billing CSR", years_experience: 5, language: "ko" }));
-    expect(db.insertSeller).toHaveBeenLastCalledWith(expect.objectContaining({ language: "KO" }));
-    await postSellers(req("POST", { role_title: "Telecom billing CSR", years_experience: 5, language: "Korean" }));
-    expect(db.insertSeller).toHaveBeenLastCalledWith(expect.objectContaining({ language: "KO" }));
+    const cases: [string, string][] = [["JA", "JA"], ["日本", "JA"], ["한국", "KO"], ["ko", "KO"], ["Korean", "KO"], ["FI", "TL"], ["DE", "DE"], ["??", "EN"]];
+    for (const [sent, stored] of cases) {
+      await postSellers(req("POST", { role_title: "Telecom billing CSR", years_experience: 5, language: sent }));
+      expect(db.insertSeller).toHaveBeenLastCalledWith(expect.objectContaining({ language: stored }));
+    }
   });
 });
 

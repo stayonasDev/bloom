@@ -10,22 +10,17 @@ import { SELLER_SAMPLE } from "@/lib/sample";
 
 type Step = "write" | "followups" | "sealing" | "sealed";
 
-// The backend knows "EN" | "KO" (lib/server-types.ts) and writes follow-ups in that language.
-// Map whatever the person typed in "You write in" to one of the two; anything else is treated as English.
-function langCode(name: string): "EN" | "KO" {
-  const k = name.trim().toLowerCase();
-  return k.includes("한국") || k.includes("조선") || k.startsWith("ko") ? "KO" : "EN";
-}
 
 const ERR_KEY: Record<string, Key> = { TOO_SHORT: "err.too_short", LOG_PASTE_SUSPECTED: "err.log", PII_DETECTED: "err.pii" };
 
 export default function Sell() {
   const { t, lang } = useT();
   const [step, setStep] = useState<Step>("write");
+  // 심사위원이 바로 실행할 수 있게 공유 샘플(lib/sample.ts ← mock/sellers/telecom-billing-en.json)을 미리 채운다. 지우고 고칠 수 있는 일반 값.
   const [role, setRole] = useState(SELLER_SAMPLE.role);
   const [years, setYears] = useState(SELLER_SAMPLE.years);
   const [writeIn, setWriteIn] = useState("");
-  const [notes, setNotes] = useState("");
+  const [notes, setNotes] = useState(SELLER_SAMPLE.notes);
   const [answers, setAnswers] = useState<Record<string, string>>({ ...SELLER_SAMPLE.answers });
   const [interview, setInterview] = useState<InterviewResponse | null>(null);
   const [followAnswers, setFollowAnswers] = useState<Record<string, string>>({ ...SELLER_SAMPLE.followups });
@@ -48,7 +43,7 @@ export default function Sell() {
   async function askMore() {
     setError(null); setBusy(true);
     try {
-      await api.createSeller({ role_title: role, years_experience: Number(years) || 0, language: langCode(langName) });
+      await api.createSeller({ role_title: role, years_experience: Number(years) || 0, language: langName }); // full name; the server normalizes it to a code (lib/lang.ts)
       const r = await api.createInterview({ seed_answers: answers, notes: notes || undefined });
       setInterview(r); setStep("followups");
     } catch (e) {
