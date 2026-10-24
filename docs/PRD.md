@@ -81,7 +81,7 @@ Ambition for Korea 해커톤 · 2026-10-24 · 주제 5 "AI로 사라질 직업 1
 
 **화면 2 — Match (구매자)**
 - 상단 입력 "What can't your AI solve?" · 구매자 유형 토글 "AI ops / Eval data" · 버튼 "Find packs"
-- 매칭 카드 3장: Field · EN · 5 yrs · Difficulty 4/5 · Rarity 4/5 · "$149 pack · $15/case" · Listed 2026-10-24 · 이유 1줄
+- 매칭 카드 3장: Field · EN · 5 yrs · Difficulty 4/5 · Rarity 4/5 · "$149 pack · $20/case" · Listed 2026-10-24 · 이유 1줄
 - 카드 패널: "Ask this pack" 입력 → 답 + "Based on 3 of 22 sealed items" / 미해당 "This pack doesn't cover that."
 - 버튼: "Unlock full note $149" (목업 결제 → 인계서) · "Route cases to this expert" (목업) · "Send hiring offer" (목업)
 - 인계서 열람: 5개 섹션, 항목에 rare/manual 배지, 하단 "Generalized: the carrier ×2, the billing system ×3"

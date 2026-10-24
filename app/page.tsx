@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Arrow, BlindCard, Bracket, Display, Section, Stat } from "@/components/ui";
+import { Arrow, BlindCard, Bracket, Display, Section } from "@/components/ui";
 import { cards } from "@/lib/mock";
 import { useT } from "@/lib/i18n";
-import { CountUp, Parallax, Reveal } from "@/components/motion";
+import { Parallax, Reveal } from "@/components/motion";
+import { EffectPanel } from "@/components/EffectPanel";
 
 // demo rows for the live board (data, not UI copy — stays as the backend would return it)
 const live = [
@@ -21,18 +22,9 @@ export default function Home() {
   const { t } = useT();
   return (
     <main className="flex-1">
-      {/* ── hero: big blind cards fanned across the top, like photographs laid over the page ── */}
+      {/* ── hero: title + two doors ── */}
       <div className="grain relative overflow-hidden border-b border-rule">
-        <Parallax className="arc-bg" strength={14}>
-          <div className="arc stagger-slow">
-            {cards.slice(0, 7).map((c, i) => (
-              <div key={c.id} style={{ transform: `translateX(-50%) rotate(${fan[i]}deg)`, zIndex: 10 - Math.abs(fan[i]) }}>
-                <BlindCard card={c} href="/buy" />
-              </div>
-            ))}
-          </div>
-        </Parallax>
-        <Section className="relative z-10 pt-[380px] pb-14">
+        <Section className="relative z-10 pt-16 pb-14">
           <Bracket>{t("home.kicker")} · 2026-10-24</Bracket>
           <h1 className="display mt-6 text-[clamp(88px,13.5vw,196px)]">
             Handover<span className="text-fern">.</span>
@@ -62,63 +54,65 @@ export default function Home() {
         </Section>
       </div>
 
-      {/* ── live matches ── */}
-      <Section className="pt-20">
-        <div id="matches" className="flex items-end justify-between">
-          <Display>{t("home.matches")}</Display>
-          <Bracket>{t("home.fit_kicker")}</Bracket>
+      {/* ── full-bleed: how sealing works ── */}
+      <div className="grain overflow-hidden border-t border-rule">
+        <Section className="py-24">
+          <div className="flex items-end justify-between">
+            <Display>{t("home.sealed")}</Display>
+            <Bracket>{t("home.how")}</Bracket>
+          </div>
+          <div className="mt-16 grid grid-cols-3 gap-12">
+            {(["1", "2", "3"] as const).map((n, i) => (
+              <Reveal key={n} delay={i * 180} className="border-t border-ink pt-6">
+                <Bracket tone="fern">0{n}</Bracket>
+                <div className="mt-4 font-display text-[40px] leading-none">{t(`how.${n}.t`)}</div>
+                <p className="mt-4 text-[16px] leading-[1.6] text-graphite">{t(`how.${n}.d`)}</p>
+              </Reveal>
+            ))}
+          </div>
+        </Section>
+        <div className="arc-stage relative h-[520px]">
+        <Parallax className="arc-bg" strength={14}>
+          <div className="arc stagger-slow">
+            {cards.slice(0, 7).map((c, i) => (
+              <div key={c.id} style={{ transform: `translateX(-50%) rotate(${fan[i]}deg)`, zIndex: 10 - Math.abs(fan[i]) }}>
+                <BlindCard card={c} href="/buy" />
+              </div>
+            ))}
+          </div>
+        </Parallax>
         </div>
-        <table className="ledger mt-10">
+        <div className="h-8" />
+      </div>
+
+      {/* ── live matches ── */}
+      <div className="grain grain-dark bg-earth text-sand">
+      <Section className="py-24">
+        <div id="matches" className="flex items-end justify-between">
+          <Display sand>{t("home.matches")}</Display>
+          <Bracket tone="sand">{t("home.fit_kicker")}</Bracket>
+        </div>
+        <table className="ledger ledger-dark mt-10">
           <thead>
             <tr><th style={{ width: "36%" }}>{t("th.demand")}</th><th style={{ width: "12%" }}>{t("th.fit")}</th><th style={{ width: "36%" }}>{t("th.note")}</th><th>{t("th.status")}</th></tr>
           </thead>
           <tbody>
             {live.map((r, i) => (
               <Reveal as="tr" key={r.demand} delay={i * 140}>
-                <td><div className="text-[17px] font-semibold">{r.demand}</div><div className="mt-1 text-[13px] text-ash">{r.who}</div></td>
-                <td><span className="font-mono text-[22px]">{r.fit}</span></td>
-                <td><div className="text-[17px] font-semibold">{r.note}</div><div className="mt-1 text-[13px] text-ash">{r.meta}</div></td>
-                <td><span className={`font-mono text-[13px] ${r.fern ? "text-fern" : "text-graphite"}`}>{r.status}</span></td>
+                <td><div className="text-[17px] font-semibold text-white">{r.demand}</div><div className="mt-1 text-[13px] text-sand/60">{r.who}</div></td>
+                <td><span className="font-mono text-[22px] text-white">{r.fit}</span></td>
+                <td><div className="text-[17px] font-semibold text-white">{r.note}</div><div className="mt-1 text-[13px] text-sand/60">{r.meta}</div></td>
+                <td><span className={`font-mono text-[13px] ${r.fern ? "text-[#9FE1C8]" : "text-sand/80"}`}>{r.status}</span></td>
               </Reveal>
             ))}
           </tbody>
         </table>
       </Section>
-
-      {/* ── full-bleed: how sealing works ── */}
-      <div className="grain grain-dark mt-24 bg-earth text-sand">
-        <Section className="py-24">
-          <div className="flex items-end justify-between">
-            <Display sand>{t("home.sealed")}</Display>
-            <Bracket tone="sand">{t("home.how")}</Bracket>
-          </div>
-          <div className="mt-16 grid grid-cols-3 gap-12">
-            {(["1", "2", "3"] as const).map((n, i) => (
-              <Reveal key={n} delay={i * 180} className="border-t border-earth-2 pt-6">
-                <Bracket tone="sand">0{n}</Bracket>
-                <div className="mt-4 font-display text-[40px] leading-none">{t(`how.${n}.t`)}</div>
-                <p className="mt-4 text-[16px] leading-[1.6] text-sand/80">{t(`how.${n}.d`)}</p>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="mt-20 flex items-center justify-center">
-            <div className="card w-[560px] p-8 text-ink">
-              <div className="flex items-center justify-between"><Bracket>Handover Note · HN-2026-10-24-0417</Bracket><span className="chip chip-fern">{t("card.sealed")} · 22</span></div>
-              <div className="font-display mt-6 text-[44px] leading-none">Telecom billing disputes</div>
-              <div className="mt-6 grid grid-cols-2 gap-x-8 gap-y-2 font-mono text-[13px] text-graphite">
-                <span>EN · Filipino</span><span>5 {t("card.yrs")}</span>
-                <span>{t("card.difficulty")} 4 / 5</span><span>{t("card.rarity")} 4 / 5 · 9 / 22</span>
-                <span>USD 149 · USD 20 {t("card.per_case")}</span><span>2026-10-24 11:42</span>
-              </div>
-              <Link href="/buy" className="btn btn-sm mt-8">{t("home.ask_btn")} <Arrow /></Link>
-            </div>
-          </Reveal>
-        </Section>
       </div>
 
-      {/* ── three ways + stats ── */}
+      {/* ── three ways + how the price works · effect ── */}
       <Section className="py-24">
-        <div className="grid grid-cols-[1fr_1.2fr] gap-16">
+        <div className="grid grid-cols-[1fr_1.1fr] gap-16">
           <div>
             <Bracket>{t("earn.kicker")}</Bracket>
             <ol className="mt-6 border-t border-ink">
@@ -130,16 +124,18 @@ export default function Home() {
                 </li>
               ))}
             </ol>
-          </div>
-          <div>
-            <Bracket>{t("num.kicker")}</Bracket>
-            <div className="mt-6 grid grid-cols-2 gap-x-10 gap-y-12 border-t border-ink pt-8">
-              <Reveal><Stat v={<CountUp value={1284} format={(n) => Math.round(n).toLocaleString("en-US")} />} k={t("num.sealed")} /></Reveal>
-              <Reveal delay={280}><Stat v={<CountUp value={312} />} k={t("num.open")} /></Reveal>
-              <Reveal delay={280}><Stat v={<CountUp value={58} format={(n) => `${Math.round(n)}s`} />} k={t("num.median")} /></Reveal>
-              <Reveal delay={420}><Stat v={<CountUp value={12} />} k={t("num.langs")} /></Reveal>
+            <div className="mt-10">
+              <Bracket>{t("price.kicker")}</Bracket>
+              <ul className="mt-5 flex flex-col gap-4 border-t border-rule pt-5 text-[15px] leading-[1.55] text-graphite">
+                <li className="grid grid-cols-[64px_1fr] gap-5"><span className="bracket">{t("price.l_pack")}</span><span>{t("price.pack")}</span></li>
+                <li className="grid grid-cols-[64px_1fr] gap-5"><span className="bracket">{t("card.per_case")}</span><span>{t("price.case")}</span></li>
+                <li className="grid grid-cols-[64px_1fr] gap-5"><span className="bracket">{t("earn.3.t")}</span><span>{t("price.hire")}</span></li>
+                <li className="grid grid-cols-[64px_1fr] gap-5"><span className="bracket">$</span><span>{t("price.pay")}</span></li>
+              </ul>
+              <div className="mt-5 rounded-[10px] bg-paper-2 px-4 py-3 font-mono text-[13px] text-ink">{t("price.example")}</div>
             </div>
           </div>
+          <EffectPanel />
         </div>
       </Section>
 

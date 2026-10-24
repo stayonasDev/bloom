@@ -7,7 +7,7 @@ import { LANGS, useT, type Lang } from "@/lib/i18n";
 export function Header() {
   const path = usePathname();
   const { t, lang, setLang } = useT();
-  const links = [{ href: "/", label: t("nav.matches") }];
+  const links: { href: string; label: string }[] = [];
   return (
     <header className="sticky top-0 z-40 border-b border-rule/70 bg-paper/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between px-6">
