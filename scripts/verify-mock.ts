@@ -6,7 +6,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-const BASE = process.env.BASE ?? "http://localhost:3000";
+const BASE = process.env.BASE_URL ?? process.env.BASE ?? "http://localhost:3000";
 const seeded = JSON.parse(readFileSync("mock/seed-output.json", "utf8")).cards as Record<string, any>;
 async function call(method: string, path: string, body?: unknown, headers: Record<string, string> = {}) {
   const res = await fetch(`${BASE}${path}`, { method, headers: { "content-type": "application/json", ...headers }, body: body ? JSON.stringify(body) : undefined });
