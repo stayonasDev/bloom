@@ -58,10 +58,13 @@ export async function getCardByPack(packId: string) {
 }
 export type CardWithCounts = Card & { item_count: number; rare_count: number };
 /** 공개 카드 + packs.item_count/rare_count (인계서 없음). listed_at desc. */
-export async function listCards(limit: number): Promise<CardWithCounts[]> {
+/** language(ISO 2글자)를 주면 그 언어 카드만 — UI 언어와 섞이지 않게 */
+export async function listCards(limit: number, language?: string | null): Promise<CardWithCounts[]> {
   // cards.pack_id → packs는 다대일이라 PostgREST는 객체로 반환하지만, 생성 타입이 없으면 배열로 추론되어 cast
+  let q = supabase().from("cards").select(`${CARD_PUBLIC}, packs(item_count, rare_count)`);
+  if (language) q = q.eq("language", language);
   const rows = must<(Card & { packs: { item_count: number; rare_count: number } | null })[]>(
-    (await supabase().from("cards").select(`${CARD_PUBLIC}, packs(item_count, rare_count)`).order("listed_at", { ascending: false }).limit(limit)) as unknown as Result<(Card & { packs: { item_count: number; rare_count: number } | null })[]>,
+    (await q.order("listed_at", { ascending: false }).limit(limit)) as unknown as Result<(Card & { packs: { item_count: number; rare_count: number } | null })[]>,
     "listCards",
   );
   return rows.map(({ packs, ...c }) => ({ ...c, item_count: packs?.item_count ?? 0, rare_count: packs?.rare_count ?? 0 }));

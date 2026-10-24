@@ -85,16 +85,18 @@ export const api = {
   async getNote(packId: string): Promise<NoteResponse> {
     return call(`/api/packs/${packId}/note`, { method: "GET" }, async () => ({ ...mock.noteResponse, pack_id: packId }));
   },
-  async listCards(): Promise<{ cards: Card[] }> {
-    return call("/api/cards?limit=20", { method: "GET" }, async () => ({ cards: mock.cards }));
+  // language: 현재 UI 언어 코드(en·ko·…). 주면 그 언어 카드만 — 목록이 다른 언어와 섞이지 않게.
+  async listCards(language?: string): Promise<{ cards: Card[] }> {
+    const q = language ? `&language=${encodeURIComponent(language)}` : "";
+    return call(`/api/cards?limit=20${q}`, { method: "GET" }, async () => ({ cards: mock.cards }));
   },
   async createBuyer(body: { buyer_type: "ai_ops" | "eval_data" }) {
     const r = await call<{ id: string }>("/api/buyers", { method: "POST", body: JSON.stringify(body) }, async () => ({ id: id("buyer") }));
     remember("buyer", r.id);
     return r;
   },
-  async createRequest(request_text: string): Promise<RequestResponse> {
-    return call("/api/requests", { method: "POST", body: JSON.stringify({ request_text }) }, async () => { await sleep(1600); return mock.request; });
+  async createRequest(request_text: string, language?: string): Promise<RequestResponse> {
+    return call("/api/requests", { method: "POST", body: JSON.stringify({ request_text, language }) }, async () => { await sleep(1600); return mock.request; });
   },
   async ask(cardId: string, question: string): Promise<AskResponse> {
     return call(`/api/cards/${cardId}/ask`, { method: "POST", body: JSON.stringify({ question }) }, async () => {

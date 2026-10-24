@@ -4,11 +4,13 @@ import { buyerId, parseBody, recordRun } from "@/lib/http";
 import { matchCards } from "@/lib/claude";
 import { getBuyer, insertBuyerRequest, insertMatches, listCards } from "@/lib/db";
 import { toPublicCard } from "@/lib/server-types";
+import { normalizeLanguage } from "@/lib/lang";
 
 // Claude ③ 호출 — Vercel 기본 10초를 넘길 수 있다
 export const maxDuration = 60;
 
-const body = z.object({ request_text: z.string().min(10).max(2000) });
+// language(선택): 주면 그 언어 카드만 후보로 — 매칭 결과가 UI 언어와 섞이지 않게
+const body = z.object({ request_text: z.string().min(10).max(2000), language: z.string().min(1).max(40).optional() });
 
 /** POST /api/requests — 수요문 저장 → Claude ③ 매칭 → 상위 3 카드 + 이유. Claude에는 카드 공개 필드 + 항목 수만 보낸다. */
 export async function POST(req: Request) {
@@ -19,7 +21,7 @@ export async function POST(req: Request) {
     if (!buyer) throw new ApiError("NOT_FOUND", "Buyer not found.", "x-buyer-id");
 
     const request = await insertBuyerRequest({ buyer_id: bid, request_text: input.request_text });
-    const cards = await listCards(100);
+    const cards = await listCards(100, input.language ? normalizeLanguage(input.language) : null);
     const byId = new Map(cards.map((c) => [c.id, c]));
 
     // 후보가 없으면 Claude를 부르지 않는다

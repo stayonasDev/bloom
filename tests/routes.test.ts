@@ -256,9 +256,18 @@ describe("GET /api/cards", () => {
     const body = await res.json();
     assertSealed(body);
     expect(body).toEqual({ cards: [{ id: CARD_ID, field: card.field, language: "EN", years_experience: 5, difficulty: 4, rarity: 4, one_liner: card.one_liner, price_pack_usd: 49, price_case_usd: 20, listed_at: card.listed_at, pack_id: PACK_ID, item_count: 22 }] });
-    expect(db.listCards).toHaveBeenCalledWith(100);
+    expect(db.listCards).toHaveBeenCalledWith(100, null);
     await getCards(new Request("http://t/api/cards"));
-    expect(db.listCards).toHaveBeenLastCalledWith(20);
+    expect(db.listCards).toHaveBeenLastCalledWith(20, null);
+  });
+  it("language param filters to that language only (UI 언어와 섞이지 않게), normalized to ISO code", async () => {
+    m(db.listCards).mockResolvedValue([]);
+    await getCards(new Request("http://t/api/cards?language=ko"));
+    expect(db.listCards).toHaveBeenLastCalledWith(20, "KO");
+    await getCards(new Request("http://t/api/cards?language=%ED%95%9C%EA%B5%AD"));
+    expect(db.listCards).toHaveBeenLastCalledWith(20, "KO");
+    await getCards(new Request("http://t/api/cards?language=ja&limit=5"));
+    expect(db.listCards).toHaveBeenLastCalledWith(5, "JA");
   });
 });
 
@@ -321,6 +330,14 @@ describe("POST /api/requests", () => {
     const res = await postRequests(req("POST", { request_text: "Something long enough to pass." }, headers));
     expect(await res.json()).toEqual({ request_id: REQUEST_ID, matches: [], run: { kind: "match", duration_ms: 0, candidate_count: 0 } });
     expect(claude.matchCards).not.toHaveBeenCalled();
+    expect(db.listCards).toHaveBeenLastCalledWith(100, null);
+  });
+  it("language in body limits candidates to that language (normalized)", async () => {
+    m(db.getBuyer).mockResolvedValue(buyer);
+    m(db.insertBuyerRequest).mockResolvedValue({ id: REQUEST_ID, buyer_id: BUYER_ID, request_text: "x", created_at: "" });
+    m(db.listCards).mockResolvedValue([]);
+    await postRequests(req("POST", { request_text: "로밍 분쟁을 AI가 못 풀어요. 사람이 필요해요.", language: "ko" }, headers));
+    expect(db.listCards).toHaveBeenLastCalledWith(100, "KO");
   });
   it("400 without buyer header; 404 unknown buyer", async () => {
     expect((await postRequests(req("POST", { request_text: "Something long enough." }))).status).toBe(400);
