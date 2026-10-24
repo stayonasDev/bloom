@@ -2,14 +2,15 @@
  * mock/sellers/*.json 5종을 API로 흘려 카드 5장을 만든다(Claude 실호출, 샘플당 2회).
  * 꼬리질문 id는 Claude가 정하므로 응답은 순서대로 f1, f2, f3를 매핑한다.
  * 결과는 mock/seed-output.json에 저장(ids·metrics·ms). 리허설 숫자와 verify-mock의 입력이 된다.
- * 실행: npm run seed            (기본 http://localhost:3000)
+ * 실행: npm run seed            (기본 http://localhost:3000, BASE_URL 또는 BASE로 지정)
+ *       BASE_URL=https://handover-seven-red.vercel.app npm run seed   (프로덕션)
  *       MOCK_SELLERS=mock/sellers-ko npm run seed   (한국판)
  *       BASE=https://… npm run seed
  */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-const BASE = process.env.BASE ?? "http://localhost:3000";
+const BASE = process.env.BASE_URL ?? process.env.BASE ?? "http://localhost:3000";
 async function call(method: string, path: string, body?: unknown, headers: Record<string, string> = {}) {
   const res = await fetch(`${BASE}${path}`, { method, headers: { "content-type": "application/json", ...headers }, body: body ? JSON.stringify(body) : undefined });
   const json = await res.json().catch(() => ({}));
