@@ -113,3 +113,9 @@ export const api = {
 export const fmtUSD = (n: number) => `USD ${Math.round(n)}`;
 export const fmtS = (ms: number) => `${(ms / 1000).toFixed(ms >= 10000 ? 0 : 1)} s`;
 export const fmtDate = (iso: string) => iso.replace("T", " ").slice(0, 16);
+export const fmtDateLocal = (iso: string) => {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return fmtDate(iso);
+  const p = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+};

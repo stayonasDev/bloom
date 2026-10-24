@@ -1,8 +1,9 @@
 "use client";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import type { Card } from "@/lib/types";
-import { fmtDate, fmtUSD } from "@/lib/api";
+import { fmtDate, fmtDateLocal, fmtUSD } from "@/lib/api";
 import { useT } from "@/lib/i18n";
 import { CountUp } from "@/components/motion";
 
@@ -63,7 +64,7 @@ export function BlindCard({ card, compact = false, selected = false, href }: { c
       <div className={`font-display leading-[1.05] tracking-tight text-ink ${compact ? "text-[22px]" : "text-[30px]"}`}>{card.field}</div>
       {!compact && <p className="text-[14px] text-graphite">{card.one_liner}</p>}
       <div className="mt-auto flex items-end justify-between gap-3 pt-2 font-mono text-[12px] text-graphite">
-        <span>{t("card.difficulty")} {card.difficulty}/5 · {t("card.rarity")} {card.rarity}/5{!compact && <><br />{t("card.listed")} {fmtDate(card.listed_at)}</>}</span>
+        <span>{t("card.difficulty")} {card.difficulty}/5 · {t("card.rarity")} {card.rarity}/5{!compact && <><br />{t("card.listed")} <Listed iso={card.listed_at} /></>}</span>
         <span className="text-right text-ink">{fmtUSD(card.price_pack_usd)}{!compact && <><br /><span className="text-graphite">{fmtUSD(card.price_case_usd)} {t("card.per_case")}</span></>}</span>
       </div>
     </div>
@@ -73,4 +74,12 @@ export function BlindCard({ card, compact = false, selected = false, href }: { c
 
 export function Section({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <section className={`mx-auto w-full max-w-[1240px] px-6 ${className}`}>{children}</section>;
+}
+
+// Renders the UTC string on the server and swaps to the viewer's local time after mount, so hydration stays stable.
+function Listed({ iso }: { iso: string }) {
+  const [s, setS] = useState(fmtDate(iso));
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- local time is only known in the browser
+  useEffect(() => { setS(fmtDateLocal(iso)); }, [iso]);
+  return <>{s}</>;
 }
