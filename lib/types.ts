@@ -2,6 +2,7 @@
 
 export type Card = {
   id: string;
+  pack_id?: string; // 인계사항 4: 백엔드가 카드 목록·매칭 카드에 포함. 구매 → /packs/{pack_id}/note 이동용
   field: string;
   language: string;
   years_experience: number;

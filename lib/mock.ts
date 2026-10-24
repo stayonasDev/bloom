@@ -6,7 +6,7 @@ export const MOCK_PACK_ID = "c71a0000-0000-4000-8000-000000000001";
 export const MOCK_CARD_ID = "d0f30000-0000-4000-8000-000000000001";
 
 export const cards: Card[] = [
-  { id: MOCK_CARD_ID, field: "Telecom billing disputes", language: "EN", years_experience: 5, difficulty: 4, rarity: 4, one_liner: "Proration, loyalty-credit edge cases and roaming waivers a script can't handle.", price_pack_usd: 149, price_case_usd: 15, listed_at: "2026-10-24T11:42:07Z", item_count: 22 },
+  { id: MOCK_CARD_ID, pack_id: MOCK_PACK_ID, field: "Telecom billing disputes", language: "EN", years_experience: 5, difficulty: 4, rarity: 4, one_liner: "Proration, loyalty-credit edge cases and roaming waivers a script can't handle.", price_pack_usd: 149, price_case_usd: 15, listed_at: "2026-10-24T11:42:07Z", item_count: 22 },
   { id: "d0f30000-0000-4000-8000-000000000002", field: "Prepaid and family-plan billing", language: "EN", years_experience: 3, difficulty: 3, rarity: 3, one_liner: "Multi-line proration and shared data pools.", price_pack_usd: 89, price_case_usd: 12, listed_at: "2026-10-24T10:58:00Z", item_count: 17 },
   { id: "d0f30000-0000-4000-8000-000000000003", field: "Telecom retention and cancellations", language: "KO", years_experience: 7, difficulty: 3, rarity: 3, one_liner: "De-escalation and save offers without over-promising.", price_pack_usd: 129, price_case_usd: 12, listed_at: "2026-10-24T10:12:00Z", item_count: 25 },
   { id: "d0f30000-0000-4000-8000-000000000004", field: "Returns and chargeback judgment", language: "EN", years_experience: 4, difficulty: 4, rarity: 3, one_liner: "Refund abuse vs. honest returns, in writing.", price_pack_usd: 129, price_case_usd: 12, listed_at: "2026-10-24T09:40:00Z", item_count: 19 },

@@ -51,7 +51,7 @@ export default function Buy() {
     if (!sel) return;
     setUnlocking(true);
     try {
-      const p = await api.purchase(packIdOf(sel.card.id));
+      const p = await api.purchase(sel.card.pack_id ?? packIdOf(sel.card.id));
       router.push(`/packs/${p.pack_id}/note`);
     } finally { setUnlocking(false); }
   }
@@ -148,7 +148,7 @@ export default function Buy() {
   );
 }
 
-// Until the API returns pack_id on cards, derive the mock pack id for the first card and pass through others.
+// Fallback for demo data without pack_id: derive the mock pack id for the first card and pass through others.
 function packIdOf(cardId: string) {
   return cardId === "d0f30000-0000-4000-8000-000000000001" ? "c71a0000-0000-4000-8000-000000000001" : cardId;
 }
