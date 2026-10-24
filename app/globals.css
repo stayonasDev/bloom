@@ -192,3 +192,16 @@ tr.reveal { display: table-row; }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .stagger > *, .stagger-slow > *, .paperblock-in, .sealbar, .sealin { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
 }
+
+/* two doors on the home page: individuals (paper) / companies (earth) */
+.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.door { background: var(--white); border: 1px solid var(--rule); border-radius: 16px; padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 12px; }
+.door .who { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ash); }
+.door h3 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 34px; line-height: 1.05; letter-spacing: -.01em; }
+.door p { margin: 0; font-size: 15px; color: var(--graphite); }
+.door ul { margin: 4px 0 0; padding-left: 18px; font-size: 14px; color: var(--graphite); display: flex; flex-direction: column; gap: 4px; }
+.door-co { background: var(--earth); border-color: var(--earth); color: var(--sand); }
+.door-co .who { color: var(--sand); } .door-co p, .door-co ul { color: #B9B6AE; } .door-co h3 { color: var(--sand); }
+.btn-fern-outline { border-color: var(--fern); color: var(--fern); }
+.btn-fern-outline:hover { background: var(--fern); border-color: var(--fern); color: #fff; }
+@media (max-width: 900px) { .doors { grid-template-columns: 1fr; } }

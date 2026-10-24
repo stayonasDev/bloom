@@ -7,11 +7,7 @@ import { LANGS, useT, type Lang } from "@/lib/i18n";
 export function Header() {
   const path = usePathname();
   const { t, lang, setLang } = useT();
-  const links = [
-    { href: "/", label: t("nav.matches") },
-    { href: "/sell", label: t("nav.write") },
-    { href: "/buy", label: t("nav.post") },
-  ];
+  const links = [{ href: "/", label: t("nav.matches") }];
   return (
     <header className="sticky top-0 z-40 border-b border-rule/70 bg-paper/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between px-6">
@@ -25,6 +21,8 @@ export function Header() {
               {l.label}
             </Link>
           ))}
+          <Link href="/sell" className={`btn btn-sm ${path.startsWith("/sell") ? "btn-fern" : "btn-fern-outline"}`}>{t("nav.write")}</Link>
+          <Link href="/buy" className={`btn btn-sm ${path.startsWith("/buy") ? "btn-ink" : ""}`}>{t("nav.post")}</Link>
           <label className="bracket flex cursor-pointer items-center gap-1" title={t("nav.lang")}>
             <select aria-label={t("nav.lang")} value={lang} onChange={(e) => setLang(e.target.value as Lang)} className="cursor-pointer appearance-none bg-transparent font-mono text-[12px] uppercase tracking-[.14em] text-graphite outline-none">
               {LANGS.map((l) => <option key={l.code} value={l.code}>{l.name}</option>)}
