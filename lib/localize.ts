@@ -17,17 +17,21 @@ export async function localizeCards<T extends CardLike>(cards: T[], language: st
   const cached = new Map((await getCardTranslations(foreign.map((c) => c.id), target) ?? []).map((t) => [t.card_id, t]));
   const missing = foreign.filter((c) => !cached.has(c.id));
 
-  if (missing.length > 0) {
+  // 12장씩 병렬 번역 — 한 번에 38장을 보내면 출력이 길어져 JSON이 잘린다(JA 실측). 묶음 하나가 실패해도 나머지는 저장.
+  const BATCH = 12;
+  const batches: typeof missing[] = [];
+  for (let i = 0; i < missing.length; i += BATCH) batches.push(missing.slice(i, i + BATCH));
+  await Promise.all(batches.map(async (batch) => {
     try {
-      const { cards: tr, run } = await translateCards(missing.map((c) => ({ id: c.id, field: c.field, one_liner: c.one_liner })), target);
+      const { cards: tr, run } = await translateCards(batch.map((c) => ({ id: c.id, field: c.field, one_liner: c.one_liner })), target);
       const rows = tr.map((t) => ({ card_id: t.id, language: target, field: t.field, one_liner: t.one_liner }));
       await upsertCardTranslations(rows);
-      await insertClaudeRun({ kind: "translate", ref_table: "cards", ref_id: missing[0].id, model: run.model, input_tokens: run.input_tokens, output_tokens: run.output_tokens, duration_ms: run.duration_ms, metrics: { target, count: rows.length } });
+      await insertClaudeRun({ kind: "translate", ref_table: "cards", ref_id: batch[0].id, model: run.model, input_tokens: run.input_tokens, output_tokens: run.output_tokens, duration_ms: run.duration_ms, metrics: { target, count: rows.length } });
       for (const r of rows) cached.set(r.card_id, r);
     } catch (e) {
-      console.error("translateCards failed — showing originals", e);
+      console.error("translateCards batch failed — showing originals", e);
     }
-  }
+  }));
   return cards.map((c) => {
     const t = cached.get(c.id);
     return t ? { ...c, field: t.field, one_liner: t.one_liner } : c;

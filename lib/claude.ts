@@ -309,7 +309,7 @@ export async function translateCards(cards: { id: string; field: string; one_lin
   const system =
     `Translate the "field" and "one_liner" of each knowledge-pack card into ${languageName(targetLang)}. Keep meaning, numbers and tone; keep "id" unchanged; keep the same number of cards and the same order. Do not add or drop cards.` +
     jsonOnly(`{"cards":[{"id":"...","field":"...","one_liner":"..."}]}`);
-  const { output, run } = await callJson("translate", system, JSON.stringify(cards, null, 1), translateCardsSchema, 4096);
+  const { output, run } = await callJson("translate", system, JSON.stringify(cards, null, 1), translateCardsSchema, 8192);
   const ids = new Set(cards.map((c) => c.id));
   return { cards: output.cards.filter((c) => ids.has(c.id)), run };
 }
