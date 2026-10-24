@@ -34,3 +34,6 @@ next-env.d.ts
 !.env.example
 node_modules/
 .next/
+
+# local dev server log
+dev.log
