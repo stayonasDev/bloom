@@ -4,6 +4,9 @@ import { listCards } from "@/lib/db";
 import { toPublicCard } from "@/lib/server-types";
 import { localizeCards } from "@/lib/localize";
 
+// 번역(⑥) 첫 호출이 있을 수 있어 Vercel 기본 10초보다 길게
+export const maxDuration = 60;
+
 /** GET /api/cards?limit=20&language=KO — 공개 카드 목록(전부). language를 주면 field·one_liner를 그 언어로 번역해 돌려준다(캐시). 인계서 없음. */
 export async function GET(req: Request) {
   // 동적 세그먼트가 없는 GET이라 cacheComponents가 프리렌더를 시도한다 — 요청 시점까지 기다린다.
