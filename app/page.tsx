@@ -23,10 +23,7 @@ export default function Home() {
       {/* ── hero ── */}
       <div className="grain overflow-hidden border-b border-rule">
         <Section className="pt-16">
-          <div className="flex items-end justify-between">
-            <Bracket>{t("home.kicker")} · 2026-10-24</Bracket>
-            <span className="hero-right"><Bracket>{t("home.counts", { n: "1,284", d: "312" })}</Bracket></span>
-          </div>
+          <Bracket>{t("home.kicker")} · 2026-10-24</Bracket>
           <h1 className="display mt-6 text-[clamp(88px,13.5vw,196px)]">
             Handover<span className="text-fern">.</span>
           </h1>

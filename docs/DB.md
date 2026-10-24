@@ -45,7 +45,7 @@
 | manual_count | int | kind=manual 수 |
 | generalized_count | int | generalization_log count 합 |
 | price_pack_usd | numeric(8,2) | `clamp(item_count × 7, 49, 499)` 상수 |
-| price_case_usd | numeric(8,2) | `8 + rarity × 3` (P1 표시용) |
+| price_case_usd | numeric(8,2) | `max(8, 3 + rarity × 3)` (P1 표시용, 희귀도 4 → USD 15) |
 | created_at | timestamptz | |
 
 ### cards — 블라인드 카드(공개 필드만)

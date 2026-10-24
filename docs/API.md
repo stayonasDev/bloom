@@ -243,7 +243,7 @@ Claude에는 카드 공개 필드 + 항목 수만 보낸다(인계서 원문 안
 | ③ | match | `{request_text, buyer_type, candidates: [{card_id, field, language, years_experience, difficulty, rarity, one_liner, item_count, rare_count}]}` | 수요문과 후보 대조, 상위 3개에 0~1 점수와 이유 1줄 | `{matches: [{card_id, rank:1-3, score, reason}]}` |
 | ④ | sealed_qa | `{question, card: {field, one_liner}, handover_note}` (서버에서만 주입) | 인계서 근거로만 답. 근거 항목 id 목록. 근거 없으면 covered=false, answer 고정 문구 | `{answer, evidence_item_ids: string[], covered: boolean}` → 저장 시 evidence_count = ids 길이 |
 
-서버 후처리(상수): `price_pack_usd = min(max(item_count × 7, 49), 499)` · `price_case_usd = 8 + rarity × 3` · `item_count/rare_count/manual_count` = 항목 집계 · `generalized_count` = log count 합. 정규식 PII 마스킹(이메일·전화)은 ② 입력 전에 1차 적용.
+서버 후처리(상수): `price_pack_usd = min(max(item_count × 7, 49), 499)` · `price_case_usd = max(8, 3 + rarity × 3)` · `item_count/rare_count/manual_count` = 항목 집계 · `generalized_count` = log count 합. 정규식 PII 마스킹(이메일·전화)은 ② 입력 전에 1차 적용.
 
 ## 미정
 - Sealed Q&A 구매 전 횟수 제한(3회) 적용 여부

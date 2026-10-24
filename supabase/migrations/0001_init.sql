@@ -47,7 +47,7 @@ create table packs (
   manual_count       int not null check (manual_count >= 0),
   generalized_count  int not null check (generalized_count >= 0),
   price_pack_usd     numeric(8,2) not null,            -- clamp(item_count * 7, 49, 499)  상수 하드코딩
-  price_case_usd     numeric(8,2) not null,            -- 8 + rarity * 3  (P1 표시용, 건당 호출은 목업)
+  price_case_usd     numeric(8,2) not null,            -- max(8, 3 + rarity * 3)  (P1 표시용, 건당 호출은 목업; 희귀도 4 → 15)
   created_at         timestamptz not null default now()
 );
 create index packs_seller_idx on packs (seller_id);
