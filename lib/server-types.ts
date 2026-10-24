@@ -1,6 +1,7 @@
 // DB.md 테이블과 1:1. API 응답 필드명은 여기 컬럼명과 같다.
 
-export type Language = "EN" | "KO";
+/** ISO 639-1 대문자 2글자 (EN KO JA TL ES DE …). lib/lang.ts normalizeLanguage()로 정규화 */
+export type Language = string;
 export type InterviewStatus = "draft" | "sealed" | "rejected";
 export type BuyerType = "ai_ops" | "eval_data";
 export type PurchaseKind = "pack" | "case" | "hire";
