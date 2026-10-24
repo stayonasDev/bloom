@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Card } from "@/lib/types";
 import { fmtDate, fmtUSD } from "@/lib/api";
 import { useT } from "@/lib/i18n";
+import { CountUp } from "@/components/motion";
 
 export function Bracket({ children, tone }: { children: React.ReactNode; tone?: "fern" | "sand" }) {
   return <span className={`bracket ${tone === "fern" ? "bracket-fern" : ""} ${tone === "sand" ? "bracket-sand" : ""}`}>{children}</span>;
@@ -15,7 +16,7 @@ export function Display({ children, size = "clamp(96px, 14vw, 180px)", fade = tr
   return <div className={`display ${cls} ${className}`} style={{ fontSize: size }}>{children}</div>;
 }
 
-export function Stat({ v, k }: { v: string; k: string }) {
+export function Stat({ v, k }: { v: React.ReactNode; k: string }) {
   return (
     <div>
       <div className="font-mono text-[40px] leading-none tracking-tight">{v}</div>
@@ -27,7 +28,7 @@ export function Stat({ v, k }: { v: string; k: string }) {
 export function Fit({ score }: { score: number }) {
   return (
     <span className="inline-flex items-baseline gap-2">
-      <span className="font-mono text-[22px] tracking-tight">{score.toFixed(2)}</span>
+      <CountUp className="font-mono text-[22px] tracking-tight" value={score} ms={800} format={(n) => n.toFixed(2)} />
       <span className="font-mono text-[12px] text-ash">fit</span>
     </span>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Arrow, BlindCard, Bracket, Display, Section, Stat } from "@/components/ui";
 import { cards } from "@/lib/mock";
 import { useT } from "@/lib/i18n";
+import { CountUp, Parallax, Reveal } from "@/components/motion";
 
 // demo rows for the live board (data, not UI copy — stays as the backend would return it)
 const live = [
@@ -34,13 +35,15 @@ export default function Home() {
           </div>
         </Section>
 
-        <div className="arc mx-auto -mt-8 max-w-[1240px]">
-          {cards.slice(0, 7).map((c, i) => (
-            <div key={c.id} style={{ transform: `translateX(-50%) rotate(${fan[i]}deg)`, zIndex: 10 - Math.abs(fan[i]) }}>
-              <BlindCard card={c} compact href="/buy" />
-            </div>
-          ))}
-        </div>
+        <Parallax className="mx-auto -mt-8 max-w-[1240px]">
+          <div className="arc stagger">
+            {cards.slice(0, 7).map((c, i) => (
+              <div key={c.id} style={{ transform: `translateX(-50%) rotate(${fan[i]}deg)`, zIndex: 10 - Math.abs(fan[i]) }}>
+                <BlindCard card={c} compact href="/buy" />
+              </div>
+            ))}
+          </div>
+        </Parallax>
         <div className="flex justify-center pb-10 pt-4">
           <a href="#matches" className="grid h-12 w-12 place-items-center rounded-full border border-ink text-ink transition-colors hover:bg-ink hover:text-paper" aria-label="Scroll">
             <Arrow className="rotate-90" />
@@ -59,13 +62,13 @@ export default function Home() {
             <tr><th style={{ width: "36%" }}>{t("th.demand")}</th><th style={{ width: "12%" }}>{t("th.fit")}</th><th style={{ width: "36%" }}>{t("th.note")}</th><th>{t("th.status")}</th></tr>
           </thead>
           <tbody>
-            {live.map((r) => (
-              <tr key={r.demand}>
+            {live.map((r, i) => (
+              <Reveal as="tr" key={r.demand} delay={i * 70}>
                 <td><div className="text-[17px] font-semibold">{r.demand}</div><div className="mt-1 text-[13px] text-ash">{r.who}</div></td>
                 <td><span className="font-mono text-[22px]">{r.fit}</span></td>
                 <td><div className="text-[17px] font-semibold">{r.note}</div><div className="mt-1 text-[13px] text-ash">{r.meta}</div></td>
                 <td><span className={`font-mono text-[13px] ${r.fern ? "text-fern" : "text-graphite"}`}>{r.status}</span></td>
-              </tr>
+              </Reveal>
             ))}
           </tbody>
         </table>
@@ -79,15 +82,15 @@ export default function Home() {
             <Bracket tone="sand">{t("home.how")}</Bracket>
           </div>
           <div className="mt-16 grid grid-cols-3 gap-12">
-            {(["1", "2", "3"] as const).map((n) => (
-              <div key={n} className="border-t border-earth-2 pt-6">
+            {(["1", "2", "3"] as const).map((n, i) => (
+              <Reveal key={n} delay={i * 90} className="border-t border-earth-2 pt-6">
                 <Bracket tone="sand">0{n}</Bracket>
                 <div className="mt-4 font-display text-[40px] leading-none">{t(`how.${n}.t`)}</div>
                 <p className="mt-4 text-[16px] leading-[1.6] text-sand/80">{t(`how.${n}.d`)}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
-          <div className="mt-20 flex items-center justify-center">
+          <Reveal className="mt-20 flex items-center justify-center">
             <div className="card w-[560px] p-8 text-ink">
               <div className="flex items-center justify-between"><Bracket>Handover Note · HN-2026-10-24-0417</Bracket><span className="chip chip-fern">{t("card.sealed")} · 22</span></div>
               <div className="font-display mt-6 text-[44px] leading-none">Telecom billing disputes</div>
@@ -98,7 +101,7 @@ export default function Home() {
               </div>
               <Link href="/buy" className="btn btn-sm mt-8">{t("home.ask_btn")} <Arrow /></Link>
             </div>
-          </div>
+          </Reveal>
         </Section>
       </div>
 
@@ -120,10 +123,10 @@ export default function Home() {
           <div>
             <Bracket>{t("num.kicker")}</Bracket>
             <div className="mt-6 grid grid-cols-2 gap-x-10 gap-y-12 border-t border-ink pt-8">
-              <Stat v="1,284" k={t("num.sealed")} />
-              <Stat v="312" k={t("num.open")} />
-              <Stat v="58s" k={t("num.median")} />
-              <Stat v="12" k={t("num.langs")} />
+              <Reveal><Stat v={<CountUp value={1284} format={(n) => Math.round(n).toLocaleString("en-US")} />} k={t("num.sealed")} /></Reveal>
+              <Reveal delay={70}><Stat v={<CountUp value={312} />} k={t("num.open")} /></Reveal>
+              <Reveal delay={140}><Stat v={<CountUp value={58} format={(n) => `${Math.round(n)}s`} />} k={t("num.median")} /></Reveal>
+              <Reveal delay={210}><Stat v={<CountUp value={12} />} k={t("num.langs")} /></Reveal>
             </div>
           </div>
         </div>

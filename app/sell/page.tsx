@@ -149,7 +149,7 @@ export default function Sell() {
             {error && !error.field && <Warn>{errText(error)}</Warn>}
 
             {(step === "followups" || step === "sealing") && interview && (
-              <div ref={fuRef} className="scroll-mt-24 rounded-[16px] bg-paper-2 p-8">
+              <div ref={fuRef} className="paperblock-in scroll-mt-24 rounded-[16px] bg-paper-2 p-8">
                 <div className="flex items-center justify-between"><Bracket tone="fern">{t("sell.fu_kicker")}</Bracket><span className="font-mono text-[13px] text-ash">{fmtS(interview.run.duration_ms)}</span></div>
                 <div className="mt-6 flex flex-col gap-8">
                   {interview.followup_questions.map((f, i) => (

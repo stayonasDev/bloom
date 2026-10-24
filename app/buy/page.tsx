@@ -92,7 +92,7 @@ export default function Buy() {
           </div>
 
           <div className="mt-10 grid grid-cols-[1fr_520px] gap-10">
-            <div className="flex flex-col">
+            <div className="stagger flex flex-col">
               {res.matches.map((m) => (
                 <button key={m.card.id} onClick={() => { setSel(m); setQa([]); }} className={`grid grid-cols-[110px_1fr] gap-6 border-t py-7 text-left transition-colors ${sel?.card.id === m.card.id ? "border-ink" : "border-rule hover:bg-paper-2/60"}`}>
                   <div><Fit score={m.score} /><div className="mt-2"><Bracket>{t("buy.match_n", { n: m.rank })}</Bracket></div></div>
@@ -107,7 +107,7 @@ export default function Buy() {
             </div>
 
             {sel && (
-              <aside className="card sticky top-24 flex flex-col gap-6 self-start p-7">
+              <aside className="card paperblock-in sticky top-24 flex flex-col gap-6 self-start p-7">
                 <div className="flex items-start justify-between"><div><Bracket>{t("buy.ask_title")}</Bracket><div className="mt-2 text-[20px] font-semibold tracking-tight">{sel.card.field}</div></div><span className="font-mono text-[12px] text-ash">{t("buy.free", { n: Math.max(0, 3 - qa.length) })}</span></div>
 
                 <div className="flex flex-col gap-5">
@@ -115,7 +115,7 @@ export default function Buy() {
                     <div key={i}>
                       <Bracket>{t("buy.your_q")}</Bracket>
                       <p className="mt-1 text-[16px] leading-[1.45]">{x.q}</p>
-                      <div className="mt-3 rounded-[12px] bg-paper p-5">
+                      <div className="paperblock-in mt-3 rounded-[12px] bg-paper p-5">
                         <div className="flex items-center gap-2"><Lock /><Bracket>{t("buy.answer")}</Bracket></div>
                         <p className={`mt-3 text-[15px] leading-[1.6] ${x.a.covered ? "" : "text-graphite"}`}>{x.a.answer}</p>
                         <div className="mt-4 border-t border-rule pt-3 font-mono text-[12px] text-ash">{x.a.covered ? t("buy.based", { e: x.a.evidence_count, t: x.a.total_items }) : t("buy.not_covered")} · {fmtS(x.a.run.duration_ms)} · {t("buy.stays")}</div>
