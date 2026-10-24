@@ -4,6 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
 import { ApiError } from "./errors";
 import type { HandoverNote, Language, NoteItem, RunKind } from "./server-types";
+import { languageName } from "./lang";
 
 export const MODEL = process.env.ANTHROPIC_MODEL ?? "claude-sonnet-5-5";
 
@@ -162,7 +163,7 @@ const SEED_LABELS = {
 } as const;
 
 export async function generateFollowups(input: FollowupInput) {
-  const lang = input.language === "KO" ? "Korean" : "English";
+  const lang = languageName(input.language);
   const system =
     `You are interviewing a frontline worker to extract the judgment they built on the job — not what the manual says.
 Role: ${input.role_title}, ${input.years_experience} years of experience.
@@ -200,7 +201,7 @@ const ID_PREFIX: Record<keyof HandoverNote, string> = {
 
 export async function extractNote(input: ExtractInput) {
   const system =
-    `You turn an interview with a frontline worker into a sealed Handover Note in English. The note is sold to companies that need this person's judgment for cases their support AI cannot resolve.
+    `You turn an interview with a frontline worker into a sealed Handover Note. Write every item text, the card field and the one_liner in ${languageName(input.language)} — the language the worker used; keep JSON keys and the kind/source values exactly as specified. The note is sold to companies that need this person's judgment for cases their support AI cannot resolve.
 Role: ${input.role_title}, ${input.years_experience} years.
 
 Structure the note into five lists: rules, exceptions, judgment_calls, common_mistakes, never_do.
@@ -252,7 +253,7 @@ export async function matchCards(input: MatchInput) {
   const system =
     `You match a buyer's need to candidate knowledge packs. You see only each card's public fields and item counts — never the sealed note.
 Buyer type: ${buyerLine}
-Score each candidate 0–1 on how well the card indicates coverage of the request (field, one_liner, rarity, rare_count). Return the top 3 (fewer if fewer candidates), ranks 1..3 with distinct card_ids, and a one-line reason that cites what in the card matches. Do not invent coverage the card does not indicate; a weak match gets a low score, not a flattering reason.` +
+Score each candidate 0–1 on how well the card indicates coverage of the request (field, one_liner, rarity, rare_count). Return the top 3 (fewer if fewer candidates), ranks 1..3 with distinct card_ids, and a one-line reason that cites what in the card matches. Write each reason in the same language the request text is written in (cards may be in other languages — match on meaning). Do not invent coverage the card does not indicate; a weak match gets a low score, not a flattering reason.` +
     jsonOnly(`{"matches":[{"card_id":"...","rank":1,"score":0.0-1.0,"reason":"..."}]}`);
 
   const user = `## Request\n${input.request_text}\n\n## Candidates\n${JSON.stringify(input.candidates, null, 1)}`;
@@ -278,7 +279,7 @@ export async function sealedQa(input: SealedQaInput) {
   const system =
     `You answer a buyer's question using ONLY the sealed handover note provided. The buyer has not purchased the note; they are checking whether it covers their case.
 Rules:
-- Answer in English, at most 3 sentences, concrete (keep numbers, thresholds, conditions). Paraphrase the judgment; do not reproduce the note's lists or structure.
+- Answer in the same language the question is written in (the note may be in another language — translate the judgment, keep numbers, thresholds, conditions). At most 3 sentences, concrete. Paraphrase the judgment; do not reproduce the note's lists or structure.
 - evidence_item_ids: the ids of the note items you relied on (e.g. "e1", "j3"). Only ids that exist in the note.
 - If the note does not address the question, set covered=false, evidence_item_ids=[], and answer exactly "${NOT_COVERED_ANSWER}". Never answer from general knowledge.` +
     jsonOnly(`{"answer":"...","evidence_item_ids":["e1"],"covered":true|false}`);
