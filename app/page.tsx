@@ -108,7 +108,7 @@ export default function Home() {
               <div className="mt-6 grid grid-cols-2 gap-x-8 gap-y-2 font-mono text-[13px] text-graphite">
                 <span>EN · Filipino</span><span>5 {t("card.yrs")}</span>
                 <span>{t("card.difficulty")} 4 / 5</span><span>{t("card.rarity")} 4 / 5 · 9 / 22</span>
-                <span>USD 149 · USD 15 {t("card.per_case")}</span><span>2026-10-24 11:42</span>
+                <span>USD 149 · USD 20 {t("card.per_case")}</span><span>2026-10-24 11:42</span>
               </div>
               <Link href="/buy" className="btn btn-sm mt-8">{t("home.ask_btn")} <Arrow /></Link>
             </div>
