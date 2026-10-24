@@ -82,8 +82,9 @@ export const api = {
   async sealInterview(interviewId: string, followup_answers: Record<string, string>): Promise<SealResponse> {
     return call(`/api/interviews/${interviewId}/seal`, { method: "POST", body: JSON.stringify({ followup_answers }) }, async () => { await sleep(4200); return mock.seal; });
   },
-  async getNote(packId: string): Promise<NoteResponse> {
-    return call(`/api/packs/${packId}/note`, { method: "GET" }, async () => ({ ...mock.noteResponse, pack_id: packId }));
+  async getNote(packId: string, language?: string): Promise<NoteResponse> {
+    const q = language ? `?language=${encodeURIComponent(language)}` : "";
+    return call(`/api/packs/${packId}/note${q}`, { method: "GET" }, async () => ({ ...mock.noteResponse, pack_id: packId }));
   },
   // language: 현재 UI 언어 코드(en·ko·…). 주면 그 언어 카드만 — 목록이 다른 언어와 섞이지 않게.
   async listCards(language?: string): Promise<{ cards: Card[] }> {

@@ -5,7 +5,7 @@ export type Language = string;
 export type InterviewStatus = "draft" | "sealed" | "rejected";
 export type BuyerType = "ai_ops" | "eval_data";
 export type PurchaseKind = "pack" | "case" | "hire";
-export type RunKind = "followup" | "extract" | "match" | "sealed_qa";
+export type RunKind = "followup" | "extract" | "match" | "sealed_qa" | "translate";
 export type ItemKind = "rare" | "manual";
 
 export type Seller = {

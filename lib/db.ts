@@ -1,7 +1,7 @@
 // DB 접근 계층 — Route Handler는 이 함수들만 쓴다 (단위 테스트는 이 모듈을 vi.mock으로 대체).
 // 테이블·컬럼은 DB.md 그대로.
 import { supabase } from "./supabase";
-import type {
+import type { HandoverNote,
   Buyer, BuyerRequest, Card, ClaudeRun, Interview, Match, Pack, Purchase, PurchaseKind, RunKind, SealedQa, Seller,
 } from "./server-types";
 
@@ -58,11 +58,9 @@ export async function getCardByPack(packId: string) {
 }
 export type CardWithCounts = Card & { item_count: number; rare_count: number };
 /** 공개 카드 + packs.item_count/rare_count (인계서 없음). listed_at desc. */
-/** language(ISO 2글자)를 주면 그 언어 카드만 — UI 언어와 섞이지 않게 */
-export async function listCards(limit: number, language?: string | null): Promise<CardWithCounts[]> {
+export async function listCards(limit: number): Promise<CardWithCounts[]> {
   // cards.pack_id → packs는 다대일이라 PostgREST는 객체로 반환하지만, 생성 타입이 없으면 배열로 추론되어 cast
-  let q = supabase().from("cards").select(`${CARD_PUBLIC}, packs(item_count, rare_count)`);
-  if (language) q = q.eq("language", language);
+  const q = supabase().from("cards").select(`${CARD_PUBLIC}, packs(item_count, rare_count)`);
   const rows = must<(Card & { packs: { item_count: number; rare_count: number } | null })[]>(
     (await q.order("listed_at", { ascending: false }).limit(limit)) as unknown as Result<(Card & { packs: { item_count: number; rare_count: number } | null })[]>,
     "listCards",
@@ -131,4 +129,29 @@ export async function listClaudeRuns(kind: RunKind, refIds: string[]) {
     await supabase().from("claude_runs").select().eq("kind", kind).in("ref_id", refIds).order("created_at", { ascending: false }),
     "listClaudeRuns",
   );
+}
+
+// ----- translations (0003) — UI 언어로 번역한 카드·인계서 캐시 -----
+export type CardTranslation = { card_id: string; language: string; field: string; one_liner: string };
+export async function getCardTranslations(cardIds: string[], language: string) {
+  if (cardIds.length === 0) return [] as CardTranslation[];
+  return must<CardTranslation[]>(
+    await supabase().from("card_translations").select("card_id, language, field, one_liner").eq("language", language).in("card_id", cardIds),
+    "getCardTranslations",
+  );
+}
+export async function upsertCardTranslations(rows: CardTranslation[]) {
+  if (rows.length === 0) return;
+  const r = await supabase().from("card_translations").upsert(rows, { onConflict: "card_id,language" });
+  if (r.error) throw new Error(`upsertCardTranslations: ${r.error.message}`);
+}
+export async function getPackTranslation(packId: string, language: string) {
+  return maybe<{ handover_note: HandoverNote }>(
+    await supabase().from("pack_translations").select("handover_note").eq("pack_id", packId).eq("language", language).maybeSingle(),
+    "getPackTranslation",
+  );
+}
+export async function upsertPackTranslation(packId: string, language: string, handover_note: HandoverNote) {
+  const r = await supabase().from("pack_translations").upsert({ pack_id: packId, language, handover_note }, { onConflict: "pack_id,language" });
+  if (r.error) throw new Error(`upsertPackTranslation: ${r.error.message}`);
 }

@@ -2,6 +2,7 @@ import { ApiError, handle, json } from "@/lib/errors";
 import { assertUuid, optionalBuyerId } from "@/lib/http";
 import { countSealedQa, getCard, getPack, getPurchase } from "@/lib/db";
 import { toPublicCard } from "@/lib/server-types";
+import { localizeCards } from "@/lib/localize";
 
 /** GET /api/cards/{id} — 카드 상세 + 이 구매자의 구매 여부. 인계서 없음. */
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -17,6 +18,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
     const unlocked = bid !== null && (await getPurchase(bid, pack.id, "pack")) !== null;
     const sealed_qa_count = bid === null ? 0 : await countSealedQa(card.id, bid);
 
-    return json({ card: toPublicCard(card), item_count: pack.item_count, rare_count: pack.rare_count, unlocked, sealed_qa_count });
+    const [localized] = await localizeCards([card], new URL(req.url).searchParams.get("language"));
+    return json({ card: toPublicCard(localized), item_count: pack.item_count, rare_count: pack.rare_count, unlocked, sealed_qa_count });
   });
 }

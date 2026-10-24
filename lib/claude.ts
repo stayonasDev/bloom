@@ -298,3 +298,35 @@ Rules:
     run,
   };
 }
+
+// ---------- ⑥ translate (UI 언어로 카드·인계서 번역, 결과는 DB 캐시) ----------
+
+const translateCardsSchema = z.object({
+  cards: z.array(z.object({ id: z.string(), field: z.string().min(1), one_liner: z.string().min(1) })),
+});
+
+export async function translateCards(cards: { id: string; field: string; one_liner: string }[], targetLang: string) {
+  const system =
+    `Translate the "field" and "one_liner" of each knowledge-pack card into ${languageName(targetLang)}. Keep meaning, numbers and tone; keep "id" unchanged; keep the same number of cards and the same order. Do not add or drop cards.` +
+    jsonOnly(`{"cards":[{"id":"...","field":"...","one_liner":"..."}]}`);
+  const { output, run } = await callJson("translate", system, JSON.stringify(cards, null, 1), translateCardsSchema, 4096);
+  const ids = new Set(cards.map((c) => c.id));
+  return { cards: output.cards.filter((c) => ids.has(c.id)), run };
+}
+
+const translatedItem = z.object({ id: z.string(), text: z.string().min(1) });
+const translateNoteSchema = z.object({ items: z.array(translatedItem) });
+
+export async function translateNote(note: HandoverNote, targetLang: string) {
+  const items = Object.values(note).flat().map((it) => ({ id: it.id, text: it.text }));
+  const system =
+    `Translate each item's "text" into ${languageName(targetLang)}. Keep every number, threshold, day count, amount and condition exactly; keep "id" unchanged; same count and order.` +
+    jsonOnly(`{"items":[{"id":"r1","text":"..."}]}`);
+  const { output, run } = await callJson("translate", system, JSON.stringify(items, null, 1), translateNoteSchema, 8192);
+  const byId = new Map(output.items.map((i) => [i.id, i.text]));
+  // 번역이 빠진 항목은 원문 유지 — 구조(id/kind/source)는 절대 바뀌지 않는다
+  const translated = Object.fromEntries(
+    (Object.keys(note) as (keyof HandoverNote)[]).map((k) => [k, note[k].map((it) => ({ ...it, text: byId.get(it.id) ?? it.text }))]),
+  ) as HandoverNote;
+  return { handover_note: translated, run };
+}

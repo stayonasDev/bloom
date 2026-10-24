@@ -1,6 +1,7 @@
 import { ApiError, handle, json } from "@/lib/errors";
 import { assertUuid, optionalBuyerId, optionalSellerId, resolvePack } from "@/lib/http";
-import { getPurchase } from "@/lib/db";
+import { getPurchase, getSeller } from "@/lib/db";
+import { localizeNote } from "@/lib/localize";
 
 /**
  * GET /api/packs/{id}/note — 봉인 해제 열람.
@@ -20,9 +21,13 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
     const isBuyer = bid !== null && (await getPurchase(bid, pack.id, "pack")) !== null;
     if (!isOwner && !isBuyer) throw new ApiError("FORBIDDEN", "Unlock this pack to read the full note.");
 
+    // ?language=KO → 항목 텍스트를 그 언어로 번역(캐시). 구조·id·kind·source는 그대로
+    const language = new URL(req.url).searchParams.get("language");
+    const sellerLang = language ? (await getSeller(pack.seller_id))?.language ?? "EN" : "EN";
+    const handover_note = await localizeNote(pack.id, sellerLang, pack.handover_note, language);
     return json({
       pack_id: pack.id,
-      handover_note: pack.handover_note,
+      handover_note,
       generalization_log: pack.generalization_log,
       metrics: { item_count: pack.item_count, rare_count: pack.rare_count, manual_count: pack.manual_count, generalized_count: pack.generalized_count },
     });
