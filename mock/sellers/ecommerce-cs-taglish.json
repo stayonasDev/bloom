@@ -1,0 +1,23 @@
+{
+  "slug": "ecommerce-cs-taglish",
+  "label": "E-commerce CS, 타갈로그·영어 혼용 (언어 축: 영어 인계서로 변환돼야 함)",
+  "axis": "language_mixed",
+  "seller": {
+    "role_title": "E-commerce customer support, marketplace seller center",
+    "years_experience": 3,
+    "language": "EN",
+    "display_name": "Seller #0333"
+  },
+  "seed_answers": {
+    "q1": "Hindi sinasabi ng manual na the 7-day return window counts from the delivery scan, not from the order date. Kaya pag umabot ng day 9 from order pero day 5 lang from delivery, pwede pa yan. Also, the manual says 'request photos', pero hindi niya sinasabi na for items under 500 pesos mas mahal pa ang oras ng agent kaysa sa refund, so I just approve those without photos. Natutunan ko yan after the team lead showed us na 12 minutes per case ang average sa photo requests.",
+    "q2": "Ang mga bago, pag sinabi ng customer na 'hindi dumating', they refund agad. Hindi nila tinitingnan ang tracking. Sa experience ko, mga 4 out of 10 ay 'delivered to guard' or 'received by relative'. Dapat send the proof of delivery muna and wait 24 hours. Pangalawa, nagrerefund sila sa card kahit vouchers ang ginamit, so the customer gets real money for free credits. Dapat refund to wallet lang pag voucher.",
+    "q3": "May customer na gusto ng full refund for a phone case kasi 'iba ang shade'. Pinagtabi ko yung photo niya at yung listing photo, pareho sa daylight, and day 11 na siya from delivery sa 7-day window. Sinabi ko na color perception is not a defect under the policy and I refused the full refund, pero binigyan ko siya ng 10% voucher as goodwill. Nag-escalate siya, pero sinuportahan ako ng supervisor kasi naka-attach na yung dalawang photo sa case notes.",
+    "q4": "Nag-order ng dalawang power bank, isa lang dumating sa box pero buo pa yung seal tape. Ang script, 'missing item' lang which goes to reship, 10 days. Pero pag buo ang seal, packing error yan sa warehouse, hindi courier theft. Kaya in-file ko as packing discrepancy, 2 days ang refund. Inattach ko yung weight sa courier label, 410 grams, na mas mababa sa expected 680 grams for two units. Simula noon, weight muna ang tinitingnan ko sa missing item claims."
+  },
+  "notes": "Checklist ko: 1) delivery scan date, hindi order date 2) under 500 pesos, approve without photos 3) tracking muna bago maniwala sa hindi dumating 4) voucher payments refund to wallet only 5) buo ang seal = packing error",
+  "followup_answers": {
+    "f1": "Yung 500 pesos threshold ay sa team namin lang, hindi official. Above 500 I always ask for photos and the courier weight kasi doon na nagre-review ang fraud team.",
+    "f2": "Hindi gumagana ang weight check sa mga magaan like earrings, under 20 grams ang difference. Doon I use the seal check at yung history ng customer, pag third missing claim sa 90 days, fraud review na.",
+    "f3": "Pag late ang courier, I count the window from the actual delivery scan. Wala sa manual pero lagi inaapprove ng supervisors."
+  }
+}

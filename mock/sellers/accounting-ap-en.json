@@ -1,0 +1,44 @@
+{
+  "slug": "accounting-ap-en",
+  "label": "Accounts payable clerk, mid-size logistics company",
+  "field_hint": "Accounts payable exceptions",
+  "seller": {
+    "role_title": "Accounts payable clerk",
+    "years_experience": 7,
+    "language": "EN",
+    "display_name": "Seller #0903"
+  },
+  "seed_answers": {
+    "q1": "The manual says every invoice needs a three-way match, purchase order, receipt and invoice. It never says that freight invoices from our carriers almost never match the PO because fuel surcharges change weekly, so a strict match blocks 30% of them. I learned to accept a variance up to 3% or 50 dollars, whichever is larger, and route anything above that to the buyer with the surcharge table attached. The manual also never mentions that NetSuite will let you post a duplicate invoice if the vendor changes one letter in the invoice number, which happened to us twice in one quarter.",
+    "q2": "New hires pay whatever has an approval stamp. They do not check whether the approver is actually authorised for that amount. Our limits are 5,000 dollars for a team lead and 25,000 for a director, and I have caught team leads approving 12,000 dollar invoices for their own vendors. The second mistake is applying a credit note to the wrong open invoice, which makes the vendor statement reconciliation take a full day at month end instead of an hour.",
+    "q3": "A vendor's account manager asked me to pay an invoice for 8,400 dollars without a purchase order, saying the PO was 'coming'. I refused, because we have a strict no-PO-no-pay rule for anything above 1,000 dollars and the last time I made an exception the PO never came and the expense sat unallocated for four months. I told him I would pay within 2 days of receiving the PO number and copied the buyer. The PO arrived the next morning. I keep the email thread on the invoice record so audit can see why it was held.",
+    "q4": "At month end a vendor sent one invoice covering three different cost centres, warehouse, fleet and office, with no breakdown. The script said 'return to vendor for correction', but returning it meant missing the accrual cutoff and understating expenses by 14,000 dollars. I split the invoice myself using the PO lines, 60-30-10, booked the accrual, and asked the vendor for a corrected invoice to replace it in the next period. The controller signed off because the split matched the PO lines exactly."
+  },
+  "notes": "Before paying: 1) variance under 3% or 50 dollars auto-accept 2) approver limit, 5k lead, 25k director 3) no PO above 1,000 dollars means hold 4) duplicate check on amount plus vendor, not invoice number 5) month-end cutoff beats returning to vendor.",
+  "followup_answers": {
+    "f1": "The 3% variance rule does not apply to fixed-price service contracts, where any variance means someone changed the scope. For those I hold at any difference above zero and ask the buyer. Roughly one in five invoices I see is a fixed-price contract.",
+    "f2": "To catch duplicates I search by vendor and amount within 90 days, not by invoice number, because vendors reissue with a suffix like -A or -REV. If the amount matches and the date is within 30 days I treat it as a duplicate until the vendor confirms otherwise.",
+    "f3": "The one time I would pay without a PO is a utility or tax invoice with a shutoff or penalty date within 5 days. I pay it, flag it as exception, and get the PO created after. That is maybe two invoices a month."
+  },
+  "self_reported": {
+    "cases_per_month": 300,
+    "escalation_rate_pct": 2,
+    "years_on_queue": 7,
+    "note": "estimate, from my own weekly tallies"
+  },
+  "expect_tags": {
+    "field_key": "accounts_payable",
+    "topics": [
+      "three_way_match",
+      "tolerance_override",
+      "approval_limit",
+      "duplicate_invoice",
+      "month_end_cutoff"
+    ],
+    "judgments": [
+      "threshold",
+      "refusal",
+      "exception"
+    ]
+  }
+}

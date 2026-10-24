@@ -1,0 +1,162 @@
+{
+  "slug": "accounts-payable-board",
+  "preseeded": true,
+  "seller": {
+    "role_title": "Accounts payable clerk",
+    "years_experience": 7,
+    "language": "EN",
+    "display_name": "Seller #2102"
+  },
+  "card": {
+    "field": "Accounts payable invoice exceptions",
+    "field_key": "accounts_payable",
+    "difficulty": 4,
+    "rarity": 4,
+    "one_liner": "Variance tolerances, approval limits, duplicate invoices that change one letter, and month-end cutoffs."
+  },
+  "tags": {
+    "field_key": "accounts_payable",
+    "topics": [
+      "three_way_match",
+      "tolerance_override",
+      "approval_limit",
+      "duplicate_invoice",
+      "month_end_cutoff"
+    ],
+    "judgments": [
+      "threshold",
+      "refusal",
+      "exception"
+    ]
+  },
+  "handover_note": {
+    "rules": [
+      {
+        "id": "r1",
+        "text": "Every invoice needs a three-way match: purchase order, receipt, invoice.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r2",
+        "text": "Approval limits are 5,000 dollars for a team lead and 25,000 for a director.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "r3",
+        "text": "No purchase order, no payment, for anything above 1,000 dollars.",
+        "kind": "manual",
+        "source": "q3"
+      },
+      {
+        "id": "r4",
+        "text": "Credit notes apply to the invoice they reference, never to the oldest open item.",
+        "kind": "manual",
+        "source": "q2"
+      }
+    ],
+    "exceptions": [
+      {
+        "id": "e1",
+        "text": "Freight invoices: accept variance up to 3% or 50 dollars, whichever is larger; above that, route to the buyer with the surcharge table.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "e2",
+        "text": "Fixed-price service contracts get zero tolerance; any variance means the scope changed.",
+        "kind": "rare",
+        "source": "f1"
+      },
+      {
+        "id": "e3",
+        "text": "Utility or tax invoices with a shutoff or penalty date within 5 days are paid without a PO and flagged as exception.",
+        "kind": "rare",
+        "source": "f3"
+      },
+      {
+        "id": "e4",
+        "text": "At month-end cutoff, split a multi-cost-centre invoice by PO lines rather than returning it; a return understates expenses.",
+        "kind": "rare",
+        "source": "q4"
+      }
+    ],
+    "judgment_calls": [
+      {
+        "id": "j1",
+        "text": "Search duplicates by vendor and amount within 90 days, not by invoice number; vendors reissue with -A or -REV suffixes.",
+        "kind": "rare",
+        "source": "f2"
+      },
+      {
+        "id": "j2",
+        "text": "A team lead approving an invoice for a vendor they own the relationship with is a hold, regardless of amount.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "j3",
+        "text": "When a PO is 'coming', hold and copy the buyer; pay within 2 days of the PO number arriving.",
+        "kind": "rare",
+        "source": "q3"
+      }
+    ],
+    "common_mistakes": [
+      {
+        "id": "m1",
+        "text": "Paying on an approval stamp without checking the approver's limit; a 12,000 dollar invoice approved by a team lead is invalid.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "m2",
+        "text": "Applying a credit note to the wrong open invoice, turning a one-hour statement reconciliation into a full day.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "m3",
+        "text": "Posting a duplicate because the vendor changed one character of the invoice number.",
+        "kind": "rare",
+        "source": "q1"
+      }
+    ],
+    "never_do": [
+      {
+        "id": "n1",
+        "text": "Never pay an invoice above 1,000 dollars without a PO on a verbal promise; refuse and ask for the PO number.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "n2",
+        "text": "Never return a month-end invoice to the vendor if it means missing the accrual cutoff.",
+        "kind": "rare",
+        "source": "q4"
+      },
+      {
+        "id": "n3",
+        "text": "Never approve a variance on a fixed-price contract.",
+        "kind": "manual",
+        "source": "f1"
+      }
+    ]
+  },
+  "generalization_log": [
+    {
+      "type": "company",
+      "replaced_with": "the vendor",
+      "count": 3
+    },
+    {
+      "type": "system",
+      "replaced_with": "the ERP system",
+      "count": 2
+    }
+  ],
+  "metrics": {
+    "followup_ms": 3800,
+    "extract_ms": 10400
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "slug": "travel-booking-en",
+  "preseeded": true,
+  "seller": {
+    "role_title": "Travel reservations agent",
+    "years_experience": 4,
+    "language": "EN",
+    "display_name": "Seller #2104"
+  },
+  "card": {
+    "field": "Travel booking changes and refunds",
+    "field_key": "travel_booking",
+    "difficulty": 3,
+    "rarity": 3,
+    "one_liner": "Schedule-change refund rights, pricing the new flight before quoting a fee, and why you never cancel a round trip."
+  },
+  "tags": {
+    "field_key": "travel_booking",
+    "topics": [
+      "change_fee_waiver",
+      "schedule_change",
+      "partial_cancellation",
+      "fare_rule_conflict",
+      "no_show_refund"
+    ],
+    "judgments": [
+      "exception",
+      "threshold",
+      "refusal"
+    ]
+  },
+  "handover_note": {
+    "rules": [
+      {
+        "id": "r1",
+        "text": "Basic economy tickets are non-refundable and non-changeable under the fare rules.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r2",
+        "text": "Quote the change fee and the fare difference together, never the fee alone.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "r3",
+        "text": "A round trip is changed, never cancelled, when the customer only wants to drop the return.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "r4",
+        "text": "Missed flights are rebooked under same-day standby when available.",
+        "kind": "manual",
+        "source": "q3"
+      }
+    ],
+    "exceptions": [
+      {
+        "id": "e1",
+        "text": "An airline schedule change over 2 hours gives a full refund regardless of fare class; about one booking in eight qualifies and the airline will not volunteer it.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "e2",
+        "text": "Some carriers use 90 minutes and one uses 3 hours for the schedule-change threshold; keep a per-carrier line.",
+        "kind": "rare",
+        "source": "f1"
+      },
+      {
+        "id": "e3",
+        "text": "A hotel non-refundable rate can be moved by date once by calling the property directly, roughly half the time; prepaid wholesaler rates cannot.",
+        "kind": "rare",
+        "source": "f2"
+      },
+      {
+        "id": "e4",
+        "text": "For cancellations after 9 pm, check interline partner flights before the airline's own rebooking options.",
+        "kind": "rare",
+        "source": "q4"
+      }
+    ],
+    "judgment_calls": [
+      {
+        "id": "j1",
+        "text": "A 'denied boarding' claim is checked against the gate time in the record; arriving after gate close is a missed flight, and filing it as denied boarding can void travel insurance.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "j2",
+        "text": "Partner protection only works on the operating carrier's ticket stock; agency-issued tickets go back to the agency, adding a day.",
+        "kind": "rare",
+        "source": "f3"
+      },
+      {
+        "id": "j3",
+        "text": "If the new flight is cheaper than the fee, present the credit explicitly; most customers never use an unexplained credit.",
+        "kind": "rare",
+        "source": "q2"
+      }
+    ],
+    "common_mistakes": [
+      {
+        "id": "m1",
+        "text": "Quoting a 200 dollar change fee to move to a flight that is 150 dollars cheaper, without pricing the new itinerary.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "m2",
+        "text": "Cancelling a round trip when the customer wanted to drop only the return, forfeiting the outbound.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "m3",
+        "text": "Missing a qualifying schedule change because only the current time was checked.",
+        "kind": "rare",
+        "source": "q1"
+      }
+    ],
+    "never_do": [
+      {
+        "id": "n1",
+        "text": "Never file a missed flight as denied boarding to trigger compensation; refuse and use the standby rule, usually a 75 dollar fee.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "n2",
+        "text": "Never cancel a round trip to drop a return.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "n3",
+        "text": "Never quote a change fee before pricing the new flight.",
+        "kind": "manual",
+        "source": "q2"
+      }
+    ]
+  },
+  "generalization_log": [
+    {
+      "type": "company",
+      "replaced_with": "the airline",
+      "count": 4
+    },
+    {
+      "type": "system",
+      "replaced_with": "the booking system",
+      "count": 1
+    }
+  ],
+  "metrics": {
+    "followup_ms": 3600,
+    "extract_ms": 8800
+  }
+}

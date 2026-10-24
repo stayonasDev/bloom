@@ -1,0 +1,24 @@
+{
+  "slug": "travel-booking-en",
+  "label": "Travel and reservations agent, airline and hotel changes (B층 직군)",
+  "axis": "occupation_b_tier",
+  "field_hint": "Travel booking changes and refund exceptions",
+  "seller": {
+    "role_title": "Travel reservations agent",
+    "years_experience": 6,
+    "language": "EN",
+    "display_name": "Seller #1503"
+  },
+  "seed_answers": {
+    "q1": "The fare rules say a basic economy ticket is non-refundable and non-changeable. They never say that if the airline changes the schedule by more than 2 hours, the passenger gets a full refund regardless of fare class, and the airline will not volunteer that. I check the original booked time against the current time before I quote any change fee, and about one booking in eight has a qualifying schedule change the customer never noticed.",
+    "q2": "New agents quote the change fee from the fare rules without checking whether the new flight is cheaper, so the customer pays a 200 dollar fee to move to a flight that is 150 dollars less, and the airline keeps the difference as a credit the customer never uses. The right move is to price the new itinerary first and present the fee and the fare difference together. The second mistake is cancelling a round trip when the customer only wants to drop the return, which forfeits the outbound on most fares; you change the return, you never cancel.",
+    "q3": "A customer asked me to issue a refund for a missed flight by saying he had been 'denied boarding', which would trigger compensation. He had arrived at the gate after it closed, which the airline record showed. I refused to file it as denied boarding, explained that the record would contradict the claim and could void his travel insurance, and instead filed a missed-flight rebooking under the airline's same-day standby rule, which cost him a 75 dollar fee instead of a new ticket. He took it. I note the gate time from the record in every missed-flight case.",
+    "q4": "A family of five was stranded when a connecting flight cancelled at 11 pm and the airline app only offered rebooking in two days. The script said to offer the airline's rebooking options. I checked the airline's interline partners, found a partner flight the next morning that the app does not show, and called the airline's partner desk to get it protected on the original ticket at no cost. They were home 36 hours earlier. Since then, for any cancellation after 9 pm I check partner flights before the airline's own options."
+  },
+  "notes": "My change checklist: 1) schedule change over 2 hours means full refund, check first 2) price the new flight before quoting any fee 3) change the return, never cancel the round trip 4) gate time from the record before any denied boarding claim 5) late cancellations, check partner flights first.",
+  "followup_answers": {
+    "f1": "The 2-hour threshold is the common one but a few carriers use 90 minutes and one uses 3 hours, so I keep a one-line list per carrier. Under the threshold I still ask the airline for a goodwill waiver if the change crosses a meal time or a connection.",
+    "f2": "The 'call the property directly' trick fails for prepaid rates sold through a third-party wholesaler, because the hotel never received the payment. For those I go back to the wholesaler and the success rate is maybe one in five.",
+    "f3": "Partner protection only works if the ticket was issued on the operating airline's stock. For a ticket issued by an online agency on another carrier's stock, the partner desk cannot touch it, and I have to go through the issuing agency, which adds a day."
+  }
+}

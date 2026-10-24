@@ -1,0 +1,24 @@
+{
+  "slug": "content-moderator-en",
+  "label": "Content moderator, marketplace listings and reviews (B층 직군)",
+  "axis": "occupation_b_tier",
+  "field_hint": "Content moderation judgment calls",
+  "seller": {
+    "role_title": "Content moderator, marketplace listings and reviews",
+    "years_experience": 4,
+    "language": "EN",
+    "display_name": "Seller #1705"
+  },
+  "seed_answers": {
+    "q1": "The policy says to remove any listing that uses a brand name it is not authorised to sell. It never says that a listing for a phone case 'compatible with' a brand is allowed while 'for' the brand is not, and the difference is one word that the automated filter cannot see. The policy also never says that a seller with over 500 listings who gets three removals in a week should be paused rather than warned, because by the fourth removal the account is usually a bulk uploader of counterfeits.",
+    "q2": "New moderators remove reviews that mention a competitor's product, because the policy lists 'promotion of other products' as a violation. A review saying 'this is worse than the one I bought last year from another brand' is a comparison, not promotion, and removing it generates an appeal that takes 20 minutes and is always overturned. The right move is to ask whether the review would help a buyer decide; if yes, it stays. The second mistake is removing a listing for a prohibited keyword in the description when the keyword is in a warning, like 'not for use by children', which is required text.",
+    "q3": "A brand's legal team asked me to remove 40 listings as counterfeit based on a list of seller names, with no test purchase or image evidence. I refused to remove them on the list alone, because our policy requires a specific violation per listing and three of the sellers on the list were authorised distributors we had verified the previous month. I offered to prioritise the 40 for manual review within 48 hours and to remove any that showed a logo mismatch or a price below 30% of retail. We removed 22. I record the evidence per listing so appeals do not come back to me.",
+    "q4": "A listing for a used medical device came in with all the right certificates, and the script only had 'medical device: check certificate' which passed. But the photos showed a single-use device with the packaging seal broken, which is not resellable regardless of certificates. I removed it under the used-single-use rule, which is in the safety policy, not the listing policy, and wrote the seller a note explaining the specific rule. The seller relisted a new sealed unit two days later. I now check the seal in every medical or cosmetic listing photo."
+  },
+  "notes": "My moderation order: 1) read the title and the first image together 2) 'compatible with' is fine, logo in the image is not 3) three removals in a week on a big account means pause 4) would the review help a buyer decide 5) seal check on medical and cosmetic photos.",
+  "followup_answers": {
+    "f1": "The 30% of retail threshold is from our fraud team's analysis of confirmed counterfeits; almost none were priced above that. Between 30% and 50% I look for a second signal like a stock photo or a new account before removing.",
+    "f2": "The three-removals rule does not apply if the removals were for the same error in a bulk upload, like a missing warning line across one product family. Then it is one mistake repeated, and I message the seller instead of pausing.",
+    "f3": "Required warning text is identified by a short list of phrases the legal team maintains. If a prohibited keyword appears inside one of those phrases I leave it; if it appears anywhere else in the description I remove the listing."
+  }
+}

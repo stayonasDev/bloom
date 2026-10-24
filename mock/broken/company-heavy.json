@@ -1,0 +1,36 @@
+{
+  "slug": "company-heavy",
+  "expect": {
+    "status": 201,
+    "min_generalized_count": 5,
+    "note_must_not_contain": [
+      "Globe",
+      "Smart",
+      "PLDT",
+      "Siebel",
+      "Salesforce",
+      "Zendesk",
+      "Dela Cruz",
+      "Makati"
+    ]
+  },
+  "note": "회사명 3·시스템명 4·고객명·지명 가득. 통과해야 하며 인계서에 고유명사 0, generalized_count ≥ 5",
+  "seller": {
+    "role_title": "Telecom billing CSR",
+    "years_experience": 5,
+    "language": "EN",
+    "display_name": "Seller #0427"
+  },
+  "seed_answers": {
+    "q1": "At Globe Telecom the manual says offer the loyalty credit, but Siebel rejects it if there was a plan change within 60 days, and our Salesforce case tool does not warn you. Before Globe I worked at Smart Communications where the same rule was 45 days in their Zendesk setup. So I always check the plan-change date in Siebel first and tell the customer the exact day, instead of saying I applied it.",
+    "q2": "New hires at Globe reset the billing cycle in Siebel when a customer asks about proration, which doubles the month, 2,400 pesos instead of 1,200. At Smart the same mistake happened in their Zendesk macros. The right move is to explain the prorated amount and never touch the cycle date. They also promise roaming waivers before checking the toggle history in the PLDT shared portal.",
+    "q3": "I refused a retroactive roaming waiver for Mr. Dela Cruz from Makati who had turned roaming on himself a week before travelling. The Globe waiver only covers lines migrated by the 2024 Siebel migration. I offered the goodwill maximum, 20% or 25 dollars, documented the toggle history in Salesforce, and he accepted. The PLDT escalation desk upheld it when he complained.",
+    "q4": "A Globe family plan customer moved abroad mid-cycle while dependents stayed in Makati. Siebel had no branch for a primary line leaving the country. I split the plan at the next cycle, kept dependents on the family discount, and adjusted 14 days of proration, 42.10 dollars. I also set a Salesforce reminder to confirm the split posted, because Siebel sometimes drops the dependents' discount on the first bill."
+  },
+  "notes": "Checklist from my Globe days: Siebel plan-change date, PLDT portal toggle history, Salesforce case note.",
+  "followup_answers": {
+    "f1": "At day 58 or 59 I escalate to the retention desk instead of refusing, because the system backdates the plan change on day 61 and a plain refusal gets reversed anyway. My threshold is 3 days before the 60-day mark. If the customer is at day 30, I give the exact date and offer a one-time 100 peso courtesy credit so they do not call back angry.",
+    "f2": "For the family plan split I used the remaining days in the cycle, 14 out of 30, times the primary line's daily rate, 3.01 dollars, which gave 42.10 dollars. I only do a manual split if the dependents are at least two lines, because for one dependent the family discount is smaller than the proration headache and I just move them to a single plan.",
+    "f3": "The exception to my 60-day rule is a customer who changed plans because of our own outage credit. Those changes are flagged as system-initiated, and the loyalty credit posts anyway. I check the change reason code before refusing, roughly one in ten cases is this."
+  }
+}

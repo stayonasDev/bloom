@@ -1,0 +1,70 @@
+[
+  {
+    "slug": "board-hospital-mismatch",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #51",
+    "request_text": "Our hospital's scheduling bot can't handle insurance mismatches at check-in. Staff re-key everything.",
+    "expect_top_slug": "hospital-intake-board",
+    "expect_tags": {
+      "field_key": "hospital_intake",
+      "topics": [
+        "insurance_mismatch",
+        "eligibility_check"
+      ],
+      "judgments": [
+        "timing"
+      ]
+    }
+  },
+  {
+    "slug": "board-ap-override",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #52",
+    "request_text": "Our AP automation flags every invoice over tolerance; we need someone who knows when to override and when to hold.",
+    "expect_top_slug": "accounts-payable-board",
+    "expect_tags": {
+      "field_key": "accounts_payable",
+      "topics": [
+        "tolerance_override",
+        "three_way_match"
+      ],
+      "judgments": [
+        "threshold"
+      ]
+    }
+  },
+  {
+    "slug": "board-travel-ko",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #53",
+    "request_text": "우리 여행 챗봇이 항공권 변경 수수료 예외를 못 풉니다. 날씨·질병 사유를 사람이 봐야 합니다.",
+    "expect_top_slug": "travel-booking-ko",
+    "expect_tags": {
+      "field_key": "travel_booking",
+      "topics": [
+        "change_fee_waiver",
+        "weather_exception"
+      ],
+      "judgments": [
+        "exception",
+        "evidence"
+      ]
+    }
+  },
+  {
+    "slug": "board-eval-refusals",
+    "buyer_type": "eval_data",
+    "display_name": "Buyer #54",
+    "request_text": "We build eval sets for support AI. We need refusal cases from any field, with the threshold the agent used.",
+    "expect_top_slug": null,
+    "expect_tags": {
+      "field_key": "other",
+      "topics": [],
+      "judgments": [
+        "refusal",
+        "threshold"
+      ]
+    },
+    "note": "judgments에 refusal이 있고 희소 비율 높은 카드 순"
+  }
+]

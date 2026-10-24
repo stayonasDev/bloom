@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "ai-ops-telecom-roaming-ko",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #31",
+    "request_text": "우리 상담 AI가 요금제 변경 뒤 로밍 요금 민원을 못 풉니다. 고객이 상위 상담을 요구하는데 넘길 사람이 없습니다.",
+    "expect_top_slug": "telecom-ko"
+  },
+  {
+    "slug": "ai-ops-ecommerce-refunds-ko",
+    "buyer_type": "ai_ops",
+    "display_name": "Buyer #32",
+    "request_text": "우리 챗봇이 '상품 미수령' 환불을 너무 쉽게 승인하고, 포장 오류와 택배 분실을 구분하지 못합니다. 언제 거절하고 어떤 증거를 요구해야 하는지 아는 사람이 필요합니다.",
+    "expect_top_slug": "ecommerce-cs-ko"
+  },
+  {
+    "slug": "eval-data-ko",
+    "buyer_type": "eval_data",
+    "display_name": "Buyer #41",
+    "request_text": "한국어 고객상담 AI 평가셋을 만듭니다. 스크립트형 봇이 틀리는 구체적 상황이 필요합니다. 기준 금액, 예외, 사람 상담원이라면 거절했을 요청 같은 것들입니다.",
+    "expect_top_slug": null
+  }
+]

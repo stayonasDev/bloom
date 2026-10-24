@@ -1,0 +1,26 @@
+{
+  "slug": "telecom-billing-en-junior",
+  "label": "Telecom billing CSR, 1년차 신입 (경력 축: 희소성 낮아야 함)",
+  "axis": "experience_low",
+  "expect": {
+    "rarity_max": 2
+  },
+  "seller": {
+    "role_title": "Telecom billing CSR",
+    "years_experience": 1,
+    "language": "EN",
+    "display_name": "Seller #0611"
+  },
+  "seed_answers": {
+    "q1": "Honestly most of what I know is in the manual. One thing it does not say clearly is that you should always read the customer's last three interactions before you start talking, because if the previous agent already promised something you need to know. I also learned that you should put the customer on hold before checking the account, not while talking, because the silence makes them nervous. That is about it for things outside the manual, I am still learning the exceptions.",
+    "q2": "New hires like me forget to verify the account with two identifiers before discussing the bill. I did that in my second week and my team lead caught it in the quality review. Another thing is reading the script too fast. Customers ask you to repeat and the call gets longer. I now slow down on the amounts and dates. We are also told not to say 'I don't know', so I say 'let me check that for you' and put them on a short hold.",
+    "q3": "A customer asked me to waive a late payment fee because he forgot to pay. The manual says we can waive one late fee per twelve months if the account is otherwise in good standing. His account had two late fees already in that period, so I could not waive it. I explained the rule and offered to set up autopay so it would not happen again. He was not happy but accepted. I always check the fee history first now because the customer usually does not remember.",
+    "q4": "A customer wanted to know why her bill was higher this month and the script just said to explain the charges line by line. The extra amount was a one-time activation fee for a second line that her husband added in the store. The script did not cover a charge created by someone else on the account. I found the order in the account history, explained it was from the store visit, and she was fine. I was not sure if I was allowed to say who added it, so I asked my team lead first."
+  },
+  "notes": "Things I keep on a sticky note: verify two identifiers, read last three interactions, one late fee waiver per twelve months, say let me check instead of I don't know.",
+  "followup_answers": {
+    "f1": "I do not really have a number for that. I would ask my team lead. The rule I know is one waiver per twelve months and I just follow it.",
+    "f2": "For the activation fee I just read the order date and the store name from the account history. I did not do any calculation, the amount was the standard fee from the price list.",
+    "f3": "I have not had a case like that yet. If it happened I would put the customer on hold and check with the floor supervisor."
+  }
+}

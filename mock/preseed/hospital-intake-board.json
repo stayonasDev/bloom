@@ -1,0 +1,167 @@
+{
+  "slug": "hospital-intake-board",
+  "preseeded": true,
+  "seller": {
+    "role_title": "Hospital front desk and intake coordinator",
+    "years_experience": 6,
+    "language": "EN",
+    "display_name": "Seller #2101"
+  },
+  "card": {
+    "field": "Hospital front desk intake and insurance verification",
+    "field_key": "hospital_intake",
+    "difficulty": 4,
+    "rarity": 4,
+    "one_liner": "Eligibility screens that lie, referral expiry, and when a 15-minute no-show rule should bend."
+  },
+  "tags": {
+    "field_key": "hospital_intake",
+    "topics": [
+      "eligibility_check",
+      "referral_required",
+      "no_show",
+      "insurance_mismatch",
+      "prior_authorization"
+    ],
+    "judgments": [
+      "refusal",
+      "timing",
+      "escalation"
+    ]
+  },
+  "handover_note": {
+    "rules": [
+      {
+        "id": "r1",
+        "text": "Verify insurance at check-in for every visit, not only new patients.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r2",
+        "text": "A specialist referral is valid for 90 days or 3 visits, whichever ends first.",
+        "kind": "manual",
+        "source": "q1"
+      },
+      {
+        "id": "r3",
+        "text": "New patients go only into 30-minute slots; follow-ups into 15-minute slots.",
+        "kind": "manual",
+        "source": "q2"
+      },
+      {
+        "id": "r4",
+        "text": "Collect the copay before the visit unless the plan shows a 0 dollar copay.",
+        "kind": "manual",
+        "source": "notes"
+      }
+    ],
+    "exceptions": [
+      {
+        "id": "e1",
+        "text": "If the last visit was over 60 days ago, call the payer line; the eligibility screen lags by up to 30 days.",
+        "kind": "rare",
+        "source": "q1"
+      },
+      {
+        "id": "e2",
+        "text": "Government-plan eligibility is real-time, so the 60-day call rule does not apply to those patients.",
+        "kind": "rare",
+        "source": "f1"
+      },
+      {
+        "id": "e3",
+        "text": "Dermatology and OB allow self-referral on 12 of our plans; keep the one-page list because the screen does not show it.",
+        "kind": "rare",
+        "source": "f2"
+      },
+      {
+        "id": "e4",
+        "text": "Prior authorization for imaging can be requested same-day if the ordering physician marks it urgent; the normal path is 5 business days.",
+        "kind": "rare",
+        "source": "q4"
+      }
+    ],
+    "judgment_calls": [
+      {
+        "id": "j1",
+        "text": "At 15 minutes late, check the phone log and the lab queue before releasing the slot; hold up to 25 minutes if either shows the patient.",
+        "kind": "rare",
+        "source": "f3"
+      },
+      {
+        "id": "j2",
+        "text": "A walk-in with chest discomfort who refuses the ER over cost goes to the free triage room, not to an argument.",
+        "kind": "rare",
+        "source": "q4"
+      },
+      {
+        "id": "j3",
+        "text": "When the eligibility screen shows a plan that terminated under 30 days ago, treat the patient as self-pay pending and do not bill the old plan.",
+        "kind": "rare",
+        "source": "q1"
+      }
+    ],
+    "common_mistakes": [
+      {
+        "id": "m1",
+        "text": "Releasing the slot at exactly 15 minutes, charging a 50 dollar no-show fee the patient will dispute.",
+        "kind": "rare",
+        "source": "q2"
+      },
+      {
+        "id": "m2",
+        "text": "Booking a specialist visit without a referral on file, which produces a 400 dollar bill to the patient.",
+        "kind": "manual",
+        "source": "q3"
+      },
+      {
+        "id": "m3",
+        "text": "Trusting the eligibility screen for a patient last seen 6 months ago; the denied claim costs about 180 dollars in rework.",
+        "kind": "rare",
+        "source": "q1"
+      }
+    ],
+    "never_do": [
+      {
+        "id": "n1",
+        "text": "Never book a referral-required specialist visit without the referral; refuse and book a nurse triage call instead.",
+        "kind": "rare",
+        "source": "q3"
+      },
+      {
+        "id": "n2",
+        "text": "Never argue cost with a chest-pain walk-in; route to triage within 10 minutes.",
+        "kind": "rare",
+        "source": "q4"
+      },
+      {
+        "id": "n3",
+        "text": "Never put a new patient in a 15-minute slot to fill a gap.",
+        "kind": "manual",
+        "source": "q2"
+      }
+    ]
+  },
+  "generalization_log": [
+    {
+      "type": "company",
+      "replaced_with": "the hospital",
+      "count": 2
+    },
+    {
+      "type": "system",
+      "replaced_with": "the scheduling system",
+      "count": 3
+    },
+    {
+      "type": "person",
+      "replaced_with": "the attending physician",
+      "count": 1
+    }
+  ],
+  "metrics": {
+    "followup_ms": 4200,
+    "extract_ms": 9800
+  }
+}

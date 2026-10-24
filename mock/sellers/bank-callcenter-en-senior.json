@@ -1,0 +1,26 @@
+{
+  "slug": "bank-callcenter-en-senior",
+  "label": "Bank card call center team lead, 15년차 (경력 축: 희소성 높아야 함)",
+  "axis": "experience_high",
+  "expect": {
+    "rarity_min": 4
+  },
+  "seller": {
+    "role_title": "Bank card call center team lead",
+    "years_experience": 15,
+    "language": "EN",
+    "display_name": "Seller #0150"
+  },
+  "seed_answers": {
+    "q1": "The manual says to block a card immediately on any fraud report. It never says that blocking a card with a pending hotel or car rental authorization triggers a second hold of the same amount on the replacement card, so the customer sees double and calls again furious. I learned to check pending authorizations first; if there is one above 300 dollars I ask the customer to wait until it settles, usually 3 to 5 days, unless the fraud is active. The manual also never says that disputes filed on day 59 and day 61 go to different queues, and the day 61 queue takes six weeks instead of ten days.",
+    "q2": "New hires file every disputed charge as fraud because that is the fastest script. Half of those are actually merchant disputes, a subscription the customer forgot or a hotel incidental, and filing them as fraud cancels the card, reissues it, and breaks every autopay the customer has. The right move is to ask whether they recognise the merchant name in any form before choosing the dispute type. The second mistake is quoting the provisional credit as final; it is reversed in about 15% of merchant disputes and the customer blames the agent who promised it.",
+    "q3": "A customer asked me to reverse a 1,200 dollar casino cash advance as fraud because his wife would see the statement. The transaction was chip-and-PIN at a location matching his phone's travel notice. Filing it as fraud would have been a false claim and would have flagged his account. I refused, explained that a fraud filing on a verified PIN transaction is investigated and could close the account, and offered a statement message service instead. He withdrew the request. I logged the refusal with the PIN verification code so no one reopened it.",
+    "q4": "A widow called because the joint card was blocked after her husband's death was reported, and the script said to close the account and open a new one in her name, which takes 10 business days and a credit check. She had no other card and her husband's funeral was in three days. I used the surviving-cardholder exception, which lets us issue an emergency replacement in her name within 24 hours with the existing limit, no credit check, as long as she was a named joint holder for over a year. Almost nobody uses it because it is in the estates manual, not the card manual."
+  },
+  "notes": "My coaching checklist for new agents: 1) pending authorizations before any block 2) merchant dispute or fraud, ask if they recognise the name in any form 3) day 60 is a cliff for dispute queues 4) provisional credit is not final 5) surviving cardholder exception lives in the estates manual.",
+  "followup_answers": {
+    "f1": "The 300 dollar threshold is mine, not the bank's. Below that a double hold clears in a few days and the complaint cost is lower than the fraud exposure. Above 300, or for any customer who told me they are travelling, I wait for settlement unless there are new unauthorised transactions in the last hour.",
+    "f2": "The 15% reversal rate is from my team's quarterly dispute report, merchant disputes only. For fraud filings it is under 3%, so for fraud I do say the credit is almost certainly final, for merchant disputes I never do.",
+    "f3": "The surviving-cardholder exception fails if the joint holder was added less than a year ago or if the account had a late payment in the last six months. Then it is the normal 10-day path and I escalate to the estates team the same day so the clock starts."
+  }
+}
