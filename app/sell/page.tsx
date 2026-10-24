@@ -10,6 +10,7 @@ import { SELLER_SAMPLE } from "@/lib/sample";
 
 type Step = "write" | "followups" | "sealing" | "sealed";
 
+
 const ERR_KEY: Record<string, Key> = { TOO_SHORT: "err.too_short", LOG_PASTE_SUSPECTED: "err.log", PII_DETECTED: "err.pii" };
 
 export default function Sell() {
@@ -42,7 +43,7 @@ export default function Sell() {
   async function askMore() {
     setError(null); setBusy(true);
     try {
-      await api.createSeller({ role_title: role, years_experience: Number(years) || 0, language: langName.slice(0, 2).toUpperCase() });
+      await api.createSeller({ role_title: role, years_experience: Number(years) || 0, language: langName }); // full name; the server normalizes it to a code (lib/lang.ts)
       const r = await api.createInterview({ seed_answers: answers, notes: notes || undefined });
       setInterview(r); setStep("followups");
     } catch (e) {
@@ -89,7 +90,7 @@ export default function Sell() {
             <div className="sealin card overflow-hidden">
               <div className="sealbar" />
               <div className="flex items-center justify-between border-b border-rule px-6 py-4"><span className="flex items-center gap-2 text-[15px] font-semibold"><Lock /> Handover Note</span><span className="chip chip-fern">{t("card.sealed")} · {sealed.metrics.item_count}</span></div>
-              <div className="p-2"><BlindCard card={sealed.card} /></div>
+              <div className="p-2"><BlindCard card={{ ...sealed.card, item_count: sealed.card.item_count ?? sealed.metrics.item_count }} /></div>
             </div>
           </div>
         </Section>

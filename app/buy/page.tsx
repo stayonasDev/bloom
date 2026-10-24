@@ -118,7 +118,7 @@ export default function Buy() {
                       <p className="mt-1 text-[16px] leading-[1.45]">{x.q}</p>
                       <div className="paperblock-in mt-3 rounded-[12px] bg-paper p-5">
                         <div className="flex items-center gap-2"><Lock /><Bracket>{t("buy.answer")}</Bracket></div>
-                        <p className={`mt-3 text-[15px] leading-[1.6] ${x.a.covered ? "" : "text-graphite"}`}>{x.a.answer}</p>
+                        <p className={`mt-3 text-[15px] leading-[1.6] ${x.a.covered ? "" : "text-graphite"}`}>{x.a.covered ? x.a.answer : t("buy.nc_body")}</p>
                         <div className="mt-4 border-t border-rule pt-3 font-mono text-[12px] text-ash">{x.a.covered ? t("buy.based", { e: x.a.evidence_count, t: x.a.total_items }) : t("buy.not_covered")} · {fmtS(x.a.run.duration_ms)} · {t("buy.stays")}</div>
                       </div>
                     </div>
