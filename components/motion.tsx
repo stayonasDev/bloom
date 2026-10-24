@@ -21,7 +21,7 @@ export function Reveal({ children, delay = 0, className = "", as: Tag = "div" }:
 }
 
 /** Counts from 0 to `value` over `ms`, ease-out. Measured, not marketed. */
-export function CountUp({ value, ms = 700, format = (n: number) => String(Math.round(n)), className = "" }: { value: number; ms?: number; format?: (n: number) => string; className?: string }) {
+export function CountUp({ value, ms = 1400, format = (n: number) => String(Math.round(n)), className = "" }: { value: number; ms?: number; format?: (n: number) => string; className?: string }) {
   const [n, setN] = useState(0);
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reduced motion: jump straight to the final value

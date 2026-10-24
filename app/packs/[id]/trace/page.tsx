@@ -47,7 +47,7 @@ export default function TracePage() {
               sub={<div className="font-mono text-[12px] text-graphite">{tr.extract.generalization_log.map((g) => `${g.type} ×${g.count} → ${g.replaced_with}`).join(" · ")}</div>} />
             <Line n="04" label={t("trace.l4")} v={tr.last_match ? t("trace.rank", { k: tr.last_match.rank, s: tr.last_match.score.toFixed(2) }) : "—"} time={tr.last_match ? fmtS(tr.last_match.duration_ms) : "—"} />
             <Line n="05" label={t("trace.l5")} v={tr.sealed_qa.count} time={tr.sealed_qa.count ? `${fmtS(tr.sealed_qa.avg_duration_ms)} ${t("trace.avg")}` : "—"} />
-            <div className="flex items-baseline justify-between pt-6"><span className="text-graphite">{t("trace.total")}</span><CountUp className="font-mono text-[48px] leading-none tracking-tight" value={tr.total_ms / 1000} ms={900} format={(n) => `${Math.round(n)}s`} /></div>
+            <div className="flex items-baseline justify-between pt-6"><span className="text-graphite">{t("trace.total")}</span><CountUp className="font-mono text-[48px] leading-none tracking-tight" value={tr.total_ms / 1000} ms={1800} format={(n) => `${Math.round(n)}s`} /></div>
             <p className="mt-6 font-mono text-[12px] leading-[1.7] text-ash">{t("trace.worker", { m: tr.model })}</p>
           </div>
 

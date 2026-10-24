@@ -28,7 +28,7 @@ export function Stat({ v, k }: { v: React.ReactNode; k: string }) {
 export function Fit({ score }: { score: number }) {
   return (
     <span className="inline-flex items-baseline gap-2">
-      <CountUp className="font-mono text-[22px] tracking-tight" value={score} ms={800} format={(n) => n.toFixed(2)} />
+      <CountUp className="font-mono text-[22px] tracking-tight" value={score} ms={1600} format={(n) => n.toFixed(2)} />
       <span className="font-mono text-[12px] text-ash">fit</span>
     </span>
   );
