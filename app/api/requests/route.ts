@@ -6,7 +6,7 @@ import { getBuyer, insertBuyerRequest, insertMatches, listCards } from "@/lib/db
 import { toPublicCard } from "@/lib/server-types";
 
 // Claude ③ 호출 — Vercel 기본 10초를 넘길 수 있다
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 const body = z.object({ request_text: z.string().min(10).max(2000) });
 

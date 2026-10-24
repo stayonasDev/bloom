@@ -5,7 +5,7 @@ import { sealedQa } from "@/lib/claude";
 import { countSealedQa, getBuyer, getCard, getPack, getPurchase, insertSealedQa } from "@/lib/db";
 
 // Claude ④ 호출 — Vercel 기본 10초를 넘길 수 있다
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 const body = z.object({ question: z.string().min(5).max(1000) });
 

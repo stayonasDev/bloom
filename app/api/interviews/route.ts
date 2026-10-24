@@ -6,7 +6,7 @@ import { generateFollowups } from "@/lib/claude";
 import { getSeller, insertInterview, updateInterview } from "@/lib/db";
 
 // Claude ① 호출 — Vercel 기본 10초를 넘길 수 있다
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 const body = z.object({
   seed_answers: z.object({ q1: z.string(), q2: z.string(), q3: z.string(), q4: z.string() }),
